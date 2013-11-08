@@ -7,8 +7,8 @@
     <ProjectGuid>{92926FD0-433B-49D9-AFA1-2D5DB1A8F02B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Vlindos.DependencyInjection</RootNamespace>
-    <AssemblyName>Vlindos.DependencyInjection</AssemblyName>
+    <RootNamespace>Vlindos.InversionOfControl</RootNamespace>
+    <AssemblyName>Vlindos.InversionOfControl</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,8 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AppllicationConfigurationManager.cs" />
+    <Compile Include="DefaultConventionConfigurator.cs" />
+    <Compile Include="IAssemblyConfigurator.cs" />
+    <Compile Include="IConfigurator.cs" />
+    <Compile Include="IContainer.cs" />
+    <Compile Include="ILifestyleManager.cs" />
+    <Compile Include="LifesStyleManagers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SingletonConventionConfigurator.cs" />
+    <Compile Include="SingletonLifetyleManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -107,7 +107,8 @@ namespace Vlindos.Logging.PerformanceTests
         {
             //return null;
             var ret = getter.Invoke();
-            return null;return ret as StackFrame;
+            // return ret as StackFrame;
+            return null;
         }
     }
 

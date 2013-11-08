@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlindos.Common", "Vlindos.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlindos.Logging.PerformanceTests", "Vlindos.Logging.PerformanceTests\Vlindos.Logging.PerformanceTests.csproj", "{F616EE82-15B1-4C5A-8E2D-77B700BE7C43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlindos.DependencyInjection", "Vlindos.DependencyInjection\Vlindos.DependencyInjection.csproj", "{92926FD0-433B-49D9-AFA1-2D5DB1A8F02B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlindos.InversionOfControl", "Vlindos.InversionOfControl\Vlindos.InversionOfControl.csproj", "{92926FD0-433B-49D9-AFA1-2D5DB1A8F02B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

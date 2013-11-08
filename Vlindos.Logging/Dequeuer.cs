@@ -11,7 +11,7 @@ namespace Vlindos.Logging
         void Stop();
         void WriteMessage(Message message);
     }
-
+                                                                                      
     public class MessagesDequeuer : IMessagesDequeuer
     {
         private readonly IConfigurationContainer _configurationContainer;
