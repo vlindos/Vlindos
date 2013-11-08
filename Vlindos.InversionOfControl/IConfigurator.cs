@@ -1,4 +1,4 @@
-﻿namespace Vlindos.DependencyInjection
+﻿namespace Vlindos.InversionOfControl
 {
     public interface IConfigurator
     {

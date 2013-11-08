@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlindos.Logging.Performance
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlindos.InversionOfControl", "Vlindos.InversionOfControl\Vlindos.InversionOfControl.csproj", "{92926FD0-433B-49D9-AFA1-2D5DB1A8F02B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlindos.DemoApp", "Vlindos.DemoApp\Vlindos.DemoApp.csproj", "{8A4F9BBD-2DE1-458C-952E-22CE0E969405}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{92926FD0-433B-49D9-AFA1-2D5DB1A8F02B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92926FD0-433B-49D9-AFA1-2D5DB1A8F02B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92926FD0-433B-49D9-AFA1-2D5DB1A8F02B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A4F9BBD-2DE1-458C-952E-22CE0E969405}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A4F9BBD-2DE1-458C-952E-22CE0E969405}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A4F9BBD-2DE1-458C-952E-22CE0E969405}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A4F9BBD-2DE1-458C-952E-22CE0E969405}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

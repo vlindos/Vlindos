@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Vlindos.Logging
+namespace Vlindos.Common.Utilities.File
 {
     public interface IFileChangeWatcherFactory
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Vlindos.DependencyInjection
+namespace Vlindos.InversionOfControl.ConventionConfigurators
 {
     public interface IConventionConfigurator
     {

@@ -6,41 +6,47 @@ using Vlindos.Common.Settings;
 
 namespace Vlindos.Logging.Configuration
 {
-    public interface IReader
+    public interface IFileReaderFactory
     {
-        bool Read(string filePath, List<string> messages, out Configuration configuration);
+        IFileReader GetFileReader(string filePath);
     }
 
-    public class Reader : IReader
+    public interface IFileReader : IReader
+    {
+    }
+
+    public class FileReader : IFileReader
     {
         private readonly ISettingReaderFactory _settingReaderFactory;
         private readonly IXmlSettingsProviderFactory _settingsProviderFactory;
         private readonly IOutput[] _outputs;
         private readonly IQueueFactory _queueFactory;
+        private readonly string _filePath;
 
-        public Reader(ISettingReaderFactory settingReaderFactory,
+        public FileReader(ISettingReaderFactory settingReaderFactory,
             IXmlSettingsProviderFactory settingsProviderFactory, 
-            IOutput[] outputs, IQueueFactory queueFactory)
+            IOutput[] outputs, IQueueFactory queueFactory, string filePath)
         {
             _settingReaderFactory = settingReaderFactory;
             _settingsProviderFactory = settingsProviderFactory;
             _outputs = outputs;
             _queueFactory = queueFactory;
+            _filePath = filePath;
         }
 
-        public bool Read(string filePath, List<string> messages, out Configuration configuration)
+        public bool Read( List<string> messages, out Configuration configuration)
         {
             XmlElement xmlConfiguration;
             try
             {
                 var xmlDocument = new XmlDocument();
-                xmlDocument.Load(filePath);
+                xmlDocument.Load(_filePath);
                 xmlConfiguration = xmlDocument.DocumentElement;
             }
             catch (Exception exception)
             {
-                messages.Add(string.Format("Unable to read file at '{0}'. Because of:{1}{2}", 
-                    filePath, Environment.NewLine, exception));
+                messages.Add(string.Format("Unable to read file at '{0}'. Because of:{1}{2}",
+                    _filePath, Environment.NewLine, exception));
                 configuration = null;
                 return false;
             }

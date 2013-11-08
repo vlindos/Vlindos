@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Vlindos.DependencyInjection
+namespace Vlindos.InversionOfControl
 {
     public interface IAssemblyConfigurator
     {

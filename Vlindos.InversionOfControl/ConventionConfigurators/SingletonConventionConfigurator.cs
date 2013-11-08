@@ -1,6 +1,7 @@
 ﻿using System;
+using Vlindos.InversionOfControl.LifestyleManagers;
 
-namespace Vlindos.DependencyInjection
+namespace Vlindos.InversionOfControl.ConventionConfigurators
 {
     public class SingletonConventionConfigurator : IConventionConfigurator
     {
@@ -10,7 +11,7 @@ namespace Vlindos.DependencyInjection
 
             foreach (var serviceType in componentType.GetInterfaces())
             {
-                container.Register(serviceType, componentType, LifesStyleManagers.Singleton,
+                container.Register(serviceType, componentType, Lifestyle.Singleton,
                     serviceType.FullName + " / " + componentType.FullName);
             }
         }

@@ -32,24 +32,26 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppllicationConfigurationManager.cs" />
-    <Compile Include="DefaultConventionConfigurator.cs" />
+    <Compile Include="AppllicationConfigurator.cs" />
+    <Compile Include="ConventionConfigurators\DefaultConventionConfigurator.cs" />
     <Compile Include="IAssemblyConfigurator.cs" />
     <Compile Include="IConfigurator.cs" />
-    <Compile Include="IContainer.cs" />
-    <Compile Include="ILifestyleManager.cs" />
-    <Compile Include="LifesStyleManagers.cs" />
+    <Compile Include="Container.cs" />
+    <Compile Include="LifestyleManagers\ILifestyleManager.cs" />
+    <Compile Include="LifestyleManagers\Lifestyle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SingletonConventionConfigurator.cs" />
-    <Compile Include="SingletonLifetyleManager.cs" />
+    <Compile Include="ConventionConfigurators\SingletonConventionConfigurator.cs" />
+    <Compile Include="LifestyleManagers\SingletonLifetyleManager.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Vlindos.Common\Vlindos.Common.csproj">
+      <Project>{ff60f6f2-57b9-49cf-9745-6eba430c8604}</Project>
+      <Name>Vlindos.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

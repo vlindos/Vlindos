@@ -1,6 +1,6 @@
-﻿namespace Vlindos.DependencyInjection
+﻿namespace Vlindos.InversionOfControl.LifestyleManagers
 {
-    public static class LifesStyleManagers
+    public static class Lifestyle
     {
         private static ILifestyleManager _singleton;
 

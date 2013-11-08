@@ -32,12 +32,14 @@
   <ItemGroup>
     <Compile Include="CallingStackFrameGetter.cs" />
     <Compile Include="Configuration\Container.cs" />
+    <Compile Include="Configuration\IReader.cs" />
     <Compile Include="Configuration\OutputPipe.cs" />
     <Compile Include="Dequeuer.cs" />
+    <Compile Include="Configuration\IConfigurationGetter.cs" />
+    <Compile Include="Configuration\IFileConfigurationGetter.cs" />
     <Compile Include="IOutputEngine.cs" />
     <Compile Include="IOutput.cs" />
-    <Compile Include="Configuration\Reader.cs" />
-    <Compile Include="FileChangeWatcher.cs" />
+    <Compile Include="Configuration\FileReader.cs" />
     <Compile Include="Configuration\Configuration.cs" />
     <Compile Include="IMessageModifier.cs" />
     <Compile Include="Output\ConsoleOutput\Output.cs" />
@@ -46,7 +48,7 @@
     <Compile Include="Output\MessageTextFormetter.cs" />
     <Compile Include="Output\FileOutput\Output.cs" />
     <Compile Include="Output\FileOutput\OutputEngine.cs" />
-    <Compile Include="System.cs" />
+    <Compile Include="LoggingSystem.cs" />
     <Compile Include="Queue.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Logger.cs" />
