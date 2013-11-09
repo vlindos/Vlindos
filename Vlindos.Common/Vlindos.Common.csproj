@@ -36,6 +36,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Cache\Cache.cs" />
+    <Compile Include="CommadLine\ApplicationArgumentsGetter.cs" />
+    <Compile Include="CommadLine\IApplicationArgument.cs" />
     <Compile Include="Notifications\INotifiable.cs" />
     <Compile Include="Notifications\INotifyManager.cs" />
     <Compile Include="Settings\AppConfigSettingsProvider.cs" />
