@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Vlindos.Logging;
 using Vlindos.Logging.Configuration;
 
@@ -27,13 +28,18 @@ namespace Vlindos.DemoApp
         {
             var messages = new List<string>();
             IConfigurationContainer loggingConfigurationContainer;
+            
+            var path = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
+            var directory = Path.GetDirectoryName(path) ?? "";
+            var filePath = Path.Combine(directory, "Logging.config");
+
             if (_configurationContainerCreator
-                    .GetConfiguration(messages, out loggingConfigurationContainer, "Logging.config") == false)
+                    .GetConfiguration(messages, out loggingConfigurationContainer, filePath) == false)
             {
                 messages.ForEach(Console.WriteLine);
                 return;
             }
-            var loggingSystem = _systemFactory.GetLoggingSystem(loggingConfigurationContainer);
+            var loggingSystem = _systemFactory.GetSystem(loggingConfigurationContainer);
 
             if (loggingSystem.Start(messages) == false) return;
             messages.ForEach(Console.WriteLine);

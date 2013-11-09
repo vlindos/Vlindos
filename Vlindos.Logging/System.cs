@@ -8,7 +8,7 @@ namespace Vlindos.Logging
 {
     public interface ISystemFactory
     {
-        ISystem GetLoggingSystem(IConfigurationContainer configurationContainer);
+        ISystem GetSystem(IConfigurationContainer configurationContainer);
     }
 
     public interface ISystem

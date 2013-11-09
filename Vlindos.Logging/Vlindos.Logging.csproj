@@ -36,7 +36,7 @@
     <Compile Include="Configuration\OutputPipe.cs" />
     <Compile Include="Dequeuer.cs" />
     <Compile Include="Configuration\IConfigurationGetter.cs" />
-    <Compile Include="Configuration\IFileConfigurationGetter.cs" />
+    <Compile Include="Configuration\IFileConfigurationContainerCreator.cs" />
     <Compile Include="IOutputEngine.cs" />
     <Compile Include="IOutput.cs" />
     <Compile Include="Configuration\FileReader.cs" />
@@ -48,7 +48,7 @@
     <Compile Include="Output\MessageTextFormetter.cs" />
     <Compile Include="Output\FileOutput\Output.cs" />
     <Compile Include="Output\FileOutput\OutputEngine.cs" />
-    <Compile Include="LoggingSystem.cs" />
+    <Compile Include="System.cs" />
     <Compile Include="Queue.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Logger.cs" />
