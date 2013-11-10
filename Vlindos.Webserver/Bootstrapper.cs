@@ -2,7 +2,7 @@
 using Vlindos.InversionOfControl;
 using Vlindos.InversionOfControl.ConventionConfigurators;
 
-namespace Vlindos.DemoApp
+namespace Vlindos.Webserver
 {
     class Bootstrapper
     {

@@ -34,21 +34,42 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Application.cs" />
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="ApplicationArguments\CommandLineArgument.cs" />
+    <Compile Include="Configuration\Application.cs" />
+    <Compile Include="Configuration\Bind.cs" />
+    <Compile Include="Configuration\Configuration.cs" />
+    <Compile Include="Configuration\FileReader.cs" />
+    <Compile Include="Configuration\HttpAuthentication.cs" />
+    <Compile Include="Configuration\NetworkSettings.cs" />
+    <Compile Include="Configuration\Path.cs" />
+    <Compile Include="Configuration\Website.cs" />
+    <Compile Include="ApplicationArguments\LoggingFilePath.cs" />
+    <Compile Include="Initializers\LoggingSystemInitializer.cs" />
+    <Compile Include="Webserver\IWebserver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Webserver.config" />
     <None Include="Websites\SampleSite\Website.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Vlindos.Common\Vlindos.Common.csproj">
+      <Project>{FF60F6F2-57B9-49CF-9745-6EBA430C8604}</Project>
+      <Name>Vlindos.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Vlindos.InversionOfControl\Vlindos.InversionOfControl.csproj">
+      <Project>{92926fd0-433b-49d9-afa1-2d5db1a8f02b}</Project>
+      <Name>Vlindos.InversionOfControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Vlindos.Logging\Vlindos.Logging.csproj">
+      <Project>{7909B1AB-545D-4938-B4D6-BA7E2AC13F96}</Project>
+      <Name>Vlindos.Logging</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

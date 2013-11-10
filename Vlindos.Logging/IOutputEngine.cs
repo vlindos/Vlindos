@@ -1,15 +1,14 @@
-﻿using System.Collections.Generic;
-using Vlindos.Common.Settings;
+﻿using Vlindos.Common.Settings;
 
 namespace Vlindos.Logging
 {
     public interface IOutputEngine
     {
-        bool ReadConfiguration(IXmlSettingsProvider outputXmlConfiguration, List<string> messages);
+        bool ReadConfiguration(IXmlSettingsProvider outputXmlConfiguration);
 
-        bool Start(List<string> messages);
+        bool Start();
 
-        void Stop(List<string> messages);
+        void Stop();
 
         Message[] SaveMessages(params Message[] messages);
     }

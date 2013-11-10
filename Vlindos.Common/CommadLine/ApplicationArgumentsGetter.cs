@@ -2,12 +2,12 @@
 
 namespace Vlindos.Common.CommadLine
 {
-    public interface IArgumentParsers
+    public interface IApplicationArgumentsGetter
     {
         Dictionary<IApplicationArgument, List<string>> GetApplicationArguments();
     }
 
-    public class ApplicationArgumentsGetter : IArgumentParsers
+    public class ApplicationArgumentsGetter : IApplicationArgumentsGetter
     {
         private readonly IApplicationArgument[] _applicationArguments;
 

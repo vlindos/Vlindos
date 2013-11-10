@@ -1,6 +1,6 @@
 ﻿using System;
+using Vlindos.Common.Configuration;
 using Vlindos.Common.Logging;
-using Vlindos.Logging.Configuration;
 
 namespace Vlindos.Logging
 {
@@ -9,12 +9,12 @@ namespace Vlindos.Logging
         private readonly IMessageCreator _messageCreator;
         private readonly IMessagesDequeuer _messagesDequeuer;
         private readonly ICallingStackFrameGetter _callingStackFrameGetter;
-        private readonly IConfigurationContainer _configurationContainer;
+        private readonly IContainer<Configuration.Configuration> _configurationContainer;
 
         public Logger(IMessageCreator messageCreator,
                       IMessagesDequeuer messagesDequeuer,
                       ICallingStackFrameGetter callingStackFrameGetter,
-                      IConfigurationContainer configurationContainer)
+                      IContainer<Configuration.Configuration> configurationContainer)
         {
             _configurationContainer = configurationContainer;
             _messageCreator = messageCreator;

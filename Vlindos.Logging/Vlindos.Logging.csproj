@@ -31,17 +31,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CallingStackFrameGetter.cs" />
-    <Compile Include="Configuration\Container.cs" />
-    <Compile Include="Configuration\IReader.cs" />
     <Compile Include="Configuration\OutputPipe.cs" />
     <Compile Include="Dequeuer.cs" />
-    <Compile Include="Configuration\IConfigurationGetter.cs" />
-    <Compile Include="Configuration\IFileConfigurationContainerCreator.cs" />
     <Compile Include="IOutputEngine.cs" />
     <Compile Include="IOutput.cs" />
     <Compile Include="Configuration\FileReader.cs" />
     <Compile Include="Configuration\Configuration.cs" />
     <Compile Include="IMessageModifier.cs" />
+    <Compile Include="InternalLogger.cs" />
     <Compile Include="Output\ConsoleOutput\Output.cs" />
     <Compile Include="Output\ConsoleOutput\OutputEngine.cs" />
     <Compile Include="Output\FileOutput\FilePathGetter.cs" />
@@ -58,7 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Vlindos.Common\Vlindos.Common.csproj">
@@ -66,7 +63,9 @@
       <Name>Vlindos.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Logging.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

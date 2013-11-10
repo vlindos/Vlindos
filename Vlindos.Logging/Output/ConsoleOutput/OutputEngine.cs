@@ -14,15 +14,18 @@ namespace Vlindos.Logging.Output.ConsoleOutput
         private readonly ISettingReaderFactory _settingReaderFactory;
         private readonly IXmlSettingsProviderFactory _xmlSettingsProviderFactory;
         private readonly IMessageTextFormatter _messageTextFormatter;
+        private readonly IInternalLogger _internalLogger;
         private readonly Dictionary<Level, ConsoleColor> _levelColors;
 
         public OutputEngine(ISettingReaderFactory settingReaderFactory, 
             IXmlSettingsProviderFactory xmlSettingsProviderFactory, 
-            IMessageTextFormatter messageTextFormatter)
+            IMessageTextFormatter messageTextFormatter, 
+            IInternalLogger internalLogger)
         {
             _settingReaderFactory = settingReaderFactory;
             _xmlSettingsProviderFactory = xmlSettingsProviderFactory;
             _messageTextFormatter = messageTextFormatter;
+            _internalLogger = internalLogger;
             _levelColors = new Dictionary<Level, ConsoleColor>();
             foreach (var level in Enum.GetValues(typeof(Level)))
             {
@@ -30,7 +33,7 @@ namespace Vlindos.Logging.Output.ConsoleOutput
             }
         }
 
-        public bool ReadConfiguration(IXmlSettingsProvider outputXmlConfiguration, List<string> messages)
+        public bool ReadConfiguration(IXmlSettingsProvider outputXmlConfiguration)
         {
             var nodes = outputXmlConfiguration.GetNodesForKey("color");
             for (var i = 0; i < nodes.Count; i++)
@@ -43,7 +46,7 @@ namespace Vlindos.Logging.Output.ConsoleOutput
                     {
                         if (Enum.TryParse(s, out o) == false)
                         {
-                            messages.Add(string.Format("Unknown level type specifier '{0}' for color.", s));
+                            _internalLogger.Log("Unknown level type specifier '{0}' for color.", s);
                             return false;
                         }
                         return true;
@@ -56,7 +59,7 @@ namespace Vlindos.Logging.Output.ConsoleOutput
                     {
                         if (Enum.TryParse(s, out o) == false)
                         {
-                            messages.Add(string.Format("Unknown color specifier '{0}' for color.", s));
+                            _internalLogger.Log("Unknown color specifier '{0}' for color.", s);
                             return false;
                         }
                         return true;
@@ -70,13 +73,13 @@ namespace Vlindos.Logging.Output.ConsoleOutput
             return true;
         }
 
-        public bool Start(List<string> messages)
+        public bool Start()
         {
             // nothing needed to be done
             return true;
         }
 
-        public void Stop(List<string> messages)
+        public void Stop()
         {
             // nothing needed to be done
         }

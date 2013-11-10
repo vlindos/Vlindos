@@ -2,11 +2,11 @@
 {
     public interface IApplicationArgument
     {
-        string Id { get; set; }
-        string ShortCommand { get; set; }
-        string LongCommand { get; set; }
-        bool ExpectsValue { get; set; }
-        string DefaultValue { get; set; }
-        string HelpMessage { get; set; }
+        string Id { get; }
+        string ShortCommand { get; }
+        string LongCommand { get; }
+        bool ExpectsValue { get; }
+        string DefaultValue { get; }
+        string HelpMessage { get; }
     }
 }

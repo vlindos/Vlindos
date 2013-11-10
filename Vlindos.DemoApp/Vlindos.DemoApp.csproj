@@ -41,6 +41,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Vlindos.Common\Vlindos.Common.csproj">
+      <Project>{FF60F6F2-57B9-49CF-9745-6EBA430C8604}</Project>
+      <Name>Vlindos.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Vlindos.InversionOfControl\Vlindos.InversionOfControl.csproj">
       <Project>{92926FD0-433B-49D9-AFA1-2D5DB1A8F02B}</Project>
       <Name>Vlindos.InversionOfControl</Name>

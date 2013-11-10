@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Timers;
+using Vlindos.Common.Configuration;
 using Vlindos.Logging.Configuration;
 
 namespace Vlindos.Logging
@@ -14,11 +15,11 @@ namespace Vlindos.Logging
                                                                                       
     public class MessagesDequeuer : IMessagesDequeuer
     {
-        private readonly IConfigurationContainer _configurationContainer;
+        private readonly IContainer<Configuration.Configuration> _configurationContainer;
 
         private readonly List<Tuple<Timer, OutputPipe, Object>> _dequeuers;
 
-        public MessagesDequeuer(IConfigurationContainer configurationContainer)
+        public MessagesDequeuer(IContainer<Configuration.Configuration> configurationContainer)
         {
             _configurationContainer = configurationContainer;
             _dequeuers = new List<Tuple<Timer, OutputPipe, object>>();
