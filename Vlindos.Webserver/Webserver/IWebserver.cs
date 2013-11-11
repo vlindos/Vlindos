@@ -3,6 +3,7 @@ using System.Net.Sockets;
 using System.Threading;
 
 // http://msdn.microsoft.com/en-us/library/system.net.sockets.socketasynceventargs(v=vs.110).aspx
+// http://www.w3.org/Protocols/rfc2616/rfc2616.html
 namespace Vlindos.Webserver.Webserver
 {
     public interface IWebserver
@@ -13,6 +14,8 @@ namespace Vlindos.Webserver.Webserver
 
     public class Webserver : IWebserver
     {
+        public Dictionary<string, Dictionary<Application, HashSet<string>>> ApplicationHostsLocationsl;
+
         public Webserver()
         {
 

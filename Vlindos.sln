@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlindos.Logging", "Vlindos.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlindos.DemoApp", "Vlindos.DemoApp\Vlindos.DemoApp.csproj", "{8A4F9BBD-2DE1-458C-952E-22CE0E969405}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlindos.Logging.Monitor", "Vlindos.Logging.Monitor\Vlindos.Logging.Monitor.csproj", "{C7EBC686-FB97-415E-9F71-E5C94310B3FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlindos.Web", "Vlindos.Web\Vlindos.Web.csproj", "{6BC58CD0-6CB2-477F-8618-760989416E38}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{8A4F9BBD-2DE1-458C-952E-22CE0E969405}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A4F9BBD-2DE1-458C-952E-22CE0E969405}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A4F9BBD-2DE1-458C-952E-22CE0E969405}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7EBC686-FB97-415E-9F71-E5C94310B3FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7EBC686-FB97-415E-9F71-E5C94310B3FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7EBC686-FB97-415E-9F71-E5C94310B3FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7EBC686-FB97-415E-9F71-E5C94310B3FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BC58CD0-6CB2-477F-8618-760989416E38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BC58CD0-6CB2-477F-8618-760989416E38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BC58CD0-6CB2-477F-8618-760989416E38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BC58CD0-6CB2-477F-8618-760989416E38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
