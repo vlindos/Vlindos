@@ -49,9 +49,12 @@
     <Compile Include="Configuration\Website.cs" />
     <Compile Include="ApplicationArguments\LoggingFilePath.cs" />
     <Compile Include="Initializers\LoggingSystemInitializer.cs" />
-    <Compile Include="Webserver\Class1.cs" />
-    <Compile Include="Webserver\IWebserver.cs" />
+    <Compile Include="Webserver\AsyncUserToken.cs" />
+    <Compile Include="Webserver\Binder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Webserver\RequestProcessor.cs" />
+    <Compile Include="Webserver\SocketAsyncEventArgsPool.cs" />
+    <Compile Include="Webserver\Webserver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Webserver.config" />
