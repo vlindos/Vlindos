@@ -2,7 +2,7 @@
 {
     public class NetworkSettings
     {
-        public int MaximumPendingConnections { get; set; }
-        public int MaximumOpenedConnections { get; set; }
+        public uint MaximumPendingConnections { get; set; }
+        public uint MaximumOpenedConnections { get; set; }
     }
 }

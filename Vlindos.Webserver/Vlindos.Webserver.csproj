@@ -49,6 +49,7 @@
     <Compile Include="Configuration\Website.cs" />
     <Compile Include="ApplicationArguments\LoggingFilePath.cs" />
     <Compile Include="Initializers\LoggingSystemInitializer.cs" />
+    <Compile Include="Webserver\Class1.cs" />
     <Compile Include="Webserver\IWebserver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
