@@ -1,4 +1,4 @@
-namespace Users.Common.Services
+namespace Vlindos.Web.Services
 {
     public interface IRunnableStateFactory
     {

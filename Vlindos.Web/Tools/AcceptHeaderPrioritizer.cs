@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Users.Common.Tools
+namespace Vlindos.Web.Tools
 {
     public interface IAcceptHeaderPrioritizer
     {

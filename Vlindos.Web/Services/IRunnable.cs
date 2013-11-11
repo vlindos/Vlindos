@@ -1,6 +1,6 @@
 using System;
 
-namespace Users.Common.Services
+namespace Vlindos.Web.Services
 {
     public interface IRunnable : IDisposable
     {

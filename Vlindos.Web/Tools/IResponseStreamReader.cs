@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.IO;
-using Users.Common.Models.Endpoint;
+using Vlindos.Web.Models.Endpoint;
 
-namespace Users.Common.Tools
+namespace Vlindos.Web.Tools
 {
     public interface IResponseStreamReader<T> where T : IEndpointResponse
     {

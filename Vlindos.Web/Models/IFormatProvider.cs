@@ -1,4 +1,4 @@
-﻿namespace Users.Common.Models
+﻿namespace Vlindos.Web.Models
 {
     public interface  IFormatProvider
     {

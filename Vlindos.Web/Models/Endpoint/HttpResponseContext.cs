@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace Users.Common.Models.Endpoint
+namespace Vlindos.Web.Models.Endpoint
 {
     public interface IHttpResponseContext
     {

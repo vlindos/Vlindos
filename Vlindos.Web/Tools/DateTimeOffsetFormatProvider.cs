@@ -1,6 +1,6 @@
-﻿using Users.Common.Models;
+﻿using Vlindos.Web.Models;
 
-namespace Users.Common.Tools
+namespace Vlindos.Web.Tools
 {
     public interface IDateTimeOffsetFormatProvider : IFormatProvider
     {

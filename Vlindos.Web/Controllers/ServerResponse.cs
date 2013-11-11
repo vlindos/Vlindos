@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
-using Users.Common.Models.Endpoint;
+using Vlindos.Web.Models.Endpoint;
 
-namespace Users.Common.Controllers
+namespace Vlindos.Web.Controllers
 {
     public class ServerResponse : EndpointResponse
     {

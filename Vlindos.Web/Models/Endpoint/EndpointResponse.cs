@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace Users.Common.Models.Endpoint
+namespace Vlindos.Web.Models.Endpoint
 {
     public interface IEndpointResponse
     {

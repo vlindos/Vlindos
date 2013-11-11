@@ -1,6 +1,6 @@
-namespace Users.Common.Services
+namespace Vlindos.Web.Services
 {
-    public interface ServiceRunnableManager
+    public interface IServiceRunnableManager
     {
         uint Copies { get; }
         IRunnable GetRunnable(string copyIdentity);

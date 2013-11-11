@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.ComponentModel;
 using System.Threading;
 
-namespace Users.Common.Tools
+namespace Vlindos.Web.Tools
 {
     /// <summary>
     /// A Utility class used to merge the properties of heterogenious objects

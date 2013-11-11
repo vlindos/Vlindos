@@ -36,7 +36,7 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
  *
  * ***** END LICENSE BLOCK ***** */
-namespace Users.Common.Tools
+namespace Vlindos.Web.Tools
 {
     public interface IHashAlgorithm
     {
@@ -44,66 +44,66 @@ namespace Users.Common.Tools
     }
 
 
-    public class MurmurHash2Unsafe : IHashAlgorithm
-    {
-        public UInt32 Hash(Byte[] data)
-        {
-            return Hash(data, 0xc58f1a7b);
-        }
-        const UInt32 m = 0x5bd1e995;
-        const Int32 r = 24;
+    //public class MurmurHash2Unsafe : IHashAlgorithm
+    //{
+    //    public UInt32 Hash(Byte[] data)
+    //    {
+    //        return Hash(data, 0xc58f1a7b);
+    //    }
+    //    const UInt32 m = 0x5bd1e995;
+    //    const Int32 r = 24;
 
-        public unsafe UInt32 Hash(Byte[] data, UInt32 seed)
-        {
-            Int32 length = data.Length;
-            if (length == 0)
-                return 0;
-            UInt32 h = seed ^ (UInt32)length;
-            Int32 remainingBytes = length & 3; // mod 4
-            Int32 numberOfLoops = length >> 2; // div 4
-            fixed (byte* firstByte = &(data[0]))
-            {
-                UInt32* realData = (UInt32*)firstByte;
-                while (numberOfLoops != 0)
-                {
-                    UInt32 k = *realData;
-                    k *= m;
-                    k ^= k >> r;
-                    k *= m;
+    //    public unsafe UInt32 Hash(Byte[] data, UInt32 seed)
+    //    {
+    //        Int32 length = data.Length;
+    //        if (length == 0)
+    //            return 0;
+    //        UInt32 h = seed ^ (UInt32)length;
+    //        Int32 remainingBytes = length & 3; // mod 4
+    //        Int32 numberOfLoops = length >> 2; // div 4
+    //        fixed (byte* firstByte = &(data[0]))
+    //        {
+    //            UInt32* realData = (UInt32*)firstByte;
+    //            while (numberOfLoops != 0)
+    //            {
+    //                UInt32 k = *realData;
+    //                k *= m;
+    //                k ^= k >> r;
+    //                k *= m;
 
-                    h *= m;
-                    h ^= k;
-                    numberOfLoops--;
-                    realData++;
-                }
-                switch (remainingBytes)
-                {
-                    case 3:
-                        h ^= (UInt16)(*realData);
-                        h ^= ((UInt32)(*(((Byte*)(realData)) + 2))) << 16;
-                        h *= m;
-                        break;
-                    case 2:
-                        h ^= (UInt16)(*realData);
-                        h *= m;
-                        break;
-                    case 1:
-                        h ^= *((Byte*)realData);
-                        h *= m;
-                        break;
-                }
-            }
+    //                h *= m;
+    //                h ^= k;
+    //                numberOfLoops--;
+    //                realData++;
+    //            }
+    //            switch (remainingBytes)
+    //            {
+    //                case 3:
+    //                    h ^= (UInt16)(*realData);
+    //                    h ^= ((UInt32)(*(((Byte*)(realData)) + 2))) << 16;
+    //                    h *= m;
+    //                    break;
+    //                case 2:
+    //                    h ^= (UInt16)(*realData);
+    //                    h *= m;
+    //                    break;
+    //                case 1:
+    //                    h ^= *((Byte*)realData);
+    //                    h *= m;
+    //                    break;
+    //            }
+    //        }
 
-            // Do a few final mixes of the hash to ensure the last few
-            // bytes are well-incorporated.
+    //        // Do a few final mixes of the hash to ensure the last few
+    //        // bytes are well-incorporated.
 
-            h ^= h >> 13;
-            h *= m;
-            h ^= h >> 15;
+    //        h ^= h >> 13;
+    //        h *= m;
+    //        h ^= h >> 15;
 
-            return h;
-        }
-    }
+    //        return h;
+    //    }
+    //}
     //public class SuperFastHashInlineBitConverter : IHashAlgorithm
     //{
     //    public UInt32 Hash(Byte[] dataToHash)
@@ -111,14 +111,14 @@ namespace Users.Common.Tools
     //        var dataLength = dataToHash.Length;
     //        if (dataLength == 0)
     //            return 0;
-    //        var hash = (UInt32) dataLength;
+    //        var hash = (UInt32)dataLength;
     //        Int32 remainingBytes = dataLength & 3; // mod 4
     //        Int32 numberOfLoops = dataLength >> 2; // div 4
     //        Int32 currentIndex = 0;
     //        while (numberOfLoops > 0)
     //        {
-    //            hash += (UInt16) (dataToHash[currentIndex++] | dataToHash[currentIndex++] << 8);
-    //            UInt32 tmp = ((UInt32) (dataToHash[currentIndex++] | dataToHash[currentIndex++] << 8) << 11) ^ hash;
+    //            hash += (UInt16)(dataToHash[currentIndex++] | dataToHash[currentIndex++] << 8);
+    //            UInt32 tmp = ((UInt32)(dataToHash[currentIndex++] | dataToHash[currentIndex++] << 8) << 11) ^ hash;
     //            hash = (hash << 16) ^ tmp;
     //            hash += hash >> 11;
     //            numberOfLoops--;
@@ -127,13 +127,13 @@ namespace Users.Common.Tools
     //        switch (remainingBytes)
     //        {
     //            case 3:
-    //                hash += (UInt16) (dataToHash[currentIndex++] | dataToHash[currentIndex++] << 8);
+    //                hash += (UInt16)(dataToHash[currentIndex++] | dataToHash[currentIndex++] << 8);
     //                hash ^= hash << 16;
-    //                hash ^= ((UInt32) dataToHash[currentIndex]) << 18;
+    //                hash ^= ((UInt32)dataToHash[currentIndex]) << 18;
     //                hash += hash >> 11;
     //                break;
     //            case 2:
-    //                hash += (UInt16) (dataToHash[currentIndex++] | dataToHash[currentIndex] << 8);
+    //                hash += (UInt16)(dataToHash[currentIndex++] | dataToHash[currentIndex] << 8);
     //                hash ^= hash << 11;
     //                hash += hash >> 17;
     //                break;

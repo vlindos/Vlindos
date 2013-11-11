@@ -1,10 +1,10 @@
-namespace Users.Common.Models.Endpoint
+namespace Vlindos.Web.Models.Endpoint
 {
-    public interface IEndpointDescriptor<T> where T : IEndpointRequest
-    {
-        IRouteDescription RouteDescription { get; }
-        IHttpRequestBuilder<T> RequestBuilder { get; }
-        IRequestValidator<T> RequestValidator { get; }
-        IHttpRequestUnbinder<T> RequestUnbinder { get; }
-    }
+//    public interface IEndpointDescriptor<T> where T : IEndpointRequest
+//    {
+//        IRouteDescription RouteDescription { get; }
+//        IHttpRequestBuilder<T> RequestBuilder { get; }
+//        IRequestValidator<T> RequestValidator { get; }
+//        IHttpRequestUnbinder<T> RequestUnbinder { get; }
+//    }
 }

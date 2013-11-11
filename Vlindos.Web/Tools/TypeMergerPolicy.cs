@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Users.Common.Tools
+namespace Vlindos.Web.Tools
 {
     public class TypeMergerPolicy
     {

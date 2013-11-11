@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Users.Common.Models.Endpoint
+namespace Vlindos.Web.Models.Endpoint
 {
     public interface IRequestValidator<in T> where T : IEndpointRequest
     {

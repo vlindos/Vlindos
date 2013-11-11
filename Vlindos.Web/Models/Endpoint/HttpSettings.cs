@@ -1,8 +1,13 @@
 ﻿using System;
-using Spreed.Common.Serialization;
 
-namespace Users.Common.Models.Endpoint
+namespace Vlindos.Web.Models.Endpoint
 {
+    public enum SerializationFormat
+    {
+        Xml,
+        Json
+    }
+
     public interface IHttpSettings
     {
         Uri BaseUrl { get; set; }

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using Newtonsoft.Json;
-using Spreed.Common.Serialization;
-using Users.Common.Models.Endpoint;
+using Vlindos.Web.Models.Endpoint;
 
-namespace Users.Common.Tools
+namespace Vlindos.Web.Tools
 {
     public interface ISerializedResponseStreamReader<T> : IResponseStreamReader<T> 
         where T : EndpointResponse
@@ -35,9 +33,9 @@ namespace Users.Common.Tools
                     case SerializationFormat.Json:
                         try
                         {
-                            var serializer = new JsonSerializer();
-                            var reader = new JsonTextReader(streamReader);
-                            serviceResponse = serializer.Deserialize<T>(reader);
+                            //var serializer = new JsonSerializer();
+                            //var reader = new JsonTextReader(streamReader);
+                            //serviceResponse = serializer.Deserialize<T>(reader);
                         }
                         catch (Exception ex)
                         {
