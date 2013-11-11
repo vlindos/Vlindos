@@ -42,7 +42,50 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Attributes\" />
+    <Compile Include="Controllers\EndpointController.cs" />
+    <Compile Include="Controllers\EndpointFailureController.cs" />
+    <Compile Include="Controllers\ServerResponse.cs" />
+    <Compile Include="Attributes\ApiKeyFilter.cs" />
+    <Compile Include="Attributes\EndpointExceptionResult.cs" />
+    <Compile Include="Attributes\RedirectIfInitializationFailedFilterAttribute.cs" />
+    <Compile Include="Attributes\ApiKeyFilter.cs" />
+    <Compile Include="Models\IFormatProvider.cs" />
+    <Compile Include="Models\Endpoint\EndpointResponse.cs" />
+    <Compile Include="Models\Endpoint\HttpRequest.cs" />
+    <Compile Include="Models\Endpoint\HttpRequestTransmitter.cs" />
+    <Compile Include="Models\Endpoint\HttpResponseContext.cs" />
+    <Compile Include="Models\Endpoint\HttpSettings.cs" />
+    <Compile Include="Models\Endpoint\IEndpoint.cs" />
+    <Compile Include="Models\Endpoint\IEndpointDescriptor.cs" />
+    <Compile Include="Models\Endpoint\IEndpointRequest.cs" />
+    <Compile Include="Models\Endpoint\IHttpRequestBuilder.cs" />
+    <Compile Include="Models\Endpoint\IHttpRequestUnbinder.cs" />
+    <Compile Include="Models\Endpoint\IPerformer.cs" />
+    <Compile Include="Models\Endpoint\IRequestValidator.cs" />
+    <Compile Include="Models\Endpoint\IResponseStreamWriter.cs" />
+    <Compile Include="Models\Endpoint\IRouteDescription.cs" />
+    <Compile Include="Models\Endpoint\IRouteDescriptor.cs" />
+    <Compile Include="Models\Endpoint\IEndpointRequest.cs" />
+	<Compile Include="Mvc\EndpointResponseResult.cs" />
+	<Compile Include="Mvc\EndpointsApplication.cs" />
+	<Compile Include="Mvc\IRouteRegisterer.cs" />
+	<Compile Include="Mvc\WindsorControllerFactory.cs" />
+	<Compile Include="Services\BackgroundTaskStarter.cs" />
+	<Compile Include="Services\IRunnable.cs" />
+	<Compile Include="Services\RunnableState.cs" />
+	<Compile Include="Services\ServiceRunnableManager.cs" />
+	<Compile Include="Services\ServicesManager.cs" />
+	<Compile Include="Tools\ServicesManager.cs" />
+	<Compile Include="Tools\AcceptHeaderPrioritizer.cs" />
+	<Compile Include="Tools\CachedXmlSerializers.cs" />
+	<Compile Include="Tools\DateTimeOffsetFormatProvider.cs" />
+	<Compile Include="Tools\HashAlgorithm.cs" />
+	<Compile Include="Tools\IResponseStreamReader.cs" />
+	<Compile Include="Tools\RequestUnfolder.cs" />
+	<Compile Include="Tools\SerializedResponseStreamReader.cs" />
+	<Compile Include="Tools\SerializedResponseStreamWritter.cs" />
+	<Compile Include="Tools\TypeMerger.cs" />
+	<Compile Include="Tools\TypeMergerPolicy.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
