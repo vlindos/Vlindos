@@ -18,18 +18,20 @@ namespace Vlindos.Webserver
         private readonly IApplicationArgumentsGetter _applicationArgumentsGetter;
         private readonly ILoggingSystemInitializer _loggingSystemInitializer;
         private readonly IFileReader<Configuration.Configuration> _configurationReader;
-        private readonly IWebserver _webserver;
+        private readonly ITcpServer _tcpServer;
+        private readonly IHttpRequestProcessor _httpRequestProcessor;
 
         public Application(
             IApplicationArgumentsGetter applicationArgumentsGetter,
             ILoggingSystemInitializer loggingSystemInitializer,
             IFileReader<Configuration.Configuration> configurationReader,
-            IWebserver webserver)
+            ITcpServer tcpServer, IHttpRequestProcessor httpRequestProcessor)
         {
             _applicationArgumentsGetter = applicationArgumentsGetter;
             _loggingSystemInitializer = loggingSystemInitializer;
             _configurationReader = configurationReader;
-            _webserver = webserver;
+            _tcpServer = tcpServer;
+            _httpRequestProcessor = httpRequestProcessor;
         }
 
         public void Run()
@@ -42,11 +44,11 @@ namespace Vlindos.Webserver
             {
                 Configuration.Configuration configuration;
                 if (_configurationReader.Read(out configuration) == false) return;
-                if (_webserver.Start(configuration) == false) return;
+                if (_tcpServer.Start(configuration.Binds, _httpRequestProcessor) == false) return;
                 Console.WriteLine("Press any key to stop the application.");
                 Console.ReadKey();
 
-                _webserver.Stop();
+                _tcpServer.Stop();
             }
         }
     }

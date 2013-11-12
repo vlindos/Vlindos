@@ -6,18 +6,21 @@ namespace Vlindos.Webserver.Configuration
     {
         public Website()
         {
-            Binds = new Dictionary<string, Bind>();                  
+            Binds = new HashSet<Bind>();                  
             Applications = new Dictionary<string, Application>();
-            Paths = new Dictionary<string, Path>();
+            CustomLocations = new Dictionary<string, Path>();
         }
 
-        public Dictionary<string, Path> Paths { get; private set; }
+        public HashSet<Bind> Binds { get; set; }
+
+        public Path RootLocation { get; set; }
+
+        public Dictionary<string, Path> CustomLocations { get; private set; }
 
         public Dictionary<string, Application> Applications { get; private set; }
 
         public string ConfigurationFileName { get; set; }
-        public string DocumentRootDirectory { get; set; }
+
         public string AccessLogFileName { get; set; }
-        public Dictionary<string, Bind> Binds { get; private set; }
     }
 }

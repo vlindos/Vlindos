@@ -8,7 +8,7 @@ namespace Vlindos.Webserver.Webserver
 {
     public interface IBinderFactory
     {
-        IBinder GetBinder(NetworkSettings networkSettings, Bind bind);
+        IBinder GetBinder(Bind bind, IHttpRequestProcessor requestProcessor);
     }
     public interface IBinder
     {
@@ -19,17 +19,19 @@ namespace Vlindos.Webserver.Webserver
     public class Binder : IBinder
     {
         private readonly ISocketAsyncEventArgsPoolFactory _socketAsyncEventArgsPoolFactory;
-        private readonly NetworkSettings _networkSettings;
+        private readonly IHttpRequestProcessor _requestProcessor;
         private readonly Bind _bind;
         private Socket _listenSocket;
         private ManualResetEvent _manualResetEvent;
         private ISocketAsyncEventArgsPool _socketAsyncEventArgsPool;
 
         public Binder(
-            ISocketAsyncEventArgsPoolFactory socketAsyncEventArgsPoolFactory, NetworkSettings networkSettings, Bind bind)
+            ISocketAsyncEventArgsPoolFactory socketAsyncEventArgsPoolFactory,
+            IHttpRequestProcessor requestProcessor, 
+            Bind bind)
         {
             _socketAsyncEventArgsPoolFactory = socketAsyncEventArgsPoolFactory;
-            _networkSettings = networkSettings;
+            _requestProcessor = requestProcessor;
             _bind = bind;
         }
 
@@ -173,13 +175,13 @@ namespace Vlindos.Webserver.Webserver
             _listenSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             var localEndPoint = new IPEndPoint(_bind.IpAddress, _bind.Port);
             _listenSocket.Bind(localEndPoint);
-            _listenSocket.Listen((int) _networkSettings.MaximumPendingConnections);
+            _listenSocket.Listen((int) _bind.MaximumPendingConnections);
 
             _manualResetEvent = new ManualResetEvent(false);
             _manualResetEvent.Reset();
 
             _socketAsyncEventArgsPool = _socketAsyncEventArgsPoolFactory.GetSocketAsyncEventArgsPool(
-                _networkSettings.MaximumOpenedConnections,
+                _bind.MaximumOpenedConnections,
                 (uint)Environment.SystemPageSize, IOCompleted);
 
             StartAccept(null);    

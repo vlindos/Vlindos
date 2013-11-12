@@ -2,40 +2,36 @@
 using System.Collections.Generic;
 using System.Linq;
 using Vlindos.Common.Logging;
+using Vlindos.Webserver.Configuration;
 
 namespace Vlindos.Webserver.Webserver
 {
-    public interface IWebserver
+    public interface ITcpServer
     {
-        bool Start(Configuration.Configuration configuration);
+        bool Start(IEnumerable<Bind> binds, IHttpRequestProcessor requestProcessor);
         void Stop();
     }
 
-    public class Webserver : IWebserver
+    public class TcpServer : ITcpServer
     {
         private readonly ILogger _logger;
         private readonly IBinderFactory _binderFactory;
         private readonly List<IBinder> _binders;
 
-        public Webserver(ILogger logger,
-            IRequestProcessor requestProcessor, IBinderFactory binderFactory)
+        public TcpServer(ILogger logger, IBinderFactory binderFactory)
         {
             _logger = logger;
             _binderFactory = binderFactory;
             _binders = new List<IBinder>();
         }
 
-        public bool Start(Configuration.Configuration configuration)
+        public bool Start(IEnumerable<Bind> binds, IHttpRequestProcessor requestProcessor)
         {
-            var binds = configuration.Websites
-                .SelectMany(x => x.Value.Binds)
-                .Select(x => x.Value)
-                .ToArray();
             foreach (var bind in binds)
             {
                 try
                 {
-                    _binders.Add(_binderFactory.GetBinder(configuration.NetworkSettings, bind));
+                    _binders.Add(_binderFactory.GetBinder(bind, requestProcessor));
                 }
                 catch (Exception exception)
                 {
