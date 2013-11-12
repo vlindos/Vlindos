@@ -8,6 +8,9 @@ namespace Vlindos.Webserver.Configuration
         public IPAddress IpAddress { get; set; }
         public ushort Port { get; set; }
         public string HostName { get; set; }
+        public string NetworkSettings { get; set; }
         public string CertificateFileName { get; set; }
+        public uint MaximumPendingConnections { get; set; }
+        public uint MaximumOpenedConnections { get; set; }
     }
 }
