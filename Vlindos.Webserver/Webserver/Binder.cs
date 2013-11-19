@@ -18,155 +18,96 @@ namespace Vlindos.Webserver.Webserver
 
     public class Binder : IBinder
     {
-        private readonly ISocketAsyncEventArgsPoolFactory _socketAsyncEventArgsPoolFactory;
-        private readonly IHttpRequestProcessor _requestProcessor;
+        private readonly IConnectionWorkersPoolFactory _connectionWorkersPoolFactory;
         private readonly Bind _bind;
         private Socket _listenSocket;
         private ManualResetEvent _manualResetEvent;
-        private ISocketAsyncEventArgsPool _socketAsyncEventArgsPool;
+        private IConnectionWorkersPool _connectionWorkersPool;
 
         public Binder(
-            ISocketAsyncEventArgsPoolFactory socketAsyncEventArgsPoolFactory,
-            IHttpRequestProcessor requestProcessor, 
+            IConnectionWorkersPoolFactory connectionWorkersPoolFactory,
             Bind bind)
         {
-            _socketAsyncEventArgsPoolFactory = socketAsyncEventArgsPoolFactory;
-            _requestProcessor = requestProcessor;
+            _connectionWorkersPoolFactory = connectionWorkersPoolFactory;
             _bind = bind;
         }
 
-        void AcceptEventArg_Completed(object sender, SocketAsyncEventArgs e)
-        {
-            ProcessAccept(e);
-        }
-
-        /// <summary>
-        /// This method is invoked when an asycnhronous receive operation completes. If the 
-        /// remote host closed the connection, then the socket is closed.  If data was received then
-        /// the data is echoed back to the client.
-        /// </summary>
-        private void ProcessReceive(SocketAsyncEventArgs e)
-        {
-            // check if the remote host closed the connection
-            var token = (AsyncUserToken)e.UserToken;
-            if (e.BytesTransferred <= 0 || e.SocketError != SocketError.Success)
-            {
-                CloseClientSocket(e);
-                return;
-            }
-
-            //echo the data received back to the client
-            var willRaiseEvent = token.Socket.SendAsync(e);
-            if (!willRaiseEvent)
-            {
-                ProcessSend(e);
-            }
-        }
-
-        /// <summary>
-        /// This method is invoked when an asynchronous send operation completes.  The method issues another receive
-        /// on the socket to read any additional data sent from the client
-        /// </summary>
-        /// <param name="e"></param>
-        private void ProcessSend(SocketAsyncEventArgs e)
-        {
-            if (e.SocketError != SocketError.Success)
-            {
-                CloseClientSocket(e);
-                return;
-            }
-            // done echoing data back to the client
-            var token = (AsyncUserToken) e.UserToken;
-            // read the next block of data send from the client
-            var willRaiseEvent = token.Socket.ReceiveAsync(e);
-            if (!willRaiseEvent)
-            {
-                ProcessReceive(e);
-            }
-        }
 
         private void CloseClientSocket(SocketAsyncEventArgs e)
         {
-            var token = (AsyncUserToken)e.UserToken;
+            var connectionWorker = (ConnectionWorker)e.UserToken;
 
             // close the socket associated with the client
             try
             {
-                token.Socket.Shutdown(SocketShutdown.Send);
+                connectionWorker.AcceptSocket.Shutdown(SocketShutdown.Send);
             }
             // throws if client process has already closed
             catch  { }
-            token.Socket.Close();
+            connectionWorker.AcceptSocket.Close();
 
             // Free the SocketAsyncEventArg so they can be reused by another client
-            _socketAsyncEventArgsPool.Push(e);
+            _connectionWorkersPool.Push(connectionWorker);
         }
+
+        private void AcceptEventArg_Completed(object sender, SocketAsyncEventArgs e)
+        {
+            ProcessAccept(e);
+        }
+
         private void ProcessAccept(SocketAsyncEventArgs e)
         {
-            // Get the socket for the accepted client connection and put it into the 
-            //ReadEventArg object user token
-            SocketAsyncEventArgs readEventArgs;
-            if (_socketAsyncEventArgsPool.TryPop(out readEventArgs) == false)
+            ConnectionWorker connectionWorker;
+            if (_connectionWorkersPool.TryPop(out connectionWorker) == false)
             {
-                throw new NotImplementedException();
+                CloseClientSocket(e); // pool exhausted - just close the connection
+                return;
             }
-            ((AsyncUserToken)readEventArgs.UserToken).Socket = e.AcceptSocket;
+            connectionWorker.AcceptSocket = e.AcceptSocket;
 
-            // As soon as the client is connected, post a receive to the connection
-            var willRaiseEvent = e.AcceptSocket.ReceiveAsync(readEventArgs);
-            if (!willRaiseEvent)
+            if (_listenSocket.ReceiveFromAsync(e)) // if performed synchroniosly
             {
-                ProcessReceive(readEventArgs);
+                ProcessAccept(e);
             }
-
-            // Accept the next connection request
-            StartAccept(e);
         }
-
 
 
         /// <summary>
         /// This method is called whenever a receive or send opreation is completed on a socket 
         /// </summary> 
-        private void IOCompleted(object sender, SocketAsyncEventArgs e)
+        private void IoCompleted(object sender, SocketAsyncEventArgs e)
         {
             // determine which type of operation just completed and call the associated handler
             switch (e.LastOperation)
             {
                 case SocketAsyncOperation.Receive:
-                    ProcessReceive(e);
+                    if (e.BytesTransferred <= 0 || e.SocketError != SocketError.Success)
+                    {
+                        CloseClientSocket(e);
+                        return;
+                    }
+                    ((ConnectionWorker)e.UserToken).RequestProcessor.Push(e.Buffer, e.BytesTransferred);
+                    e.SetBuffer(e.Buffer, 0, e.Buffer.Length);
                     break;
                 case SocketAsyncOperation.Send:
-                    ProcessSend(e);
+                    if (e.BytesTransferred <= 0 || e.SocketError != SocketError.Success)
+                    {
+                        CloseClientSocket(e);
+                        break;
+                    }
+                    e.SetBuffer(e.Buffer, 0, e.Buffer.Length);
                     break;
+                case SocketAsyncOperation.Connect:
+                    ((ConnectionWorker) e.UserToken).RequestProcessor.Initialize();
+                    break; // ignore event
+                case SocketAsyncOperation.Disconnect:
+                    CloseClientSocket(e);
+                    break; // ignore event
+                case SocketAsyncOperation.None:
+                    break; // ignore event
                 default:
-                    throw new ArgumentException("The last operation completed on the socket was not a receive or send");
-            }
-        }
-
-        /// <summary>
-        /// Begins an operation to accept a connection request from the client 
-        /// </summary>
-        /// <param name="acceptEventArg">The context object to use when issuing the accept operation on the 
-        /// server's listening socket</param>
-        public void StartAccept(SocketAsyncEventArgs acceptEventArg)
-        {
-            if (acceptEventArg == null)
-            {
-                acceptEventArg = new SocketAsyncEventArgs();
-                acceptEventArg.Completed += AcceptEventArg_Completed;
-            }
-            else
-            {
-                // socket must be cleared since the context object is being reused
-                acceptEventArg.AcceptSocket = null;
-            }
-
-            _manualResetEvent.WaitOne();
-            var willRaiseEvent = _listenSocket.AcceptAsync(acceptEventArg);
-            if (!willRaiseEvent)
-            {
-                ProcessAccept(acceptEventArg);
+                    CloseClientSocket(e);
+                    break;
             }
         }
 
@@ -180,11 +121,18 @@ namespace Vlindos.Webserver.Webserver
             _manualResetEvent = new ManualResetEvent(false);
             _manualResetEvent.Reset();
 
-            _socketAsyncEventArgsPool = _socketAsyncEventArgsPoolFactory.GetSocketAsyncEventArgsPool(
+            _connectionWorkersPool = _connectionWorkersPoolFactory.GetSocketAsyncEventArgsPool(
                 _bind.MaximumOpenedConnections,
-                (uint)Environment.SystemPageSize, IOCompleted);
+                (uint)Environment.SystemPageSize, IoCompleted);
 
-            StartAccept(null);    
+            var acceptEventArg = new SocketAsyncEventArgs();
+            acceptEventArg.Completed += AcceptEventArg_Completed;
+
+            _manualResetEvent.WaitOne();
+            if (_listenSocket.AcceptAsync(acceptEventArg)) // if performed synchroniosly
+            {
+                ProcessAccept(acceptEventArg);
+            }
         }
 
         public void Unbind()

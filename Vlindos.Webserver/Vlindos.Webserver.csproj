@@ -49,11 +49,12 @@
     <Compile Include="ApplicationArguments\LoggingFilePath.cs" />
     <Compile Include="Webserver\IHttpRequestProcessor.cs" />
     <Compile Include="Initializers\LoggingSystemInitializer.cs" />
-    <Compile Include="Webserver\AsyncUserToken.cs" />
+    <Compile Include="Webserver\IRequestProcessor.cs" />
+    <Compile Include="Webserver\UserToken.cs" />
     <Compile Include="Webserver\Binder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Webserver\SocketAsyncEventArgsPool.cs" />
-    <Compile Include="Webserver\Webserver.cs" />
+    <Compile Include="Webserver\ConnectionWorkersPool.cs" />
+    <Compile Include="Webserver\TcpServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Webserver.config" />
@@ -72,6 +73,9 @@
       <Project>{7909B1AB-545D-4938-B4D6-BA7E2AC13F96}</Project>
       <Name>Vlindos.Logging</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

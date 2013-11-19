@@ -1,5 +1,5 @@
 ﻿
-namespace Vlindos.Logging.Monitor
+namespace LoggingMonitor
 {
     public class WebApplication : IWebApplication
     {
