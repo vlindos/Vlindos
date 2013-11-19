@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlindos.Webserver", "Vlindos.Webserver\Vlindos.Webserver.csproj", "{B8A56D82-C795-4F44-87F2-B79C0B676915}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webserver", "Webserver\Webserver.csproj", "{B8A56D82-C795-4F44-87F2-B79C0B676915}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlindos.Common", "Vlindos.Common\Vlindos.Common.csproj", "{FF60F6F2-57B9-49CF-9745-6EBA430C8604}"
 EndProject
