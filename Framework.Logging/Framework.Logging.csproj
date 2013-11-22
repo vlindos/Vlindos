@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{92926FD0-433B-49D9-AFA1-2D5DB1A8F02B}</ProjectGuid>
+    <ProjectGuid>{7909B1AB-545D-4938-B4D6-BA7E2AC13F96}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Vlindos.InversionOfControl</RootNamespace>
-    <AssemblyName>Vlindos.InversionOfControl</AssemblyName>
+    <RootNamespace>Vlindos.Logging</RootNamespace>
+    <AssemblyName>Vlindos.Logging</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,28 +30,42 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AppllicationConfigurator.cs" />
-    <Compile Include="ConventionConfigurators\DefaultConventionConfigurator.cs" />
-    <Compile Include="IAssemblyConfigurator.cs" />
-    <Compile Include="IConfigurator.cs" />
-    <Compile Include="Container.cs" />
-    <Compile Include="LifestyleManagers\ILifestyleManager.cs" />
-    <Compile Include="LifestyleManagers\Lifestyle.cs" />
+    <Compile Include="CallingStackFrameGetter.cs" />
+    <Compile Include="Configuration\OutputPipe.cs" />
+    <Compile Include="Dequeuer.cs" />
+    <Compile Include="IOutputEngine.cs" />
+    <Compile Include="IOutput.cs" />
+    <Compile Include="Configuration\FileReader.cs" />
+    <Compile Include="Configuration\Configuration.cs" />
+    <Compile Include="IMessageModifier.cs" />
+    <Compile Include="InternalLogger.cs" />
+    <Compile Include="Output\ConsoleOutput\Output.cs" />
+    <Compile Include="Output\ConsoleOutput\OutputEngine.cs" />
+    <Compile Include="Output\FileOutput\FilePathGetter.cs" />
+    <Compile Include="Output\MessageTextFormetter.cs" />
+    <Compile Include="Output\FileOutput\Output.cs" />
+    <Compile Include="Output\FileOutput\OutputEngine.cs" />
+    <Compile Include="System.cs" />
+    <Compile Include="Queue.cs" />
+    <Compile Include="Level.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ConventionConfigurators\SingletonConventionConfigurator.cs" />
-    <Compile Include="LifestyleManagers\SingletonLifetyleManager.cs" />
+    <Compile Include="MessageCreator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Vlindos.Common\Framework.csproj">
-      <Project>{ff60f6f2-57b9-49cf-9745-6eba430c8604}</Project>
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{FF60F6F2-57B9-49CF-9745-6EBA430C8604}</Project>
       <Name>Framework</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Logging.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

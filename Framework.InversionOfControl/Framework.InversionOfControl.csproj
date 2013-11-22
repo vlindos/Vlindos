@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8A4F9BBD-2DE1-458C-952E-22CE0E969405}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{92926FD0-433B-49D9-AFA1-2D5DB1A8F02B}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Vlindos.DemoApp</RootNamespace>
-    <AssemblyName>Vlindos.DemoApp</AssemblyName>
+    <RootNamespace>Vlindos.InversionOfControl</RootNamespace>
+    <AssemblyName>Vlindos.InversionOfControl</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -36,24 +34,24 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application.cs" />
-    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="AppllicationConfigurator.cs" />
+    <Compile Include="ConventionConfigurators\DefaultConventionConfigurator.cs" />
+    <Compile Include="IAssemblyConfigurator.cs" />
+    <Compile Include="IConfigurator.cs" />
+    <Compile Include="Container.cs" />
+    <Compile Include="LifestyleManagers\ILifestyleManager.cs" />
+    <Compile Include="LifestyleManagers\Lifestyle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ConventionConfigurators\SingletonConventionConfigurator.cs" />
+    <Compile Include="LifestyleManagers\SingletonLifetyleManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Vlindos.Common\Framework.csproj">
-      <Project>{FF60F6F2-57B9-49CF-9745-6EBA430C8604}</Project>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{ff60f6f2-57b9-49cf-9745-6eba430c8604}</Project>
       <Name>Framework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Vlindos.InversionOfControl\Framework.InversionOfControl.csproj">
-      <Project>{92926FD0-433B-49D9-AFA1-2D5DB1A8F02B}</Project>
-      <Name>Framework.InversionOfControl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Vlindos.Logging\Framework.Logging.csproj">
-      <Project>{7909B1AB-545D-4938-B4D6-BA7E2AC13F96}</Project>
-      <Name>Framework.Logging</Name>
-    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

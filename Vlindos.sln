@@ -5,19 +5,19 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webserver", "Webserver\Webserver.csproj", "{B8A56D82-C795-4F44-87F2-B79C0B676915}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework", "Vlindos.Common\Framework.csproj", "{FF60F6F2-57B9-49CF-9745-6EBA430C8604}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework", "Framework\Framework.csproj", "{FF60F6F2-57B9-49CF-9745-6EBA430C8604}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.InversionOfControl", "Vlindos.InversionOfControl\Framework.InversionOfControl.csproj", "{92926FD0-433B-49D9-AFA1-2D5DB1A8F02B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.InversionOfControl", "Framework.InversionOfControl\Framework.InversionOfControl.csproj", "{92926FD0-433B-49D9-AFA1-2D5DB1A8F02B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Logging", "Vlindos.Logging\Framework.Logging.csproj", "{7909B1AB-545D-4938-B4D6-BA7E2AC13F96}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Logging", "Framework.Logging\Framework.Logging.csproj", "{7909B1AB-545D-4938-B4D6-BA7E2AC13F96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.DemoApp", "Vlindos.DemoApp\Framework.DemoApp.csproj", "{8A4F9BBD-2DE1-458C-952E-22CE0E969405}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.DemoApp", "Framework.DemoApp\Framework.DemoApp.csproj", "{8A4F9BBD-2DE1-458C-952E-22CE0E969405}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggingMonitor.Webservice", "LoggingMonitor\LoggingMonitor.Webservice.csproj", "{C7EBC686-FB97-415E-9F71-E5C94310B3FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Web", "Vlindos.Web\Framework.Web.csproj", "{6BC58CD0-6CB2-477F-8618-760989416E38}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Web", "Framework.Web\Framework.Web.csproj", "{6BC58CD0-6CB2-477F-8618-760989416E38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.UnitsTesting", "Vlindos.UnitsTesting\Framework.UnitsTesting.csproj", "{F195A72E-EE7C-4398-B8AD-BD597BFE155B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.UnitsTesting", "Framework.UnitsTesting\Framework.UnitsTesting.csproj", "{F195A72E-EE7C-4398-B8AD-BD597BFE155B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthMonitor", "HealthMonitor\HealthMonitor.csproj", "{F82511C2-EF03-42CE-AB07-176CE4D08096}"
 EndProject

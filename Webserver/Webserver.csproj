@@ -61,15 +61,15 @@
     <None Include="Websites\SampleSite\Website.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Vlindos.Common\Framework.csproj">
+    <ProjectReference Include="..\Framework\Framework.csproj">
       <Project>{FF60F6F2-57B9-49CF-9745-6EBA430C8604}</Project>
       <Name>Framework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Vlindos.InversionOfControl\Framework.InversionOfControl.csproj">
+    <ProjectReference Include="..\Framework.InversionOfControl\Framework.InversionOfControl.csproj">
       <Project>{92926fd0-433b-49d9-afa1-2d5db1a8f02b}</Project>
       <Name>Framework.InversionOfControl</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Vlindos.Logging\Framework.Logging.csproj">
+    <ProjectReference Include="..\Framework.Logging\Framework.Logging.csproj">
       <Project>{7909B1AB-545D-4938-B4D6-BA7E2AC13F96}</Project>
       <Name>Framework.Logging</Name>
     </ProjectReference>
