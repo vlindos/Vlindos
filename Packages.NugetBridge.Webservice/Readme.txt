@@ -1,0 +1,1 @@
+﻿An interface to search, aggregate and mass upload (and updated if exists) packages from NuGet repository to the Packages repository.
