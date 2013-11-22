@@ -5,19 +5,19 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webserver", "Webserver\Webserver.csproj", "{B8A56D82-C795-4F44-87F2-B79C0B676915}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlindos.Common", "Vlindos.Common\Vlindos.Common.csproj", "{FF60F6F2-57B9-49CF-9745-6EBA430C8604}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework", "Vlindos.Common\Framework.csproj", "{FF60F6F2-57B9-49CF-9745-6EBA430C8604}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlindos.InversionOfControl", "Vlindos.InversionOfControl\Vlindos.InversionOfControl.csproj", "{92926FD0-433B-49D9-AFA1-2D5DB1A8F02B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.InversionOfControl", "Vlindos.InversionOfControl\Framework.InversionOfControl.csproj", "{92926FD0-433B-49D9-AFA1-2D5DB1A8F02B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlindos.Logging", "Vlindos.Logging\Vlindos.Logging.csproj", "{7909B1AB-545D-4938-B4D6-BA7E2AC13F96}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Logging", "Vlindos.Logging\Framework.Logging.csproj", "{7909B1AB-545D-4938-B4D6-BA7E2AC13F96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlindos.DemoApp", "Vlindos.DemoApp\Vlindos.DemoApp.csproj", "{8A4F9BBD-2DE1-458C-952E-22CE0E969405}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.DemoApp", "Vlindos.DemoApp\Framework.DemoApp.csproj", "{8A4F9BBD-2DE1-458C-952E-22CE0E969405}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggingMonitor", "LoggingMonitor\LoggingMonitor.csproj", "{C7EBC686-FB97-415E-9F71-E5C94310B3FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggingMonitor.Webservice", "LoggingMonitor\LoggingMonitor.Webservice.csproj", "{C7EBC686-FB97-415E-9F71-E5C94310B3FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlindos.Web", "Vlindos.Web\Vlindos.Web.csproj", "{6BC58CD0-6CB2-477F-8618-760989416E38}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Web", "Vlindos.Web\Framework.Web.csproj", "{6BC58CD0-6CB2-477F-8618-760989416E38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlindos.UnitsTesting", "Vlindos.UnitsTesting\Vlindos.UnitsTesting.csproj", "{F195A72E-EE7C-4398-B8AD-BD597BFE155B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.UnitsTesting", "Vlindos.UnitsTesting\Framework.UnitsTesting.csproj", "{F195A72E-EE7C-4398-B8AD-BD597BFE155B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthMonitor", "HealthMonitor\HealthMonitor.csproj", "{F82511C2-EF03-42CE-AB07-176CE4D08096}"
 EndProject
@@ -29,7 +29,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Databa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database.Webservice", "Database.Webservice\Database.Webservice.csproj", "{F6363EE3-FD61-43FB-8484-0A80D847188C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Distribution", "Distribution\Distribution.csproj", "{CB9743BF-FC9B-4928-920A-1D04429C078D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Distribution.Webservice", "Distribution\Distribution.Webservice.csproj", "{CB9743BF-FC9B-4928-920A-1D04429C078D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Logging.DatabaseOutput", "Framework.Logging.DatabaseOutput\Framework.Logging.DatabaseOutput.csproj", "{F61DC4D2-A449-4EE1-8016-6D944D2A04B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +95,10 @@ Global
 		{CB9743BF-FC9B-4928-920A-1D04429C078D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB9743BF-FC9B-4928-920A-1D04429C078D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB9743BF-FC9B-4928-920A-1D04429C078D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F61DC4D2-A449-4EE1-8016-6D944D2A04B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F61DC4D2-A449-4EE1-8016-6D944D2A04B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F61DC4D2-A449-4EE1-8016-6D944D2A04B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F61DC4D2-A449-4EE1-8016-6D944D2A04B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

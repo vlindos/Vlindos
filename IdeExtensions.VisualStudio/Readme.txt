@@ -1,0 +1,1 @@
+﻿Should be abstract Visual Studio Extension that contains the server and be able to create Web applications that automatically gets debugged via the web server launch.

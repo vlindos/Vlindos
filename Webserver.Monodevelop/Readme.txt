@@ -1,0 +1,1 @@
+﻿Should be abstract MonoDevelop Extension that contains the server and be able to create Web applications that automatically gets debugged via the web server launch.

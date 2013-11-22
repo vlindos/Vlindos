@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8A4F9BBD-2DE1-458C-952E-22CE0E969405}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{C7EBC686-FB97-415E-9F71-E5C94310B3FC}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Vlindos.DemoApp</RootNamespace>
-    <AssemblyName>Vlindos.DemoApp</AssemblyName>
+    <RootNamespace>LoggingMonitor</RootNamespace>
+    <AssemblyName>LoggingMonitor</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -34,25 +32,18 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application.cs" />
-    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Vlindos.Common\Vlindos.Common.csproj">
-      <Project>{FF60F6F2-57B9-49CF-9745-6EBA430C8604}</Project>
-      <Name>Vlindos.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Vlindos.InversionOfControl\Vlindos.InversionOfControl.csproj">
-      <Project>{92926FD0-433B-49D9-AFA1-2D5DB1A8F02B}</Project>
-      <Name>Vlindos.InversionOfControl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Vlindos.Logging\Vlindos.Logging.csproj">
-      <Project>{7909B1AB-545D-4938-B4D6-BA7E2AC13F96}</Project>
-      <Name>Vlindos.Logging</Name>
-    </ProjectReference>
+    <Content Include="Readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,0 +1,1 @@
+﻿Core functionality library used for the specific IDEs
