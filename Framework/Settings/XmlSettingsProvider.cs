@@ -24,8 +24,7 @@ namespace Vlindos.Common.Settings
         public string GetValueForKey(string path)
         {
             var xmlNode = _rootXmlElement.SelectSingleNode(path);
-            if (xmlNode == null) return null;
-            return xmlNode.Value;
+            return xmlNode == null ? null : xmlNode.Value;
         }
 
         public XmlNodeList GetNodesForKey(string path)
