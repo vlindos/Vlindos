@@ -7,18 +7,14 @@ using System.Threading.Tasks;
 
 namespace Database
 {
-    public interface IDatabase
+    public interface IDatabase : IDisposable
     {
         string Namespace { get; set; }
-
-        IDatabaseHandle Open(string filepath);
-
-        IDatabaseHandle Handle { get; set; }
     }
 
-    public interface IDatabaseHandle : IDisposable
+    public interface IDatabaseManager
     {
-
+        IDatabase OpenDatabase(string filepath);
     }
 
     public interface IOperation
