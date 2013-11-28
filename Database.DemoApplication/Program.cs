@@ -51,6 +51,7 @@ namespace Database.DemoApplication
             database.Delete<EntityExample>().ByCriteria(x => x.Name == "").Or(x => x.Id != Guid.Empty);
             database.Update<EntityExample>(entity);
             database.Update<EntityExample>(entity).ByCriteria(x => x.Name == "");
+            database.Get<EntityExample>().Top(10).ByCriteria(x => x.Name == "");
         }
     }
 }
