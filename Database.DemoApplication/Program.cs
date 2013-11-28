@@ -12,6 +12,7 @@ namespace Database.DemoApplication
     {
         public Guid Id { get; set; }
 
+        public DateTimeOffset Created { get; set; }
 
         public override bool Equals(object obj)
         {
