@@ -10,8 +10,8 @@ namespace Database.DemoApplication
     {
         static void Main(string[] args)
         {
-            IDatabaseManager databaseManager;
-            var database = databaseManager.OpenDatabase("");
+            IDatabaseOpener databaseOpener;
+            var database = databaseOpener.OpenDatabase("");
         }
     }
 }

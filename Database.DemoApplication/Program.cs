@@ -1,32 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Database.DemoApplication
 {
 
-    public class Entity : object          
-    {
-        public Guid Id { get; set; }
-
-        public DateTimeOffset Created { get; set; }
-
-        public override bool Equals(object obj)
-        {
-            if (obj.GetType() != typeof (Entity)) return false;
-            return ((Entity)obj).Id == Id;
-        }
-
-        public override int GetHashCode()
-        {
-            return Id.GetHashCode();
-        }
-    }
-
-    public class EntityExample : Entity
+    public class EntityExample : IEntity
     {
         public string Name { get; set; }
     }
@@ -35,23 +15,80 @@ namespace Database.DemoApplication
     {
         static void Main(string[] args)
         {
-            IDatabaseManager databaseManager = null;
-            var database = databaseManager.OpenDatabase("");
-            var entity = new EntityExample();      
-            database.SubscribeForAdd<EntityExample>(entittyInserted =>
+            const string databaseDirectory = @"";
+            IDatabaseOpener databaseOpener = null;
+            var database = databaseOpener.OpenDatabase<EntityExample>(databaseDirectory);
+            var newEntity = new EntityExample();
+
+            database.Add(newEntity)
+                    .Perform();
+            if (r.Success == false)
             {
-                if (entityInserted.Id != entity.Id)
+                Console.WriteLine(string.Join("\r\n", r.Errors));
+                return;
+            }
+
+            database.Delete()
+                    .Where(x => x.Entity.Name == "")
+                    .Perform();
+            if (r.Success == false)
+            {
+                Console.WriteLine(string.Join("\r\n", r.Errors));
+                return;
+            }
+
+            database.Update(newEntity)
+                    .Where(x => x.Id == Guid.Empty)
+                    .Perform();
+            if (r.Success == false)
+            {
+                Console.WriteLine(string.Join("\r\n", r.Errors));
+                return;
+            }
+
+            database.Update(x => x)
+                    .Where(x => x.Id == Guid.Empty)
+                    .Perform();
+            if (r.Success == false)
+            {
+                Console.WriteLine(string.Join("\r\n", r.Errors));
+                return;
+            }
+
+            var r = database.Select()
+                            .Where(x => x.Changed > DateTimeOffset.Now)
+                            .Top(10)
+                            .Offset(10)
+                            .OrderBy(x => x.Created, OrderType.Ascending)
+                            .Perform();
+            if (r.Success == false)
+            {
+                Console.WriteLine(string.Join("\r\n", r.Errors));
+                return;
+            }
+            IRetrieveResult<EntityExample> retrieveResult;
+            while ((retrieveResult = r.Retrive(1)).Entities.Any())
+            {
+                foreach (var entity in retrieveResult.Entities)
                 {
-                    // subscribtion event raised before insert confirmation
-                }    
-            });
-
-            database.Add<EntityExample>(entity);
-
-            database.Delete<EntityExample>().ByCriteria(x => x.Name == "").Or(x => x.Id != Guid.Empty);
-            database.Update<EntityExample>(entity);
-            database.Update<EntityExample>(entity).ByCriteria(x => x.Name == "");
-            database.Get<EntityExample>().Top(10).ByCriteria(x => x.Name == "");
+                    Console.WriteLine("{0}", entity.Id);
+                }
+            }
+            if (retrieveResult.Success == false)
+            {
+                Console.WriteLine(string.Join("\r\n", retrieveResult.Errors));
+                return;
+            }
+            var retrieveAllResult = r.RetrieveAll();
+            if (retrieveAllResult.Success == false)
+            {
+                Console.WriteLine(string.Join("\r\n", retrieveResult.Errors));
+                return;
+            }
+            foreach (var entity in retrieveResult.Entities)
+            {
+                Console.WriteLine("{0}", entity.Id);
+            }
         }
     }
 }
