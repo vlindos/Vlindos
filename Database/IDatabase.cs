@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Database
@@ -40,7 +39,7 @@ namespace Database
         IOperation<T> Add(params IEntity[] entity);
         IDeleteOperation<T> Delete();
         IUpdateOperation<T> Update(IEntity entity);
-        IUpdateOperation<T> Update(Func<EntityHolder<T>, EntityHolder<T> entityUpdater);
+        IUpdateOperation<T> Update(Func<EntityHolder<T>> entityUpdater);
         ISelectionOperation<T> Select();
     }
 

@@ -20,47 +20,47 @@ namespace Database.DemoApplication
             var database = databaseOpener.OpenDatabase<EntityExample>(databaseDirectory);
             var newEntity = new EntityExample();
 
-            database.Add(newEntity)
-                    .Perform();
-            if (r.Success == false)
-            {
-                Console.WriteLine(string.Join("\r\n", r.Errors));
-                return;
-            }
-
-            database.Delete()
-                    .Where(x => x.Entity.Name == "")
-                    .Perform();
-            if (r.Success == false)
-            {
-                Console.WriteLine(string.Join("\r\n", r.Errors));
-                return;
-            }
-
-            database.Update(newEntity)
-                    .Where(x => x.Id == Guid.Empty)
-                    .Perform();
-            if (r.Success == false)
-            {
-                Console.WriteLine(string.Join("\r\n", r.Errors));
-                return;
-            }
-
-            database.Update(x => x)
-                    .Where(x => x.Id == Guid.Empty)
-                    .Perform();
-            if (r.Success == false)
-            {
-                Console.WriteLine(string.Join("\r\n", r.Errors));
-                return;
-            }
-
-            var r = database.Select()
-                            .Where(x => x.Changed > DateTimeOffset.Now)
-                            .Top(10)
-                            .Offset(10)
-                            .OrderBy(x => x.Created, OrderType.Ascending)
+            var r = database.Add(newEntity)
                             .Perform();
+            if (r.Success == false)
+            {
+                Console.WriteLine(string.Join("\r\n", r.Errors));
+                return;
+            }
+
+            r = database.Delete()
+                        .Where(x => x.Entity.Name == "")
+                        .Perform();
+            if (r.Success == false)
+            {
+                Console.WriteLine(string.Join("\r\n", r.Errors));
+                return;
+            }
+
+            r = database.Update(newEntity)
+                        .Where(x => x.Id == Guid.Empty)
+                        .Perform();
+            if (r.Success == false)
+            {
+                Console.WriteLine(string.Join("\r\n", r.Errors));
+                return;
+            }
+
+            r = database.Update(x => x)
+                        .Where(x => x.Id == Guid.Empty)
+                        .Perform();
+            if (r.Success == false)
+            {
+                Console.WriteLine(string.Join("\r\n", r.Errors));
+                return;
+            }
+
+            r = database.Select()
+                        .Where(x => x.Changed > DateTimeOffset.Now)
+                        .Top(10)
+                        .Offset(10)
+                        .OrderBy(x => x.Created, OrderType.Ascending)
+                        .Perform();
             if (r.Success == false)
             {
                 Console.WriteLine(string.Join("\r\n", r.Errors));
