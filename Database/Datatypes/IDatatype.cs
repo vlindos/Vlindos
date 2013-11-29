@@ -1,10 +1,6 @@
 ﻿namespace Database.Datatypes
 {
-    public interface ILogicalOperation
-    {
-    }
-
-    public interface IDatatype<T> where T : struct
+    public interface IDataType<T>
     {
         ILogicalOperation[] LogicalOperations { get; set; }
     }

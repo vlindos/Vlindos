@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 
 namespace Database.DemoApplication
 {
@@ -13,7 +11,7 @@ namespace Database.DemoApplication
 
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             const string databaseDirectory = @"";
             IDatabaseOpener databaseOpener = null;
@@ -55,39 +53,38 @@ namespace Database.DemoApplication
                 return;
             }
 
-            r = database.Select()
-                        .Where(x => x.Changed > DateTimeOffset.Now)
-                        .Top(10)
-                        .Offset(10)
-                        .OrderBy(x => x.Created, OrderType.Ascending)
-                        .Perform();
-            if (r.Success == false)
-            {
-                Console.WriteLine(string.Join("\r\n", r.Errors));
-                return;
-            }
-            IRetrieveResult<EntityExample> retrieveResult;
-            while ((retrieveResult = r.Retrive(1)).Entities.Any())
-            {
-                foreach (var entity in retrieveResult.Entities)
-                {
-                    Console.WriteLine("{0}", entity.Id);
-                }
-            }
-            if (retrieveResult.Success == false)
-            {
-                Console.WriteLine(string.Join("\r\n", retrieveResult.Errors));
-                return;
-            }
-            var retrieveAllResult = r.RetrieveAll();
+            var q = database.Select()
+                            .Where(x => x.Changed > DateTimeOffset.Now)
+                            .Top(10)
+                            .Offset(10)
+                            .OrderBy(x => x.Created, OrderType.Ascending);
+
+            var retrieveAllResult = q.RetrieveAll();
             if (retrieveAllResult.Success == false)
             {
-                Console.WriteLine(string.Join("\r\n", retrieveResult.Errors));
+                Console.WriteLine(string.Join("\r\n", retrieveAllResult.Errors));
                 return;
             }
-            foreach (var entity in retrieveResult.Entities)
+            foreach (var entity in retrieveAllResult.Entities)
             {
                 Console.WriteLine("{0}", entity.Id);
+            }
+
+            using (var retrieveResult = q.RetriveByBatchOf(10))
+            {
+                while (retrieveAllResult.Success && retrieveResult.Entities.Any())
+                {
+                    foreach (var entity in retrieveResult.Entities)
+                    {
+                        Console.WriteLine("{0}", entity.Id);
+                    }
+
+                    retrieveResult.RetrieveNextBatch();
+                }
+                if (!retrieveAllResult.Success)
+                {
+                    Console.WriteLine(string.Join("\r\n", retrieveAllResult.Errors));
+                }
             }
         }
     }

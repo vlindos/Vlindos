@@ -40,8 +40,30 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Readme.txt" />
+    <Compile Include="Datatypes\IBoolDataType.cs" />
     <Compile Include="Datatypes\IDatatype.cs" />
+    <Compile Include="Datatypes\IDateTimeDataType.cs" />
+    <Compile Include="Datatypes\IDateTimeOffsetDataType.cs" />
+    <Compile Include="Datatypes\IEnumerableDataType.cs" />
+    <Compile Include="Datatypes\IGuidDataType.cs" />
+    <Compile Include="Datatypes\IIntegerDataType.cs" />
+    <Compile Include="Datatypes\ILogicalOperation.cs" />
+    <Compile Include="Datatypes\ILongDataType.cs" />
+    <Compile Include="Datatypes\IStringDataType.cs" />
+    <Compile Include="EntityHolder.cs" />
+    <Compile Include="IAddOperation.cs" />
+    <Compile Include="ICriteriaOperation.cs" />
     <Compile Include="IDatabase.cs" />
+    <Compile Include="IDatabaseOpener.cs" />
+    <Compile Include="IDeleteOperation.cs" />
+    <Compile Include="IEntity.cs" />
+    <Compile Include="IResult.cs" />
+    <Compile Include="IRetrieveAllResult.cs" />
+    <Compile Include="IRetrieveByBatchResult.cs" />
+    <Compile Include="IRetrieveResult.cs" />
+    <Compile Include="ISelectOperation.cs" />
+    <Compile Include="IUpdateOperation.cs" />
+    <Compile Include="OrderType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
