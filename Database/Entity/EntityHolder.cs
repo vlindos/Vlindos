@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Database
+namespace Database.Entity
 {
     public class EntityHolder<T> 
         where T : IEntity

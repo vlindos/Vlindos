@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using Database.Entity;
 
-namespace Database
+namespace Database.Operations.Results
 {
-    public interface IResult<T> 
+    public interface IOperationResult<T> 
         where T : IEntity
     {
         bool Success { get; set; }

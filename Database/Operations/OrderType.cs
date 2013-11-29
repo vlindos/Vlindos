@@ -1,4 +1,4 @@
-﻿namespace Database
+﻿namespace Database.Operations
 {
     public enum OrderType
     {

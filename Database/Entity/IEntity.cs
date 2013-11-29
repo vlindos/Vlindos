@@ -1,4 +1,4 @@
-﻿namespace Database
+﻿namespace Database.Entity
 {
     public interface IEntity
     {

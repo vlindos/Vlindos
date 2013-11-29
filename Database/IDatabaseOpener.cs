@@ -1,4 +1,6 @@
-﻿namespace Database
+﻿using Database.Entity;
+
+namespace Database
 {
     public interface IDatabaseOpener
     {

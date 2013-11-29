@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
+using Database.Entity;
+using Database.Operations.Results;
 
-namespace Database
+namespace Database.Operations
 {
     public interface IUpdateOperation<T> : ICriteriaOperation<T, IUpdateOperation<T>>
         where T : IEntity
     {
         IEnumerable<T> Entities { get; set; }
-        IResult<T> Perform();
+        IOperationResult<T> Perform();
     }
 }
