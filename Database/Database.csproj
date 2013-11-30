@@ -39,6 +39,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IDatabaseOperations.cs" />
+    <Compile Include="ITransacationalDatabaseOperations.cs" />
+    <Compile Include="Operations\IOffsetOperation.cs" />
+    <Compile Include="Operations\IOrderByOperation.cs" />
+    <Compile Include="Operations\ISelectOneCriteriaOperation.cs" />
+    <Compile Include="Operations\ISelectOneOperation.cs" />
+    <Compile Include="Operations\ITopOperation.cs" />
+    <Compile Include="Operations\IWhereOperation.cs" />
+    <Compile Include="Operations\Results\IRetriveOneOperationResult.cs" />
+    <Compile Include="Operations\Results\ITransactionOperationResult.cs" />
+    <Compile Include="Transaction.cs" />
+    <Compile Include="TransactionResult.cs" />
     <Content Include="Readme.txt" />
     <Compile Include="Datatypes\IBoolDataType.cs" />
     <Compile Include="Datatypes\IDatatype.cs" />
@@ -58,7 +70,6 @@
     <Compile Include="Operations\IDeleteOperation.cs" />
     <Compile Include="Entity\IEntity.cs" />
     <Compile Include="Operations\Results\IOperationResult.cs" />
-    <Compile Include="Operations\Results\IRetrieveOperationResult.cs" />
     <Compile Include="Operations\ISelectOperation.cs" />
     <Compile Include="Operations\IUpdateOperation.cs" />
     <Compile Include="Operations\OrderType.cs" />

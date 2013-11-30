@@ -1,17 +1,13 @@
-﻿using System;
-using Database.Entity;
+﻿using Database.Entity;
 
 namespace Database.Operations
 {
-    public interface ICriteriaOperation<T, out TOperation> 
+    public interface ICriteriaOperation<T, out TOperation> :
+        IWhereOperation<T, TOperation>,
+        ITopOperation<TOperation>,
+        IOffsetOperation<TOperation>, 
+        IOrderByOperation<T, TOperation> 
         where T : IEntity
     {
-        TOperation Where(Predicate<EntityHolder<T>> whereCriteria);
-
-        TOperation Top(long top);
-
-        TOperation Offset(long offset);
-
-        TOperation OrderBy(Func<EntityHolder<T>, object> property, OrderType orderType);
     }
 }

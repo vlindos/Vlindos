@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Database.Entity;
 using Database.Operations;
 using Database.Operations.Results;
 
@@ -61,39 +63,32 @@ namespace Database.DemoApplication
                             .Where(x => x.Changed > DateTimeOffset.Now)
                             .Top(10)
                             .Offset(10)
-                            .OrderBy(x => x.Created, OrderType.Ascending);
-
-            using (var retrieveResult = q.Retrieve(10))
+                            .OrderBy(x => x.Created, OrderType.Ascending)
+                            .Retrieve(10, entities =>
+                            {
+                                foreach (var entity in entities)
+                                {
+                                    Console.WriteLine("{0}", entity.Id);
+                                }
+                            });
+            if (q.Success == false)
             {
-                while (retrieveResult.Success && retrieveResult.Entities.Any())
-                {
-                    foreach (var entity in retrieveResult.Entities)
-                    {
-                        Console.WriteLine("{0}", entity.Id);
-                    }
-
-                    retrieveResult.RetrieveNextBatch();
-                }
-                if (!retrieveResult.Success)
-                {
-                    Console.WriteLine(string.Join(Environment.NewLine, retrieveResult.Errors));
-                }
+                Console.WriteLine(string.Join(Environment.NewLine, q.Errors));
             }
 
-            var transactionOperation = database.ExecuteInTranscation(new TimeSpan(0,0,0,15), tx =>
+
+            var transactionOperation = database.ExecuteInTranscation(new TimeSpan(0, 0, 0, 15), tx =>
             {
-                var selectRequest = tx.Select()
+                var selectRequest = tx.SelectOne()
                                       .Where(x => x.Changed > DateTimeOffset.Now)
-                                      .Top(1)
                                       .Offset(10)
-                                      .OrderBy(x => x.Created, OrderType.Ascending)
-                                      .Retrieve(1);
+                                      .RetrieveOne();
                 if (!selectRequest.Success) // check if queries had compiled well
                 {
                     Console.WriteLine(string.Join(Environment.NewLine, selectRequest.Errors));
                     return Transaction.Rollback;
                 }
-                var item = selectRequest.Entities.FirstOrDefault();
+                var item = selectRequest.Result.Entity;
                 IOperationResult<EntityExample> operationResult;
                 if (item == null)
                 {
@@ -116,10 +111,6 @@ namespace Database.DemoApplication
             if (transactionOperation.Success == false)
             {
                 Console.WriteLine(transactionOperation.TransactionResult.ToString());
-                if (transactionOperation.TransactionResult == TransactionResult.ExceptionFailure)
-                {
-                    Console.WriteLine(transactionOperation.ExceptionThrown.ToString());
-                }
             }
 
             Console.WriteLine("All OK.");
