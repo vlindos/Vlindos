@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Database.Entity;
 using Database.Operations;
 using Database.Operations.Results;
+using Vlindos.Common.Extensions.IEnumerable;
 
 namespace Database.DemoApplication
 {   
@@ -64,18 +62,11 @@ namespace Database.DemoApplication
                             .Top(10)
                             .Offset(10)
                             .OrderBy(x => x.Created, OrderType.Ascending)
-                            .Retrieve(10, entities =>
-                            {
-                                foreach (var entity in entities)
-                                {
-                                    Console.WriteLine("{0}", entity.Id);
-                                }
-                            });
+                            .Retrieve(10, entities => entities.ForEach(x => Console.WriteLine("{0}", x.Id)));
             if (q.Success == false)
             {
                 Console.WriteLine(string.Join(Environment.NewLine, q.Errors));
             }
-
 
             var transactionOperation = database.ExecuteInTranscation(new TimeSpan(0, 0, 0, 15), tx =>
             {

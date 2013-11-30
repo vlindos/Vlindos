@@ -55,6 +55,10 @@
       <Project>{2D8BEB10-076D-4A30-8318-2D2B0357DAC3}</Project>
       <Name>Database</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{FF60F6F2-57B9-49CF-9745-6EBA430C8604}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
