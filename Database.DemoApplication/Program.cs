@@ -1,17 +1,10 @@
 ﻿using System;
 using System.Linq;
-using Database.Entity;
 using Database.Operations;
 using Database.Operations.Results;
 
 namespace Database.DemoApplication
-{
-
-    public class EntityExample : IEntity
-    {
-        public string Name { get; set; }
-    }
-
+{   
     class Program
     {
         static void Main()
@@ -25,16 +18,19 @@ namespace Database.DemoApplication
                             .Perform();
             if (r.Success == false)
             {
-                Console.WriteLine(string.Join("\r\n", r.Errors));
+                Console.WriteLine(string.Join(Environment.NewLine, r.Errors));
                 return;
             }
+
+            r = database.Add(newEntity)
+                        .Perform();
 
             r = database.Delete()
                         .Where(x => x.Entity.Name == "")
                         .Perform();
             if (r.Success == false)
             {
-                Console.WriteLine(string.Join("\r\n", r.Errors));
+                Console.WriteLine(string.Join(Environment.NewLine, r.Errors));
                 return;
             }
 
@@ -43,7 +39,7 @@ namespace Database.DemoApplication
                         .Perform();
             if (r.Success == false)
             {
-                Console.WriteLine(string.Join("\r\n", r.Errors));
+                Console.WriteLine(string.Join(Environment.NewLine, r.Errors));
                 return;
             }
 
@@ -52,7 +48,7 @@ namespace Database.DemoApplication
                         .Perform();
             if (r.Success == false)
             {
-                Console.WriteLine(string.Join("\r\n", r.Errors));
+                Console.WriteLine(string.Join(Environment.NewLine, r.Errors));
                 return;
             }
 
@@ -75,42 +71,48 @@ namespace Database.DemoApplication
                 }
                 if (!retrieveResult.Success)
                 {
-                    Console.WriteLine(string.Join("\r\n", retrieveResult.Errors));
+                    Console.WriteLine(string.Join(Environment.NewLine, retrieveResult.Errors));
                 }
             }
 
             using (database.BeginTranscation())
             {
-                var item = database
-                    .Select()
-                    .Where(x => x.Changed > DateTimeOffset.Now)
-                    .Top(1)
-                    .Offset(10)
-                    .OrderBy(x => x.Created, OrderType.Ascending)
-                    .Retrieve(1)
-                    .Entities
-                    .FirstOrDefault();
+                var selectRequest = database.Select()
+                                            .Where(x => x.Changed > DateTimeOffset.Now)
+                                            .Top(1)
+                                            .Offset(10)
+                                            .OrderBy(x => x.Created, OrderType.Ascending)
+                                            .Retrieve(1);
+                if (!selectRequest.Success) // check if queries had compiled well
+                {
+                    Console.WriteLine(string.Join(Environment.NewLine, selectRequest.Errors));
+                    return;
+                }
+                var item = selectRequest.Entities.FirstOrDefault();
                 IOperationResult<EntityExample> operationResult;
                 if (item == null)
                 {
-                    operationResult = database.Add(new EntityExample { Name = "Exampe #1" }).Perform();
+                    operationResult = database.Add(new EntityExample { Name = "Example #1" })
+                                              .Perform();
                 }
                 else
                 {
                     operationResult = database.Update(x =>
-                    {
-                        x.Entity.Name = "Example #2";
-                        return x;
-                    }).Where(x => x.Id == item.Id).Perform();
+                                            {
+                                                x.Entity.Name = "Example #2";
+                                                return x;
+                                            }).Where(x => x.Id == item.Id)
+                                              .Perform();
                 }
                 if (!operationResult.Success) // check if queries had compiled well
                 {
-                    Console.WriteLine(string.Join("\r\n", operationResult.Errors));
+                    Console.WriteLine(string.Join(Environment.NewLine, operationResult.Errors));
+                    return;
                 }
                 operationResult = database.Commit(); // check if actuall persistense went well
                 if (!operationResult.Success)
                 {
-                    Console.WriteLine(string.Join("\r\n", operationResult.Errors));
+                    Console.WriteLine(string.Join(Environment.NewLine, operationResult.Errors));
                 }
             } // Dispose will make sure the transcation is released (or rollbacked if not committed)
         }
