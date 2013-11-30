@@ -62,18 +62,18 @@ namespace Database.DemoApplication
                             .Top(10)
                             .Offset(10)
                             .OrderBy(x => x.Created, OrderType.Ascending)
-                            .Retrieve(10, entities => entities.ForEach(x => Console.WriteLine("{0}", x.Id)));
+                            .Retrieve(entities => entities.ForEach(x => Console.WriteLine("{0}", x.Id)), 10);
             if (q.Success == false)
             {
                 Console.WriteLine(string.Join(Environment.NewLine, q.Errors));
             }
 
-            var transactionOperation = database.ExecuteInTranscation(new TimeSpan(0, 0, 0, 15), tx =>
+            var transactionOperation = database.ExecuteInTranscation(tx =>
             {
                 var selectRequest = tx.SelectOne()
-                                      .Where(x => x.Changed > DateTimeOffset.Now)
-                                      .Offset(10)
-                                      .RetrieveOne();
+                    .Where(x => x.Changed > DateTimeOffset.Now)
+                    .Offset(10)
+                    .RetrieveOne();
                 if (!selectRequest.Success) // check if queries had compiled well
                 {
                     Console.WriteLine(string.Join(Environment.NewLine, selectRequest.Errors));
@@ -84,12 +84,12 @@ namespace Database.DemoApplication
                 if (item == null)
                 {
                     operationResult = tx.Add(new EntityExample { Name = "new Example" })
-                                        .Perform();
+                        .Perform();
                 }
                 else
                 {
                     operationResult = tx.Update(new EntityExample { Name = "Example Update By Update" })
-                                        .Perform();
+                        .Perform();
                 }
                 if (!operationResult.Success) // check if queries had compiled well
                 {
@@ -97,7 +97,7 @@ namespace Database.DemoApplication
                     return Transaction.Rollback;
                 }
                 return Transaction.Commit;
-            });
+            }, new TimeSpan(0, 0, 0, 15));
 
             if (transactionOperation.Success == false)
             {

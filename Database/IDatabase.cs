@@ -7,7 +7,6 @@ namespace Database
     public interface IDatabase<T> : IDatabaseOperations<T>, IDisposable 
         where T : IEntity
     {
-        ITransactionOperationResult<T> ExecuteInTranscation(
-            TimeSpan timeout, Func<ITransacationalDatabaseOperations<T>, Transaction> actions);
+        ITransactionOperationResult<T> ExecuteInTranscation(Func<ITransacationalDatabaseOperations<T>, Transaction> actions, TimeSpan timeout);
     }
 }

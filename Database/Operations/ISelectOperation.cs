@@ -8,6 +8,6 @@ namespace Database.Operations
     public interface ISelectOperation<T> : ICriteriaOperation<T, ISelectOperation<T>>
         where T : IEntity
     {
-        IOperationResult<T> Retrieve(int maximum, Action<IEnumerable<EntityHolder<T>>> fetchAction);
+        IOperationResult<T> Retrieve(Action<IEnumerable<EntityHolder<T>>> fetchAction, int maximum);
     }
 }
