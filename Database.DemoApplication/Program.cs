@@ -24,6 +24,11 @@ namespace Database.DemoApplication
 
             r = database.Add(newEntity)
                         .Perform();
+            if (r.Success == false)
+            {
+                Console.WriteLine(string.Join(Environment.NewLine, r.Errors));
+                return;
+            }
 
             r = database.Delete()
                         .Where(x => x.Entity.Name == "")
@@ -43,7 +48,7 @@ namespace Database.DemoApplication
                 return;
             }
 
-            r = database.Update(x => x)
+            r = database.Update(x => x.Entity)
                         .Where(x => x.Id == Guid.Empty)
                         .Perform();
             if (r.Success == false)
@@ -75,46 +80,49 @@ namespace Database.DemoApplication
                 }
             }
 
-            using (database.BeginTranscation())
+            var transactionOperation = database.ExecuteInTranscation(new TimeSpan(0,0,0,15), tx =>
             {
-                var selectRequest = database.Select()
-                                            .Where(x => x.Changed > DateTimeOffset.Now)
-                                            .Top(1)
-                                            .Offset(10)
-                                            .OrderBy(x => x.Created, OrderType.Ascending)
-                                            .Retrieve(1);
+                var selectRequest = tx.Select()
+                                      .Where(x => x.Changed > DateTimeOffset.Now)
+                                      .Top(1)
+                                      .Offset(10)
+                                      .OrderBy(x => x.Created, OrderType.Ascending)
+                                      .Retrieve(1);
                 if (!selectRequest.Success) // check if queries had compiled well
                 {
                     Console.WriteLine(string.Join(Environment.NewLine, selectRequest.Errors));
-                    return;
+                    return Transaction.Rollback;
                 }
                 var item = selectRequest.Entities.FirstOrDefault();
                 IOperationResult<EntityExample> operationResult;
                 if (item == null)
                 {
-                    operationResult = database.Add(new EntityExample { Name = "Example #1" })
-                                              .Perform();
+                    operationResult = tx.Add(new EntityExample { Name = "new Example" })
+                                        .Perform();
                 }
                 else
                 {
-                    operationResult = database.Update(x =>
-                                            {
-                                                x.Entity.Name = "Example #2";
-                                                return x;
-                                            }).Where(x => x.Id == item.Id)
-                                              .Perform();
+                    operationResult = tx.Update(new EntityExample { Name = "Example Update By Update" })
+                                        .Perform();
                 }
                 if (!operationResult.Success) // check if queries had compiled well
                 {
                     Console.WriteLine(string.Join(Environment.NewLine, operationResult.Errors));
-                    return;
+                    return Transaction.Rollback;
                 }
-                operationResult = database.Commit(); // check if actuall persistense went well
-                if (!operationResult.Success)
+                return Transaction.Commit;
+            });
+
+            if (transactionOperation.Success == false)
+            {
+                Console.WriteLine(transactionOperation.TransactionResult.ToString());
+                if (transactionOperation.TransactionResult == TransactionResult.ExceptionFailure)
                 {
-                    Console.WriteLine(string.Join(Environment.NewLine, operationResult.Errors));
+                    Console.WriteLine(transactionOperation.ExceptionThrown.ToString());
                 }
-            } // Dispose will make sure the transcation is released (or rollbacked if not committed)
+            }
+
+            Console.WriteLine("All OK.");
         }
     }
 }
