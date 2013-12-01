@@ -43,8 +43,16 @@
     <Compile Include="Configuration\IFileReader.cs" />
     <Compile Include="Configuration\IContainerGetter.cs" />
     <Compile Include="Configuration\IReader.cs" />
+    <Compile Include="Formatters\String\DateTimeOffsetStringFormatProvider.cs" />
+    <Compile Include="Formatters\String\IStringFormatProvider.cs" />
+    <Compile Include="Hashing\HashAlgorithm.cs" />
     <Compile Include="Notifications\INotifiable.cs" />
     <Compile Include="Notifications\INotifyManager.cs" />
+    <Compile Include="Services\BackgroundTaskStarter.cs" />
+    <Compile Include="Services\IRunnable.cs" />
+    <Compile Include="Services\RunnableState.cs" />
+    <Compile Include="Services\ServiceRunnableManager.cs" />
+    <Compile Include="Services\ServicesManager.cs" />
     <Compile Include="Settings\AppConfigSettingsProvider.cs" />
     <Compile Include="Settings\SettingReader.cs" />
     <Compile Include="Settings\ConfigFileSettingsProvider.cs" />
@@ -53,6 +61,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\XmlSettingsProvider.cs" />
     <Compile Include="Extensions\IEnumerable\ForEach.cs" />
+    <Compile Include="Streams\IInputStream.cs" />
+    <Compile Include="Streams\IOutputStream.cs" />
     <Compile Include="Utilities\File\FileChangeWatcher.cs" />
   </ItemGroup>
   <ItemGroup>

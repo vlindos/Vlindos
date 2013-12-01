@@ -1,0 +1,23 @@
+﻿- There must be a global filters
+- A default global filter must be responsible for endpoints addressing
+- Filters must be addable per endpoint
+ -Endpoint's filters available by default:
+    - cache
+- Endpoint must has descriptor that:  
+    - has the endpoint performer (see below)
+    - Allowed method openers
+    - Model reader / writters
+    - model validators z
+- Endpoint must sophisticated base that could be easily used:
+    - Passing to the performer (if implementing):
+        - Request object that has:
+            - headers
+            - method
+            - full url
+        - Any custom object that is there
+- There must be default response writters for:
+    - html template
+    - file reader
+    - object xml, json writter
+- There must be special type of exception attribute and be set in app
+- There must be controller for 404

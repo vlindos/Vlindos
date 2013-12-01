@@ -7,8 +7,8 @@
     <ProjectGuid>{6BC58CD0-6CB2-477F-8618-760989416E38}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Vlindos.Web</RootNamespace>
-    <AssemblyName>Vlindos.Web</AssemblyName>
+    <RootNamespace>Framework.Web</RootNamespace>
+    <AssemblyName>Framework.Web</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,50 +39,56 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\Endpoints\Filters\IPostProcessingEndpointsFilter.cs" />
+    <Compile Include="HttpMethods.cs" />
+    <Compile Include="Application\Endpoints\SerializationType.cs" />
+    <Compile Include="Models\HttpUrlMaterializer.cs" />
+    <Compile Include="Application\Endpoints\Filters\IEndpointFilter.cs" />
+    <Compile Include="Application\Filters\IFilter.cs" />
+    <Compile Include="Application\Filters\Global\IFullProcessingGlobalFillter.cs" />
+    <Compile Include="Application\Endpoints\Filters\IFullProcessingEnpointFillter.cs" />
+    <Compile Include="Application\Filters\Global\IGlobalFilter.cs" />
+    <Compile Include="Application\Filters\IPostProcessingFilter.cs" />
+    <Compile Include="Application\Filters\Global\IPostProcessingGlobalFilter.cs" />
+    <Compile Include="Application\Endpoints\Filters\IPreProcessingEndpointFilter.cs" />
+    <Compile Include="Application\Filters\IPreProcessingFilter.cs" />
+    <Compile Include="Application\Filters\Global\IPreProcessingGlobalFilter.cs" />
+    <Compile Include="Models\HttpRequest.cs" />
+    <Compile Include="Models\HttpResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\EndpointController.cs" />
-    <Compile Include="Controllers\EndpointFailureController.cs" />
-    <Compile Include="Controllers\ServerResponse.cs" />
-    <Compile Include="Attributes\ApiKeyFilter.cs" />
-    <Compile Include="Attributes\EndpointExceptionResult.cs" />
-    <Compile Include="Attributes\RedirectIfInitializationFailedFilterAttribute.cs" />
-    <Compile Include="Models\IFormatProvider.cs" />
-    <Compile Include="Models\Endpoint\EndpointResponse.cs" />
-    <Compile Include="Models\Endpoint\HttpRequest.cs" />
-    <Compile Include="Models\Endpoint\HttpRequestTransmitter.cs" />
-    <Compile Include="Models\Endpoint\HttpResponseContext.cs" />
-    <Compile Include="Models\Endpoint\HttpSettings.cs" />
-    <Compile Include="Models\Endpoint\IEndpoint.cs" />
-    <Compile Include="Models\Endpoint\IEndpointDescriptor.cs" />
-    <Compile Include="Models\Endpoint\IEndpointRequest.cs" />
-    <Compile Include="Models\Endpoint\IHttpRequestBuilder.cs" />
-    <Compile Include="Models\Endpoint\IHttpRequestUnbinder.cs" />
-    <Compile Include="Models\Endpoint\IPerformer.cs" />
-    <Compile Include="Models\Endpoint\IRequestValidator.cs" />
-    <Compile Include="Models\Endpoint\IResponseStreamWriter.cs" />
-    <Compile Include="Models\Endpoint\IRouteDescription.cs" />
-    <Compile Include="Models\Endpoint\IRouteDescriptor.cs" />
-    <Compile Include="Mvc\EndpointResponseResult.cs" />
-    <Compile Include="Mvc\IRouteRegisterer.cs" />
-    <Compile Include="Mvc\WindsorControllerFactory.cs" />
-    <Compile Include="Services\BackgroundTaskStarter.cs" />
-    <Compile Include="Services\IRunnable.cs" />
-    <Compile Include="Services\RunnableState.cs" />
-    <Compile Include="Services\ServiceRunnableManager.cs" />
-    <Compile Include="Services\ServicesManager.cs" />
+    <Compile Include="Application\Filters\IExceptionFilter.cs" />
+    <Compile Include="Application\Endpoints\Models\IEndpointResponse.cs" />
+    <Compile Include="Client\Tools\HttpRequestTransmitter.cs" />
+    <Compile Include="Client\Tools\Models\HttpSettings.cs" />
+    <Compile Include="Application\Endpoints\IEndpoint.cs" />
+    <Compile Include="Application\Endpoints\IEndpointDescriptor.cs" />
+    <Compile Include="Application\Endpoints\Models\IEndpointRequest.cs" />
+    <Compile Include="Application\Endpoints\IHttpRequestBuilder.cs" />
+    <Compile Include="Application\Endpoints\IHttpRequestUnbinder.cs" />
+    <Compile Include="Application\Endpoints\IPerformer.cs" />
+    <Compile Include="Application\Endpoints\IRequestValidator.cs" />
+    <Compile Include="Application\Endpoints\IResponseStreamWriter.cs" />
+    <Compile Include="Application\Endpoints\Models\IRouteDescription.cs" />
+    <Compile Include="Application\Endpoints\IRouteDescriptor.cs" />
     <Compile Include="Tools\AcceptHeaderPrioritizer.cs" />
     <Compile Include="Tools\CachedXmlSerializers.cs" />
-    <Compile Include="Tools\DateTimeOffsetFormatProvider.cs" />
-    <Compile Include="Tools\HashAlgorithm.cs" />
-    <Compile Include="Tools\IResponseStreamReader.cs" />
-    <Compile Include="Tools\RequestUnfolder.cs" />
-    <Compile Include="Tools\SerializedResponseStreamReader.cs" />
-    <Compile Include="Tools\SerializedResponseStreamWritter.cs" />
-    <Compile Include="Tools\TypeMerger.cs" />
-    <Compile Include="Tools\TypeMergerPolicy.cs" />
+    <Compile Include="Application\Endpoints\IResponseStreamReader.cs" />
+    <Compile Include="Application\Endpoints\RequestUnfolder.cs" />
+    <Compile Include="Application\Endpoints\JsonEndpointResponseStreamReader.cs" />
+    <Compile Include="Application\Endpoints\JsonEndpointResponseStreamWrittter.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{FF60F6F2-57B9-49CF-9745-6EBA430C8604}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -47,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Packages.NugetBridge.Webser
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database.DemoApplication", "Database.DemoApplication\Database.DemoApplication.csproj", "{868F73FF-5C16-4A24-A39B-38DF2B563A95}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Web.DemoApp", "Framework.Web.DemoApp\Framework.Web.DemoApp.csproj", "{7D2B60EF-83BE-4CD9-96BD-46DDED4140D9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -141,6 +143,10 @@ Global
 		{868F73FF-5C16-4A24-A39B-38DF2B563A95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{868F73FF-5C16-4A24-A39B-38DF2B563A95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{868F73FF-5C16-4A24-A39B-38DF2B563A95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D2B60EF-83BE-4CD9-96BD-46DDED4140D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D2B60EF-83BE-4CD9-96BD-46DDED4140D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D2B60EF-83BE-4CD9-96BD-46DDED4140D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D2B60EF-83BE-4CD9-96BD-46DDED4140D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
