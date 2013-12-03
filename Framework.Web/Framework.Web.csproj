@@ -64,7 +64,6 @@
     <Compile Include="Client\Tools\Models\HttpSettings.cs" />
     <Compile Include="Application\Endpoints\IEndpoint.cs" />
     <Compile Include="Application\Endpoints\IEndpointDescriptor.cs" />
-    <Compile Include="Application\Endpoints\Models\IEndpointRequest.cs" />
     <Compile Include="Application\Endpoints\IHttpRequestBuilder.cs" />
     <Compile Include="Application\Endpoints\IHttpRequestUnbinder.cs" />
     <Compile Include="Application\Endpoints\IPerformer.cs" />

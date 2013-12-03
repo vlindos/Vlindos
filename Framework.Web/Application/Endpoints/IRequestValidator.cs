@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using Framework.Web.Application.Endpoints.Models;
 
 namespace Framework.Web.Application.Endpoints
 {
-    public interface IRequestValidator<in T> where T : IEndpointRequest
+    public interface IRequestValidator<in T>
     {
         bool Validate(T request, List<string> messages);
     }

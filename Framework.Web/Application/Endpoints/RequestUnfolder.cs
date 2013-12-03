@@ -6,7 +6,6 @@ using Framework.Web.Models;
 namespace Framework.Web.Application.Endpoints
 {
     public interface IRequestUnfolder<TRequest, TResponse>
-        where TRequest : IEndpointRequest
         where TResponse : IEndpointResponse
     {
         bool UnfoldRequest(HttpRequest httpRequest,
@@ -16,7 +15,6 @@ namespace Framework.Web.Application.Endpoints
     }
 
     public class RequestUnfolder<TRequest, TResponse> : IRequestUnfolder<TRequest, TResponse>
-        where TRequest : IEndpointRequest
         where TResponse : IEndpointResponse
     {
         public bool UnfoldRequest(HttpRequest httpRequest,

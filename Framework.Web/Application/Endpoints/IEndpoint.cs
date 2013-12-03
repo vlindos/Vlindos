@@ -3,7 +3,6 @@
 namespace Framework.Web.Application.Endpoints
 {
     public interface IEndpoint<TRequest, TResponse>
-        where TRequest : IEndpointRequest
         where TResponse : IEndpointResponse
     {
         IEndpointDescriptor<TRequest> Descriptor { get; }
