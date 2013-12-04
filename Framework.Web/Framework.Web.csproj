@@ -40,7 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application\Endpoints\Filters\IPostProcessingEndpointsFilter.cs" />
-    <Compile Include="HttpMethods.cs" />
+    <Compile Include="HttpMethod.cs" />
     <Compile Include="Application\Endpoints\SerializationType.cs" />
     <Compile Include="Models\HttpUrlMaterializer.cs" />
     <Compile Include="Application\Endpoints\Filters\IEndpointFilter.cs" />
@@ -63,7 +63,7 @@
     <Compile Include="Client\Tools\HttpRequestTransmitter.cs" />
     <Compile Include="Client\Tools\Models\HttpSettings.cs" />
     <Compile Include="Application\Endpoints\IEndpoint.cs" />
-    <Compile Include="Application\Endpoints\IEndpointDescriptor.cs" />
+    <Compile Include="Application\Endpoints\IDescriptor.cs" />
     <Compile Include="Application\Endpoints\IHttpRequestBuilder.cs" />
     <Compile Include="Application\Endpoints\IHttpRequestUnbinder.cs" />
     <Compile Include="Application\Endpoints\IPerformer.cs" />

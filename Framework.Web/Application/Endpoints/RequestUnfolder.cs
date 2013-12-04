@@ -1,12 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Net;
-using Framework.Web.Application.Endpoints.Models;
-using Framework.Web.Models;
+﻿using Framework.Web.Models;
 
 namespace Framework.Web.Application.Endpoints
 {
     public interface IRequestUnfolder<TRequest, TResponse>
-        where TResponse : IEndpointResponse
     {
         bool UnfoldRequest(HttpRequest httpRequest,
                            HttpResponse httpResponse,
@@ -15,14 +11,13 @@ namespace Framework.Web.Application.Endpoints
     }
 
     public class RequestUnfolder<TRequest, TResponse> : IRequestUnfolder<TRequest, TResponse>
-        where TResponse : IEndpointResponse
     {
         public bool UnfoldRequest(HttpRequest httpRequest,
                                    HttpResponse httpResponse,
                                    IEndpoint<TRequest, TResponse> endpoint,
                                    out TRequest request)
         {
-            var unbinder = endpoint.Descriptor.RequestUnbinder;
+            var unbinder = endpoint.RequestUnbinder;
             if (unbinder == null) // does the enpoint expects input?
             {
                 request = default(TRequest);

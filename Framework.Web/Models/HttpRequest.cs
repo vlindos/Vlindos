@@ -7,7 +7,7 @@ namespace Framework.Web.Models
 {
     public class HttpRequest
     {
-        public HttpMethods HttpMethod { get; set; }
+        public HttpMethod HttpMethod { get; set; }
 
         public string HttpUsername { get; set; }
 

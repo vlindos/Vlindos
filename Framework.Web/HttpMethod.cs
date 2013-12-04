@@ -1,6 +1,6 @@
 ﻿namespace Framework.Web
 {
-    public enum HttpMethods
+    public enum HttpMethod
     {
         Get,
         Post,

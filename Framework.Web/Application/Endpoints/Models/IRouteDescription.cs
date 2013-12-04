@@ -2,10 +2,8 @@
 {
     public class RouteDescription
     {
-        public string Id { get; set; }
+        HttpMethod[] HttpMethods { get; set; }
 
         public string Path { get; set; }
-
-        public object Configuration { get; set; }
     }
 }

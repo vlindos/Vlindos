@@ -3,10 +3,13 @@
 namespace Framework.Web.Application.Endpoints
 {
     public interface IEndpoint<TRequest, TResponse>
-        where TResponse : IEndpointResponse
     {
-        IEndpointDescriptor<TRequest> Descriptor { get; }
-        IPerformer<TRequest, TResponse> RequestPerformer { get; }
+        RouteDescription RouteDescription { get; }
+        IHttpRequestBuilder<TRequest> RequestBuilder { get; }
+        IRequestValidator<TRequest> RequestValidator { get; }
+        IHttpRequestUnbinder<TRequest> RequestUnbinder { get; }
+        IPerformer<TRequest, TResponse> Performer { get; }
         IResponseStreamWriter<TResponse> ResponseStreamWriter { get; }
+        IResponseStreamReader<TResponse> ResponseStreamReader { get; }
     }
 }
