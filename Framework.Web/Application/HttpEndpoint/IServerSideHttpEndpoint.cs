@@ -1,8 +1,8 @@
 ﻿namespace Framework.Web.Application.HttpEndpoint
 {
-    public interface IServerSideHttpEndpoint<TRequest, TResponse> : IServerSideHttpEndpointDescriptor
+    public interface IServerSideHttpEndpoint<TRequest, TResponse>
     {
-        IHttpEndpoint<TRequest, TResponse> HttpEndpoint { get; }
+        IHttpEndpoint<TRequest> HttpEndpoint { get; }
 
         IHttpRequestUnbinder<TRequest> HttpRequestUnbinder { get; }
 

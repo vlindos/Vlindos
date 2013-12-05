@@ -1,7 +1,7 @@
 ﻿using System;
-using Framework.Web.Application.ServiceEndpoint.Models;
+using Framework.Web.Service.Models;
 
-namespace Framework.Web.Client.Tools.Models
+namespace Framework.Web.Service.Client.Tools.Models
 {
     public class HttpSettings
     {
@@ -14,5 +14,7 @@ namespace Framework.Web.Client.Tools.Models
         public string Username { get; set; }
 
         public string Password { get; set; }
+
+        public string SessionId { get; set; }
     }
 }

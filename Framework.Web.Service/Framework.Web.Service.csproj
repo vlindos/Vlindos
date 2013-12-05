@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7D2B60EF-83BE-4CD9-96BD-46DDED4140D9}</ProjectGuid>
+    <ProjectGuid>{D32855AC-02DF-4D43-983E-9A3711C578A2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Framework.Web.DemoApp</RootNamespace>
-    <AssemblyName>Framework.Web.DemoApp</AssemblyName>
+    <RootNamespace>Framework.Web.Service</RootNamespace>
+    <AssemblyName>Framework.Web.Service</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,16 +22,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -44,26 +39,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationDelegate.cs" />
-    <Compile Include="Models\Config.cs" />
-    <Compile Include="Performers\ConfigAdderPerformer.cs" />
+    <Compile Include="Client\Tools\HttpRequestTransmitter.cs" />
+    <Compile Include="Client\Tools\Models\HttpSettings.cs" />
+    <Compile Include="Filters\IAfterPerformServiceEndpointFilter.cs" />
+    <Compile Include="Filters\IBeforePerformServiceEndpointFilter.cs" />
+    <Compile Include="Filters\IServiceEndpointFilter.cs" />
+    <Compile Include="Filters\ServiceRequestHandler.cs" />
+    <Compile Include="IClientSideServiceEndpoint.cs" />
+    <Compile Include="IServerSideServiceEndpoint.cs" />
+    <Compile Include="IServiceEndpoint.cs" />
+    <Compile Include="JsonHttpStreamResponseReader.cs" />
+    <Compile Include="JsonHttpStreamResponseWritter.cs" />
+    <Compile Include="Models\SerializationType.cs" />
+    <Compile Include="Models\ServiceResponse.cs" />
+    <Compile Include="PerformerManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Database\Database.csproj">
-      <Project>{2D8BEB10-076D-4A30-8318-2D2B0357DAC3}</Project>
-      <Name>Database</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Framework.Web.Service\Framework.Web.Service.csproj">
-      <Project>{D32855AC-02DF-4D43-983E-9A3711C578A2}</Project>
-      <Name>Framework.Web.Service</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Framework.Web\Framework.Web.csproj">
       <Project>{6BC58CD0-6CB2-477F-8618-760989416E38}</Project>
       <Name>Framework.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{FF60F6F2-57B9-49CF-9745-6EBA430C8604}</Project>
+      <Name>Framework</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

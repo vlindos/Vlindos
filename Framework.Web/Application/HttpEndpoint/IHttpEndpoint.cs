@@ -2,7 +2,7 @@
 
 namespace Framework.Web.Application.HttpEndpoint
 {
-    public interface IHttpEndpoint<in TRequest, out TResponse>
+    public interface IHttpEndpoint<in TRequest>
     {
         HttpUrlDescription HttpUrlDescription { get; }
 

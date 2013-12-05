@@ -1,4 +1,4 @@
-namespace Framework.Web.Application.ServiceEndpoint.Models
+namespace Framework.Web.Service.Models
 {
     public enum SerializationType
     {

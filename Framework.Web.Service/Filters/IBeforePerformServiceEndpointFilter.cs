@@ -1,11 +1,11 @@
 using Framework.Web.Application.Filters;
-using Framework.Web.Application.ServiceEndpoint.Models;
 using Framework.Web.Models;
+using Framework.Web.Service.Models;
 
-namespace Framework.Web.Application.ServiceEndpoint.Filters
+namespace Framework.Web.Service.Filters
 {
-    public interface IAfterPerformServiceEndpointFilter<TRequest, TResponse> 
-        : IAfterPerformFilter, IServiceEndpointFilter
+    public interface IBeforePerformServiceEndpointFilter<TRequest, TResponse> 
+        : IBeforePerformFilter, IServiceEndpoint<TRequest, TResponse>
         where TResponse : IServiceResponse
     {
         bool BeforePerform(

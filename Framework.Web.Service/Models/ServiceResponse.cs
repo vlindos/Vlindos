@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Framework.Web.Application.ServiceEndpoint.Models
+namespace Framework.Web.Service.Models
 {
     public interface IServiceResponse
     {

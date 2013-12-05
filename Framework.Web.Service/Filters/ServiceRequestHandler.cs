@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Net;
-using Framework.Web.Application.ServiceEndpoint.Models;
 using Framework.Web.Models;
+using Framework.Web.Service.Models;
 
-namespace Framework.Web.Application.ServiceEndpoint.Filters
+namespace Framework.Web.Service.Filters
 {
     public interface IServiceRequestHandler<TRequest, TResponse> : IAfterPerformServiceEndpointFilter<TRequest, TResponse>
         where TResponse : IServiceResponse

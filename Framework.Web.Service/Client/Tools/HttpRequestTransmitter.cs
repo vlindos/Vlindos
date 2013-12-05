@@ -7,7 +7,7 @@ using Framework.Web.Tools;
 using Vlindos.Common.Logging;
 using Vlindos.Common.Models;
 
-namespace Framework.Web.Client.Tools
+namespace Framework.Web.Service.Client.Tools
 {
     public interface IHttpRequestTransmitter
     {

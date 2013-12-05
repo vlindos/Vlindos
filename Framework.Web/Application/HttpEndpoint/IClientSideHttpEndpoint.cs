@@ -2,7 +2,7 @@
 {
     public interface IClientSideHttpEndpoint<TRequest, TResponse>
     {
-        IHttpEndpoint<TRequest, TResponse> HttpEndpoint { get; }
+        IHttpEndpoint<TRequest> HttpEndpoint { get; }
 
         IHttpRequestBuilder<TRequest> HttpRequestBuilder { get; }
 

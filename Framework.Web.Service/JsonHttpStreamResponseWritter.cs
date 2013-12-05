@@ -1,7 +1,7 @@
 ﻿using Framework.Web.Application.HttpEndpoint;
 using Framework.Web.Models;
 
-namespace Framework.Web.Application.ServiceEndpoint
+namespace Framework.Web.Service
 {
     public interface IJsonHttpStreamResponseWritter<in T> : IHttpStreamResponseWritter<T>
     {

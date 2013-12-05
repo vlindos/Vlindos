@@ -1,15 +1,10 @@
 ﻿using Database;
-using Database.Entity;
 using Framework.Web.Application;
-using Framework.Web.Application.ServiceEndpoint.Models;
+using Framework.Web.DemoApp.Models;
+using Framework.Web.Service.Models;
 
-namespace Framework.Web.DemoApp.ExamplePerformers
+namespace Framework.Web.DemoApp.Performers
 {
-    public class Config : IEntity
-    {
-        public int Number { get; set; }
-    }
-
     public class ConfigAdderPerformer : IRequestPerformer<IServiceResponse>
     {
         private readonly IDatabase<Config> _database;
