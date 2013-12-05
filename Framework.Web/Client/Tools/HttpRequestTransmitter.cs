@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using Framework.Web.Models;
+using Framework.Web.Tools;
 using Vlindos.Common.Logging;
+using Vlindos.Common.Models;
 
 namespace Framework.Web.Client.Tools
 {
     public interface IHttpRequestTransmitter
     {
-        bool TransmitHttpRequest(HttpRequest requestContext,
-                                 out StreamReader streamReader, List<string> messages);
+        bool TransmitHttpRequest(
+            IHttpRequest httpRequest,
+            IUsernamePassword usernamePassword,
+            out StreamReader streamReader,
+            List<string> messages);
     }
 
     public class HttpRequestTransmitter : IHttpRequestTransmitter
@@ -24,32 +29,35 @@ namespace Framework.Web.Client.Tools
             _httpUrlMaterializer = httpUrlMaterializer;
         }
 
-        public bool TransmitHttpRequest(HttpRequest requestContext,
-            out StreamReader streamReader, List<string> messages)
+        public bool TransmitHttpRequest(
+            IHttpRequest httpRequest, 
+            IUsernamePassword usernamePassword,
+            out StreamReader streamReader, 
+            List<string> messages)
         {
-            var url = _httpUrlMaterializer.MaterializeHttpUrl(requestContext);
+            var url = _httpUrlMaterializer.MaterializeHttpUrl(httpRequest);
             _logger.Debug("Transporting request to '{0}'...", url);
             Stream responseStream;
             try
             {
                 var webRequest = (HttpWebRequest)WebRequest.Create(url);
-                webRequest.Method = requestContext.HttpMethod.ToString();
-                if (!string.IsNullOrWhiteSpace(requestContext.HttpUsername))
+                webRequest.Method = httpRequest.HttpMethod.ToString();
+                if (!string.IsNullOrWhiteSpace(usernamePassword.Username))
                 {
-                    webRequest.Credentials = new NetworkCredential(requestContext.HttpUsername,
-                                                                   requestContext.HttpPassword);
+                    webRequest.Credentials = new NetworkCredential(usernamePassword.Username,
+                                                                   usernamePassword.Password);
                 }
-                if (requestContext.Headers != null && requestContext.Headers.Count > 0)
+                if (httpRequest.Headers != null && httpRequest.Headers.Count > 0)
                 {
-                    foreach (var headerKey in requestContext.Headers.AllKeys)
+                    foreach (var headerKey in httpRequest.Headers.AllKeys)
                     {
-                        webRequest.Headers.Add(headerKey, requestContext.Headers[headerKey]);
+                        webRequest.Headers.Add(headerKey, httpRequest.Headers[headerKey]);
                     }
                 }
-                if (requestContext.PostData != null)
+                if (httpRequest.PostData != null)
                 {
                     var stream = webRequest.GetRequestStream();
-                    foreach (var bytes in requestContext.PostData)
+                    foreach (var bytes in httpRequest.PostData)
                     {
                         stream.Write(bytes, 0, bytes.Length);
                     }

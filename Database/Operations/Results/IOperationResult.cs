@@ -7,6 +7,6 @@ namespace Database.Operations.Results
         where T : IEntity
     {
         bool Success { get; set; }
-        IEnumerable<string> Errors { get; set; }
+        List<string> Messages { get; set; }
     }
 }

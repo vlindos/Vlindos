@@ -17,3 +17,4 @@ namespace 1.2.3 { /// ie no database or table restrictions, namespace goes in di
 Datatype specific indexes to supported. Per datatype specific logical operation to be supported.
 Full LINQ support
 
+BIG QUESTION : How to deal with entity / conversions upgrades

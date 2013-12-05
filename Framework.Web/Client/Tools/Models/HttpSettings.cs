@@ -1,5 +1,5 @@
 ﻿using System;
-using Framework.Web.Application.Endpoints;
+using Framework.Web.Application.ServiceEndpoint.Models;
 
 namespace Framework.Web.Client.Tools.Models
 {

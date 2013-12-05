@@ -18,7 +18,7 @@ namespace Database.DemoApplication
                             .Perform();
             if (r.Success == false)
             {
-                Console.WriteLine(string.Join(Environment.NewLine, r.Errors));
+                Console.WriteLine(string.Join(Environment.NewLine, r.Messages));
                 return;
             }
 
@@ -26,7 +26,7 @@ namespace Database.DemoApplication
                         .Perform();
             if (r.Success == false)
             {
-                Console.WriteLine(string.Join(Environment.NewLine, r.Errors));
+                Console.WriteLine(string.Join(Environment.NewLine, r.Messages));
                 return;
             }
 
@@ -35,7 +35,7 @@ namespace Database.DemoApplication
                         .Perform();
             if (r.Success == false)
             {
-                Console.WriteLine(string.Join(Environment.NewLine, r.Errors));
+                Console.WriteLine(string.Join(Environment.NewLine, r.Messages));
                 return;
             }
 
@@ -44,7 +44,7 @@ namespace Database.DemoApplication
                         .Perform();
             if (r.Success == false)
             {
-                Console.WriteLine(string.Join(Environment.NewLine, r.Errors));
+                Console.WriteLine(string.Join(Environment.NewLine, r.Messages));
                 return;
             }
 
@@ -53,7 +53,7 @@ namespace Database.DemoApplication
                         .Perform();
             if (r.Success == false)
             {
-                Console.WriteLine(string.Join(Environment.NewLine, r.Errors));
+                Console.WriteLine(string.Join(Environment.NewLine, r.Messages));
                 return;
             }
 
@@ -65,7 +65,7 @@ namespace Database.DemoApplication
                             .Retrieve(entities => entities.ForEach(x => Console.WriteLine("{0}", x.Id)), 10);
             if (q.Success == false)
             {
-                Console.WriteLine(string.Join(Environment.NewLine, q.Errors));
+                Console.WriteLine(string.Join(Environment.NewLine, q.Messages));
             }
 
             var transactionOperation = database.ExecuteInTranscation(tx =>
@@ -76,7 +76,7 @@ namespace Database.DemoApplication
                     .RetrieveOne();
                 if (!selectRequest.Success) // check if queries had compiled well
                 {
-                    Console.WriteLine(string.Join(Environment.NewLine, selectRequest.Errors));
+                    Console.WriteLine(string.Join(Environment.NewLine, selectRequest.Messages));
                     return Transaction.Rollback;
                 }
                 var item = selectRequest.Result.Entity;
@@ -93,7 +93,7 @@ namespace Database.DemoApplication
                 }
                 if (!operationResult.Success) // check if queries had compiled well
                 {
-                    Console.WriteLine(string.Join(Environment.NewLine, operationResult.Errors));
+                    Console.WriteLine(string.Join(Environment.NewLine, operationResult.Messages));
                     return Transaction.Rollback;
                 }
                 return Transaction.Commit;

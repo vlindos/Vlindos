@@ -1,7 +1,6 @@
 namespace Framework.Web.Application.Filters
 {
-    public interface IFilter
+    public interface IAfterPerformFilter : IFilter
     {
-        int Priority { get; }
     }
 }
