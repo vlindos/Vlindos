@@ -1,4 +1,7 @@
-﻿namespace Framework.Web.Application.HttpEndpoint
+﻿using System.Collections.Generic;
+using Framework.Web.Application.HttpEndpoint.Filters;
+
+namespace Framework.Web.Application.HttpEndpoint
 {
     public interface IServerSideHttpEndpoint<TRequest, TResponse>
     {
@@ -9,5 +12,7 @@
         IHttpStreamResponseWritter<TResponse> HttpStreamResponseWritter { get; }
 
         IRequestPerformer<TResponse> RequestPerformer { get; }
+
+        List<IHttpEndpointFilter<TRequest, TResponse>> Filters { get; } 
     }
 }

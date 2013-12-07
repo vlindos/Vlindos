@@ -44,9 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationDelegate.cs" />
+    <Compile Include="Application.cs" />
+    <Compile Include="Endpoints\ConfigAdder\HttpEndpoint.cs" />
+    <Compile Include="Endpoints\ConfigAdder\RequestValidator.cs" />
+    <Compile Include="Endpoints\ConfigAdder\ServerSideHttpEndpoint.cs" />
     <Compile Include="Models\Config.cs" />
-    <Compile Include="Performers\ConfigAdderPerformer.cs" />
+    <Compile Include="PerformerManager.cs" />
+    <Compile Include="Endpoints\ConfigAdder\RequestPerformer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +61,10 @@
       <Project>{2D8BEB10-076D-4A30-8318-2D2B0357DAC3}</Project>
       <Name>Database</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Framework.InversionOfControl\Framework.InversionOfControl.csproj">
+      <Project>{92926fd0-433b-49d9-afa1-2d5db1a8f02b}</Project>
+      <Name>Framework.InversionOfControl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Framework.Web.Service\Framework.Web.Service.csproj">
       <Project>{D32855AC-02DF-4D43-983E-9A3711C578A2}</Project>
       <Name>Framework.Web.Service</Name>
@@ -64,6 +72,10 @@
     <ProjectReference Include="..\Framework.Web\Framework.Web.csproj">
       <Project>{6BC58CD0-6CB2-477F-8618-760989416E38}</Project>
       <Name>Framework.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{FF60F6F2-57B9-49CF-9745-6EBA430C8604}</Project>
+      <Name>Framework</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

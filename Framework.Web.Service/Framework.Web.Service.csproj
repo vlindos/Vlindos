@@ -41,18 +41,11 @@
   <ItemGroup>
     <Compile Include="Client\Tools\HttpRequestTransmitter.cs" />
     <Compile Include="Client\Tools\Models\HttpSettings.cs" />
-    <Compile Include="Filters\IAfterPerformServiceEndpointFilter.cs" />
-    <Compile Include="Filters\IBeforePerformServiceEndpointFilter.cs" />
-    <Compile Include="Filters\IServiceEndpointFilter.cs" />
     <Compile Include="Filters\ServiceRequestHandler.cs" />
-    <Compile Include="IClientSideServiceEndpoint.cs" />
-    <Compile Include="IServerSideServiceEndpoint.cs" />
-    <Compile Include="IServiceEndpoint.cs" />
     <Compile Include="JsonHttpStreamResponseReader.cs" />
     <Compile Include="JsonHttpStreamResponseWritter.cs" />
     <Compile Include="Models\SerializationType.cs" />
     <Compile Include="Models\ServiceResponse.cs" />
-    <Compile Include="PerformerManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

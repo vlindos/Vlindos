@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Net;
+using Framework.Web.Application.HttpEndpoint;
+using Framework.Web.Application.HttpEndpoint.Filters;
 using Framework.Web.Models;
 using Framework.Web.Service.Models;
 
 namespace Framework.Web.Service.Filters
 {
-    public interface IServiceRequestHandler<TRequest, TResponse> : IAfterPerformServiceEndpointFilter<TRequest, TResponse>
+    public interface IServiceRequestHandler<TRequest, TResponse> : IAfterPerformHttpEndpointFilter<TRequest, TResponse>
         where TResponse : IServiceResponse
     {
     }
@@ -16,9 +18,9 @@ namespace Framework.Web.Service.Filters
         public int Priority { get { return 100; } }
 
         public bool BeforePerform(
-            IHttpRequest httpRequest, IHttpResponse httpResponse, IServerSideServiceEndpoint<TRequest, TResponse> serviceEndpoint)
+            IHttpRequest httpRequest, IHttpResponse httpResponse, IServerSideHttpEndpoint<TRequest, TResponse> httpEndpoint)
         {
-            var unbinder = serviceEndpoint.HttpRequestUnbinder;
+            var unbinder = httpEndpoint.HttpRequestUnbinder;
 
             // does the enpoint expects input?
             if (unbinder == null) return true;
@@ -37,7 +39,7 @@ namespace Framework.Web.Service.Filters
                 return false;
             }
 
-            var validator = serviceEndpoint.ServiceEndpoint.RequestValidator;
+            var validator = httpEndpoint.HttpEndpoint.RequestValidator;
             if (validator == null) // does the enpoint requires validation?
             {
                 return true;

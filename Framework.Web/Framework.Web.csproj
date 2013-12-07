@@ -39,9 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\IApplicationDelegate.cs" />
+    <Compile Include="Application\IApplication.cs" />
     <Compile Include="Application\IPerformerManager.cs" />
-    <Compile Include="Models\Application.cs" />
+    <Compile Include="Models\ApplicationConfiguration.cs" />
     <Compile Include="Application\HttpEndpoint\Filters\IAfterPerformHttpEndpointsFilter.cs" />
     <Compile Include="Application\HttpEndpoint\IClientSideHttpEndpoint.cs" />
     <Compile Include="Application\HttpEndpoint\IServerSideHttpEndpoint.cs" />
