@@ -78,6 +78,7 @@
     <Compile Include="Models\HttpResponse.cs" />
     <Compile Include="Models\HttpMethods\IHttpMethod.cs" />
     <Compile Include="Models\StandardHeaders.cs" />
+    <Compile Include="Tools\IFormDataReader.cs" />
     <Compile Include="Tools\StandardHeadersReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

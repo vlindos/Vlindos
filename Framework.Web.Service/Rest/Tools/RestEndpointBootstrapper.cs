@@ -20,7 +20,7 @@ namespace Framework.Web.Service.Rest.Tools
             List<IHttpEndpointFilter> filters = null,
             UnbinderDelegate<TRequest> unbind = null,
             Func<TRequest, List<string>, bool> validate = null,
-            Func<TRequest, TResponse> perform = null,
+            Action<IHttpRequest<TRequest>, IHttpResponse<TResponse>> perform = null,
             Action<IHttpRequest<TRequest>, IHttpResponse<TResponse>> responseWritter = null)
             where TResponse : IServiceResponse;
         void Bootstrap<TRequest, TResponse>(
@@ -28,7 +28,7 @@ namespace Framework.Web.Service.Rest.Tools
             IHttpEndpoint<TRequest> httpEndpoint,
             List<IHttpEndpointFilter> filters = null,
             UnbinderDelegate<TRequest> unbind = null,
-            Func<TRequest, TResponse> perform = null,
+            Action<IHttpRequest<TRequest>, IHttpResponse<TResponse>> perform = null,
             Action<IHttpRequest<TRequest>, IHttpResponse<TResponse>> responseWritter = null)
             where TResponse : IServiceResponse;
     }
@@ -56,7 +56,7 @@ namespace Framework.Web.Service.Rest.Tools
             List<IHttpEndpointFilter> filters = null, 
             UnbinderDelegate<TRequest> unbind = null, 
             Func<TRequest, List<string>, bool> validate = null,
-            Func<TRequest, TResponse> perform = null,
+            Action<IHttpRequest<TRequest>, IHttpResponse<TResponse>> perform = null,
             Action<IHttpRequest<TRequest>, IHttpResponse<TResponse>> responseWritter = null) 
             where TResponse : IServiceResponse
         {
@@ -68,7 +68,7 @@ namespace Framework.Web.Service.Rest.Tools
             IHttpEndpoint<TRequest> httpEndpoint, 
             List<IHttpEndpointFilter> filters = null, 
             UnbinderDelegate<TRequest> unbind = null,
-            Func<TRequest, TResponse> perform = null,
+            Action<IHttpRequest<TRequest>, IHttpResponse<TResponse>> perform = null,
             Action<IHttpRequest<TRequest>, IHttpResponse<TResponse>> responseWritter = null) 
             where TResponse : IServiceResponse
         {

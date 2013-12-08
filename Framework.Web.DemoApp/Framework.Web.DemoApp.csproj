@@ -45,6 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application.cs" />
+    <Compile Include="Endpoints\Authenticate\AuthenticateResponse.cs" />
+    <Compile Include="Endpoints\Authenticate\AuthenticateRestEndpoint.cs" />
+    <Compile Include="Filters\AuthenticationFilter.cs" />
     <Compile Include="Endpoints\Sample\EchoResponse.cs" />
     <Compile Include="Endpoints\Sample\SampleRestEndpoint.cs" />
     <Compile Include="Endpoints\ConfigAdder\HttpEndpoint.cs" />
