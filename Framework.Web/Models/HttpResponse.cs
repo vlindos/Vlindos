@@ -3,13 +3,14 @@ using System.Collections.Specialized;
 using System.Net;
 using System.Net.Mime;
 using Framework.Web.Models.FiltersObjects;
+using Vlindos.Common.Extensions.IEnumerable;
 using Vlindos.Common.Streams;
 
 namespace Framework.Web.Models
 {
-    public interface IHttpResponseFactory<TRequest>
+    public interface IHttpResponseFactory
     {
-        IHttpResponse<TRequest> GetHttpResponse();
+        IHttpResponse<TRequest> GetHttpResponse<TRequest>();
     }
 
     public interface IHttpResponse<TResponse>
@@ -24,19 +25,17 @@ namespace Framework.Web.Models
 
         TResponse Response { get; set; }
 
-        Dictionary<IFiltersObjectsBagGroup, List<object>> FiltersObjects { get; set; }
+        Dictionary<IFiltersObjectsGroup, List<object>> FiltersObjects { get; }
     }
 
     public class HttpResponse<TResponse> : IHttpResponse<TResponse>
     {
-        public HttpResponse(IEnumerable<IFiltersObjectsBagGroup> filtersObjectsBagGroups)
+        public HttpResponse(IEnumerable<IFiltersObjectsGroup> filtersObjectsGroups)
         {
+            FiltersObjects = new Dictionary<IFiltersObjectsGroup, List<object>>();
+            filtersObjectsGroups.ForEach(x => FiltersObjects.Add(x, new List<object>()));
+
             HttpStatusCode = HttpStatusCode.OK;
-            FiltersObjects = new Dictionary<IFiltersObjectsBagGroup, List<object>>();
-            foreach (var filtersObjectsBagGroup in filtersObjectsBagGroups)
-            {
-                FiltersObjects.Add(filtersObjectsBagGroup, new List<object>());
-            }
         }
 
         public HttpStatusCode HttpStatusCode { get; set; }
@@ -49,6 +48,6 @@ namespace Framework.Web.Models
 
         public TResponse Response { get; set; }
 
-        public Dictionary<IFiltersObjectsBagGroup, List<object>> FiltersObjects { get; set; }
+        public Dictionary<IFiltersObjectsGroup, List<object>> FiltersObjects { get; private set; }
     }
 }

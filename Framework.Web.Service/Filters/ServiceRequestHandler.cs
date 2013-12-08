@@ -7,21 +7,23 @@ using Framework.Web.Service.Models;
 
 namespace Framework.Web.Service.Filters
 {
-    public interface IServiceRequestHandler<TRequest, TResponse> : IAfterPerformHttpEndpointFilter<TRequest, TResponse>
-        where TResponse : IServiceResponse
+    public interface IServiceRequestHandler : IBeforePerformHttpEndpointFilter
     {
     }
 
-    public class ServiceRequestHandler<TRequest, TResponse> : IServiceRequestHandler<TRequest, TResponse>
-        where TResponse : IServiceResponse
+    public class ServiceRequestHandler : IServiceRequestHandler
     {
-        public int Priority { get { return 100; } }
+        public int Priority { get { return 5000; } }
 
-        public bool BeforePerform(
+        public bool BeforePerform<TRequest, TResponse>(
             IHttpRequest<TRequest> httpRequest, 
-            IHttpResponse<TResponse> httpResponse, 
-            IServerSideHttpEndpoint<TRequest, TResponse> httpEndpoint)
+            IHttpResponse<TResponse> httpResponse)
         {
+            if (typeof(TResponse).IsAssignableFrom(typeof(IServiceResponse))) return true;
+            var httpEndpoint = httpRequest.Endpoint as IServerSideHttpEndpoint<TRequest, TResponse>;
+            // is request having IServiceResponse?
+            if (httpEndpoint == null) return true;
+
             var unbinder = httpEndpoint.HttpRequestUnbinder;
 
             // does the enpoint expects input?
@@ -31,11 +33,11 @@ namespace Framework.Web.Service.Filters
             if (unbinder.TryToUnbind(httpRequest, messages) == false)
             {
                 messages.Add("Bad request.");
-                var response = default(TResponse);
+                var response = (IServiceResponse)default(TResponse);
                 response.Messages = messages;
 
+                httpResponse.Response = (TResponse)response;
                 httpResponse.HttpStatusCode = HttpStatusCode.BadRequest;
-                httpResponse.Response.Messages = messages;
 
                 return false;
             }
@@ -49,11 +51,11 @@ namespace Framework.Web.Service.Filters
             if (validator.Validate(httpRequest.Request, messages) == false)
             {
                 messages.Add("Invalid request.");
-                var response = default(TResponse);
+                var response = (IServiceResponse)default(TResponse);
                 response.Messages = messages;
 
+                httpResponse.Response = (TResponse)response;
                 httpResponse.HttpStatusCode = HttpStatusCode.BadRequest;
-                httpResponse.Response.Messages = messages;
                 return false;
             }
 

@@ -1,14 +1,11 @@
 ﻿using System;
-using System.IO;
 using Framework.Web.Application;
 using Framework.Web.Models;
 using Framework.Web.Tools;
-using Vlindos.Common.Configuration;
 using Vlindos.Common.Logging;
 using Vlindos.InversionOfControl;
 using Vlindos.InversionOfControl.ConventionConfigurators;
 using Vlindos.Logging;
-using Vlindos.Logging.Configuration;
 using Vlindos.Logging.Tools;
 
 namespace Framework.Web.DemoApp

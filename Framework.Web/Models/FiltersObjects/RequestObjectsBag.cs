@@ -1,13 +1,11 @@
 ﻿
 namespace Framework.Web.Models.FiltersObjects
 {
-    public interface IRequestFiltersObjectsBagGroup : IFiltersObjectsBagGroup
+    public interface IRequestFiltersObjectsGroup : IFiltersObjectsGroup
     {
-
     }
 
-    public class RequestFiltersObjectsBagGroup : IRequestFiltersObjectsBagGroup
+    public class RequestFiltersObjectsGroup : IRequestFiltersObjectsGroup
     {
-        public string Id { get { return "Request"; } }
     }
 }

@@ -17,7 +17,7 @@ namespace Framework.Web.Service.Rest.Tools
         void Bootstrap<TRequest, TResponse>(
             RestEndpointBase<TRequest, TResponse> restEndpoint,
             IHttpMethod httpMethod, string route,
-            List<IHttpEndpointFilter<TRequest, TResponse>> filters = null,
+            List<IHttpEndpointFilter> filters = null,
             UnbinderDelegate<TRequest> unbind = null,
             Func<TRequest, List<string>, bool> validate = null,
             Func<TRequest, TResponse> perform = null,
@@ -26,7 +26,7 @@ namespace Framework.Web.Service.Rest.Tools
         void Bootstrap<TRequest, TResponse>(
             RestEndpointBase<TRequest, TResponse> restEndpoint, 
             IHttpEndpoint<TRequest> httpEndpoint,
-            List<IHttpEndpointFilter<TRequest, TResponse>> filters = null,
+            List<IHttpEndpointFilter> filters = null,
             UnbinderDelegate<TRequest> unbind = null,
             Func<TRequest, TResponse> perform = null,
             Action<IHttpRequest<TRequest>, IHttpResponse<TResponse>> responseWritter = null)
@@ -53,7 +53,7 @@ namespace Framework.Web.Service.Rest.Tools
         public void Bootstrap<TRequest, TResponse>(
             RestEndpointBase<TRequest, TResponse> restEndpoint, 
             IHttpMethod httpMethod, string route,
-            List<IHttpEndpointFilter<TRequest, TResponse>> filters = null, 
+            List<IHttpEndpointFilter> filters = null, 
             UnbinderDelegate<TRequest> unbind = null, 
             Func<TRequest, List<string>, bool> validate = null,
             Func<TRequest, TResponse> perform = null,
@@ -66,7 +66,7 @@ namespace Framework.Web.Service.Rest.Tools
         public void Bootstrap<TRequest, TResponse>(
             RestEndpointBase<TRequest, TResponse> restEndpoint, 
             IHttpEndpoint<TRequest> httpEndpoint, 
-            List<IHttpEndpointFilter<TRequest, TResponse>> filters = null, 
+            List<IHttpEndpointFilter> filters = null, 
             UnbinderDelegate<TRequest> unbind = null,
             Func<TRequest, TResponse> perform = null,
             Action<IHttpRequest<TRequest>, IHttpResponse<TResponse>> responseWritter = null) 

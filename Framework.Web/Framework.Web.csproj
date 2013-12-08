@@ -41,14 +41,21 @@
   <ItemGroup>
     <Compile Include="Application\DefaultPerfomerException.cs" />
     <Compile Include="Application\DefaultPerformerManager.cs" />
+    <Compile Include="Application\Session\ISessionValueReader.cs" />
+    <Compile Include="Application\Session\ISessionRepositoryManager.cs" />
+    <Compile Include="Application\Filters\Global\SessionHandler.cs" />
+    <Compile Include="Application\Session\MemorySessionRepository.cs" />
+    <Compile Include="Application\Session\SessionIdSpecifier.cs" />
     <Compile Include="Application\IApplication.cs" />
     <Compile Include="Application\IPerformerManager.cs" />
+    <Compile Include="Application\Session\SessionValue.cs" />
     <Compile Include="Models\ApplicationConfiguration.cs" />
-    <Compile Include="Application\HttpEndpoint\Filters\IAfterPerformHttpEndpointsFilter.cs" />
+    <Compile Include="Application\HttpEndpoint\Filters\IBeforePerformHttpEndpointFilter.cs" />
     <Compile Include="Application\HttpEndpoint\IClientSideHttpEndpoint.cs" />
     <Compile Include="Application\HttpEndpoint\IServerSideHttpEndpoint.cs" />
     <Compile Include="Models\FiltersObjects\RequestObjectsBag.cs" />
-    <Compile Include="Models\FiltersObjects\IFiltersObjectsBagGroup.cs" />
+    <Compile Include="Models\FiltersObjects\IFiltersObjectsGroup.cs" />
+    <Compile Include="Models\FiltersObjects\SessionObjectsGroup.cs" />
     <Compile Include="Models\HttpMethods\ConnectHttpMethod.cs" />
     <Compile Include="Models\HttpMethods\DeleteHttpMethod.cs" />
     <Compile Include="Models\HttpMethods\GetHttpMethod.cs" />
@@ -82,7 +89,6 @@
     <Compile Include="Application\IRequestPerformer.cs" />
     <Compile Include="Application\IRequestValidator.cs" />
     <Compile Include="Application\HttpEndpoint\IHttpStreamResponseWritter.cs" />
-    <Compile Include="Application\HttpEndpoint\Models\HttpUrlDescription.cs" />
     <Compile Include="Tools\AcceptHeaderPrioritizer.cs" />
     <Compile Include="Tools\CachedXmlSerializers.cs" />
     <Compile Include="Application\HttpEndpoint\IHttpStreamResponseReader.cs" />

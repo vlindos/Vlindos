@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
+using Framework.Web.Application.HttpEndpoint;
 using Framework.Web.Models.FiltersObjects;
 using Framework.Web.Models.HttpMethods;
+using Vlindos.Common.Extensions.IEnumerable;
 using Vlindos.Common.Streams;
 
 namespace Framework.Web.Models
 {
-    public interface IHttpRequestFactory<TRequest>
+    public interface IHttpRequestFactory
     {
-        IHttpRequest<TRequest> GetHttpRequest();
+        IHttpRequest<TRequest> GetHttpRequest<TRequest>();
     }
 
     public interface IHttpRequest<TRequest>
@@ -30,19 +32,20 @@ namespace Framework.Web.Models
         IInputStream InputStream { get; set; }
 
         TRequest Request { get; set; }
+        
+        Dictionary<string, string> Session { get; set; }
 
-        Dictionary<IFiltersObjectsBagGroup, List<object>> FiltersObjects { get; set; }
+        IServerSideHttpEndpoint Endpoint { get; set; }
+
+        Dictionary<IFiltersObjectsGroup, List<object>> FiltersObjects { get; }
     }
 
     public class HttpRequest<TRequest> : IHttpRequest<TRequest>
     {
-        public HttpRequest(IEnumerable<IFiltersObjectsBagGroup> filtersObjectsBagGroups)
+        public HttpRequest(IEnumerable<IFiltersObjectsGroup> filtersObjectsGroups)
         {
-            FiltersObjects = new Dictionary<IFiltersObjectsBagGroup, List<object>>();
-            foreach (var filtersObjectsBagGroup in filtersObjectsBagGroups)
-            {
-                FiltersObjects.Add(filtersObjectsBagGroup, new List<object>());
-            }
+            FiltersObjects = new Dictionary<IFiltersObjectsGroup, List<object>>();
+            filtersObjectsGroups.ForEach(x => FiltersObjects.Add(x, new List<object>()));
         }
 
         public IHttpMethod HttpMethod { get; set; }
@@ -63,6 +66,10 @@ namespace Framework.Web.Models
 
         public TRequest Request { get; set; }
 
-        public Dictionary<IFiltersObjectsBagGroup, List<object>> FiltersObjects { get; set; }
+        public Dictionary<string, string> Session { get; set; }
+
+        public IServerSideHttpEndpoint Endpoint { get; set; }
+
+        public Dictionary<IFiltersObjectsGroup, List<object>> FiltersObjects { get; private set; }
     }
 }

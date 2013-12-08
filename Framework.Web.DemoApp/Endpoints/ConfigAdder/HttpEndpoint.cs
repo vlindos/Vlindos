@@ -1,7 +1,5 @@
 using Framework.Web.Application;
 using Framework.Web.Application.HttpEndpoint;
-using Framework.Web.Application.HttpEndpoint.Models;
-using Framework.Web.Models.HttpMethods;
 
 namespace Framework.Web.DemoApp.Endpoints.ConfigAdder
 {
@@ -11,17 +9,13 @@ namespace Framework.Web.DemoApp.Endpoints.ConfigAdder
 
     public class HttpEndpoint : IHttpEndpoint
     {
-        public HttpEndpoint(IPostHttpMethod postHttpMethod, IRequestValidator requestValidator)
+        public HttpEndpoint(IRequestValidator requestValidator)
         {
-            HttpUrlDescription = new HttpUrlDescription
-            {
-                HttpMethods = new IHttpMethod[] { postHttpMethod },
-                Path = "/Config/Add"
-            };
+            HttpUrlDescription = "/Config/Add";
 
             RequestValidator = requestValidator;
         }
-        public HttpUrlDescription HttpUrlDescription { get; private set; }
+        public string HttpUrlDescription { get; private set; }
         public IRequestValidator<int> RequestValidator { get; private set; }
     }
 }

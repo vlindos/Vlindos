@@ -7,13 +7,13 @@ namespace Framework.Web.Application
     public class DefaultPerformerManager : IPerformerManager
     {
         private readonly IContainerAccessor _containerAccessor;
-        private readonly IRequestFiltersObjectsBagGroup _requestFiltersObjectsBagGroup;
+        private readonly IRequestFiltersObjectsGroup _requestFiltersObjectsGroup;
 
         public DefaultPerformerManager(IContainerAccessor containerAccessor, 
-            IRequestFiltersObjectsBagGroup requestFiltersObjectsBagGroup)
+            IRequestFiltersObjectsGroup requestFiltersObjectsGroup)
         {
             _containerAccessor = containerAccessor;
-            _requestFiltersObjectsBagGroup = requestFiltersObjectsBagGroup;
+            _requestFiltersObjectsGroup = requestFiltersObjectsGroup;
         }
 
         public TPerformer GetPerformer<TPerformer, TRequest, TResponse>(
@@ -21,7 +21,7 @@ namespace Framework.Web.Application
             where TPerformer : IRequestPerformer<TResponse>
         {
             return _containerAccessor.Container.Resolve<TPerformer>(
-                request.FiltersObjects[_requestFiltersObjectsBagGroup]);
+                request.FiltersObjects[_requestFiltersObjectsGroup]);
         }
     }
 }
