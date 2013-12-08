@@ -3,6 +3,11 @@ using Framework.Web.Models;
 
 namespace Framework.Web.Service
 {
+    public interface IJsonHttpStreamResponseWritterFactory
+    {
+        IJsonHttpStreamResponseWritter<T> GetJsonHttpStreamResponseWritter<T>();
+    }
+
     public interface IJsonHttpStreamResponseWritter<in T> : IHttpStreamResponseWritter<T>
     {
     }

@@ -1,6 +1,10 @@
 namespace Framework.Web.Models.HttpMethods
 {
-    public class PostHttpMethod : IHttpMethod
+    public interface IPostHttpMethod : IHttpMethod
+    {
+    }
+
+    public class PostHttpMethod : IPostHttpMethod
     {
         public string MethodName { get { return "POST"; } }
     }

@@ -24,7 +24,7 @@ namespace Framework.Web.DemoApp
             {
                 PerformerManger = new PerformerManager(_container),
                 PerformerException = null,
-                Endpoints = new List<object> {  },
+                Endpoints = new List<object> {  }, // TODO: How to setup endpoints easily
                 GlobalFilters = null,
             };
 

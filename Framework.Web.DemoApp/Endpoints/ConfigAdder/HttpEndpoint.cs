@@ -11,15 +11,12 @@ namespace Framework.Web.DemoApp.Endpoints.ConfigAdder
 
     public class HttpEndpoint : IHttpEndpoint
     {
-        public HttpEndpoint(IGetHttpMethod getHttpMethod, IRequestValidator requestValidator)
+        public HttpEndpoint(IPostHttpMethod postHttpMethod, IRequestValidator requestValidator)
         {
             HttpUrlDescription = new HttpUrlDescription
             {
-                Path = "/Config/Add",
-                HttpMethods = new IHttpMethod[]
-                {
-                    getHttpMethod
-                }
+                HttpMethods = new IHttpMethod[] { postHttpMethod },
+                Path = "/Config/Add"
             };
 
             RequestValidator = requestValidator;

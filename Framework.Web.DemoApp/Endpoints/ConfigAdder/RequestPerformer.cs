@@ -5,7 +5,7 @@ using Framework.Web.Service.Models;
 
 namespace Framework.Web.DemoApp.Endpoints.ConfigAdder
 {
-    public interface IRequestPerformer : IRequestPerformer<IServiceResponse>
+    public interface IRequestPerformer : IRequestPerformer<ServiceResponse>
     {
     }
 
@@ -20,7 +20,7 @@ namespace Framework.Web.DemoApp.Endpoints.ConfigAdder
             _requestNumber = requestNumber;
         }
 
-        public IServiceResponse Perform()
+        public ServiceResponse Perform()
         {
             var result = _database.Add(new Config
             {

@@ -44,6 +44,7 @@
     <Compile Include="Filters\ServiceRequestHandler.cs" />
     <Compile Include="JsonHttpStreamResponseReader.cs" />
     <Compile Include="JsonHttpStreamResponseWritter.cs" />
+    <Compile Include="JsonHttpStreamResponseWritterManager.cs" />
     <Compile Include="Models\SerializationType.cs" />
     <Compile Include="Models\ServiceResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

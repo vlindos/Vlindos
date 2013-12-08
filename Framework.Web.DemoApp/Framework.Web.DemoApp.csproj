@@ -45,7 +45,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application.cs" />
+    <Compile Include="Endpoints\Base\RestEndpointBase.cs" />
+    <Compile Include="Endpoints\Base\RestEndpointBootstrapper.cs" />
+    <Compile Include="Endpoints\Sample\SampleRestEndpoint.cs" />
     <Compile Include="Endpoints\ConfigAdder\HttpEndpoint.cs" />
+    <Compile Include="Endpoints\ConfigAdder\HttpRequestUnbinder.cs" />
     <Compile Include="Endpoints\ConfigAdder\RequestValidator.cs" />
     <Compile Include="Endpoints\ConfigAdder\ServerSideHttpEndpoint.cs" />
     <Compile Include="Models\Config.cs" />
