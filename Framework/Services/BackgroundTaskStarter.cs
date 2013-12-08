@@ -50,13 +50,14 @@ namespace Vlindos.Common.Services
                         }
                         catch (Exception ex)
                         {
-                            _logger.Error(ex, "Runnable did throw an exception. It will be restarted after a '{0}'.", _failurePauseInMilisecs);
+                            _logger.Error(ex, "Runnable did throw an exception. It will be restarted after a '{0}'.", 
+                                _failurePauseInMilisecs);
                             Thread.Sleep(_failurePauseInMilisecs);
                             if (runnable != null)
                             {
                                 runnable.Dispose();
+                                runnable = null;
                             }
-                            //Thread.Sleep(_failurePauseInMilisecs); 
                         }
                     }
                     runnableState.IsRunning = false;

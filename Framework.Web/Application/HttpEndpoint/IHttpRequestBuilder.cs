@@ -3,8 +3,8 @@ using Framework.Web.Models;
 
 namespace Framework.Web.Application.HttpEndpoint
 {
-    public interface IHttpRequestBuilder<T>
+    public interface IHttpRequestBuilder<TRequest>
     {
-        bool Build(out IHttpRequest httpRequest, List<string> messages);
+        bool Build(out IHttpRequest<TRequest> httpRequest, List<string> messages);
     }
 }

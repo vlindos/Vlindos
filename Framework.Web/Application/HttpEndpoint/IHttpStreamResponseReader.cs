@@ -3,8 +3,8 @@ using Framework.Web.Models;
 
 namespace Framework.Web.Application.HttpEndpoint
 {
-    public interface IHttpStreamResponseReader<T> 
+    public interface IHttpStreamResponseReader<TResponse> 
     {
-        bool Read(IHttpRequest httpRequest, out T response, List<string> messages);
+        bool Read(IHttpResponse<TResponse> httpRequest, List<string> messages);
     }
 }

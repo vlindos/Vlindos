@@ -33,6 +33,7 @@
     <Compile Include="CallingStackFrameGetter.cs" />
     <Compile Include="Configuration\OutputPipe.cs" />
     <Compile Include="Dequeuer.cs" />
+    <Compile Include="Tools\FileConfigurationLoggingSystemInitializer.cs" />
     <Compile Include="IOutputEngine.cs" />
     <Compile Include="IOutput.cs" />
     <Compile Include="Configuration\FileReader.cs" />

@@ -1,6 +1,5 @@
 ﻿using Database;
 using Framework.Web.Application;
-using Framework.Web.DemoApp.Models;
 using Framework.Web.Service.Models;
 
 namespace Framework.Web.DemoApp.Endpoints.ConfigAdder

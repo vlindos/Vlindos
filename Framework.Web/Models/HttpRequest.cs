@@ -1,11 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
+using Framework.Web.Models.FiltersObjects;
 using Framework.Web.Models.HttpMethods;
 using Vlindos.Common.Streams;
 
 namespace Framework.Web.Models
 {
-    public interface IHttpRequest
+    public interface IHttpRequestFactory<TRequest>
+    {
+        IHttpRequest<TRequest> GetHttpRequest();
+    }
+
+    public interface IHttpRequest<TRequest>
     {
         IHttpMethod HttpMethod { get; set; }
 
@@ -23,14 +29,20 @@ namespace Framework.Web.Models
 
         IInputStream InputStream { get; set; }
 
-        List<object> FiltersObjects { get; set; }
+        TRequest Request { get; set; }
+
+        Dictionary<IFiltersObjectsBagGroup, List<object>> FiltersObjects { get; set; }
     }
 
-    public class HttpRequest : IHttpRequest
+    public class HttpRequest<TRequest> : IHttpRequest<TRequest>
     {
-        public HttpRequest()
+        public HttpRequest(IEnumerable<IFiltersObjectsBagGroup> filtersObjectsBagGroups)
         {
-            FiltersObjects = new List<object>();
+            FiltersObjects = new Dictionary<IFiltersObjectsBagGroup, List<object>>();
+            foreach (var filtersObjectsBagGroup in filtersObjectsBagGroups)
+            {
+                FiltersObjects.Add(filtersObjectsBagGroup, new List<object>());
+            }
         }
 
         public IHttpMethod HttpMethod { get; set; }
@@ -49,6 +61,8 @@ namespace Framework.Web.Models
 
         public IInputStream InputStream { get; set; }
 
-        public List<object> FiltersObjects { get; set; }
+        public TRequest Request { get; set; }
+
+        public Dictionary<IFiltersObjectsBagGroup, List<object>> FiltersObjects { get; set; }
     }
 }

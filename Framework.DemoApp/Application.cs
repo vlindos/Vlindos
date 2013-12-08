@@ -1,8 +1,6 @@
 ﻿using System;
-using System.IO;
-using Vlindos.Common.Configuration;
 using Vlindos.Logging;
-using Vlindos.Logging.Configuration;
+using Vlindos.Logging.Tools;
 
 namespace Vlindos.DemoApp
 {
@@ -13,38 +11,16 @@ namespace Vlindos.DemoApp
 
     public class Application : IApplication
     {
-        private readonly IFileConfigurationContainerGetterFactory<Configuration> _configurationContainerGetterFactory;
-        private readonly IFileReaderFactory<Configuration> _fileConfigurationReaderFactory;
-        private readonly ISystemFactory _systemFactory;
+        private readonly IFileConfigurationLoggingSystemInitializer _loggingSystemInitializer;
 
-        public Application(
-            IFileConfigurationContainerGetterFactory<Configuration> configurationContainerGetterFactoryFactory,
-            IFileReaderFactory<Configuration> fileConfigurationReaderFactory,
-            ISystemFactory systemFactory)
+        public Application(IFileConfigurationLoggingSystemInitializer loggingSystemInitializer)
         {
-            _configurationContainerGetterFactory = configurationContainerGetterFactoryFactory;
-            _fileConfigurationReaderFactory = fileConfigurationReaderFactory;
-            _systemFactory = systemFactory;
+            _loggingSystemInitializer = loggingSystemInitializer;
         }
 
         public void Run()
         {
-            IContainer<Configuration> loggingConfigurationContainer;
-            
-            var path = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
-            var directory = Path.GetDirectoryName(path) ?? "";
-            var filePath = Path.Combine(directory, "Logging.config");
-
-            var fileReader = _fileConfigurationReaderFactory.GetFileReader(filePath);
-
-            if (_configurationContainerGetterFactory.GetFileConfigurationContainerGetter(filePath)
-                    .GetContainer(fileReader, out loggingConfigurationContainer) == false)
-            {
-                return;
-            }
-            var loggingSystem = _systemFactory.GetSystem(loggingConfigurationContainer);
-
-            if (loggingSystem.Start() == false) return;
+            var loggingSystem = _loggingSystemInitializer.GetLoggingSystem();
 
             Console.WriteLine("Press any key to stop the application.");
             Console.ReadKey();

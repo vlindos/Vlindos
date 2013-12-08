@@ -16,7 +16,7 @@ namespace Vlindos.Webserver.Webserver
 
     public class RequestProcessor : IRequestProcessor
     {
-        private int _bytesReceived;
+        //private int _bytesReceived;
 
         private readonly MemoryStream _memoryStream;
 
@@ -32,7 +32,7 @@ namespace Vlindos.Webserver.Webserver
 
         public void Initialize()
         {
-            _bytesReceived = 0;
+            //_bytesReceived = 0;
         }
     }
 

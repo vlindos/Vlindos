@@ -2,8 +2,8 @@ using Framework.Web.Models;
 
 namespace Framework.Web.Application.Filters.Global
 {
-    public interface IAfterPerformGlobalFilter : IAfterPerformFilter, IGlobalFilter
+    public interface IAfterPerformGlobalFilter<TRequest, TResponse> : IAfterPerformFilter, IGlobalFilter
     {
-        bool AfterPerform(IHttpRequest request, IHttpResponse httpResponse);
+        bool AfterPerform(IHttpRequest<TRequest> request, IHttpResponse<TResponse> httpResponse);
     }
 }

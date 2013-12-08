@@ -45,20 +45,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application.cs" />
-    <Compile Include="Endpoints\Base\RestEndpointBase.cs" />
-    <Compile Include="Endpoints\Base\RestEndpointBootstrapper.cs" />
+    <Compile Include="Endpoints\Sample\EchoResponse.cs" />
     <Compile Include="Endpoints\Sample\SampleRestEndpoint.cs" />
     <Compile Include="Endpoints\ConfigAdder\HttpEndpoint.cs" />
     <Compile Include="Endpoints\ConfigAdder\HttpRequestUnbinder.cs" />
     <Compile Include="Endpoints\ConfigAdder\RequestValidator.cs" />
     <Compile Include="Endpoints\ConfigAdder\ServerSideHttpEndpoint.cs" />
-    <Compile Include="Models\Config.cs" />
-    <Compile Include="PerformerManager.cs" />
+    <Compile Include="Endpoints\ConfigAdder\Config.cs" />
     <Compile Include="Endpoints\ConfigAdder\RequestPerformer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Database\Database.csproj">
@@ -68,6 +63,10 @@
     <ProjectReference Include="..\Framework.InversionOfControl\Framework.InversionOfControl.csproj">
       <Project>{92926fd0-433b-49d9-afa1-2d5db1a8f02b}</Project>
       <Name>Framework.InversionOfControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework.Logging\Framework.Logging.csproj">
+      <Project>{7909B1AB-545D-4938-B4D6-BA7E2AC13F96}</Project>
+      <Name>Framework.Logging</Name>
     </ProjectReference>
     <ProjectReference Include="..\Framework.Web.Service\Framework.Web.Service.csproj">
       <Project>{D32855AC-02DF-4D43-983E-9A3711C578A2}</Project>

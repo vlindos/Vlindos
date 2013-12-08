@@ -1,32 +1,45 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.IO;
 using Framework.Web.Application;
 using Framework.Web.Models;
+using Framework.Web.Tools;
+using Vlindos.Common.Configuration;
 using Vlindos.Common.Logging;
 using Vlindos.InversionOfControl;
+using Vlindos.InversionOfControl.ConventionConfigurators;
+using Vlindos.Logging;
+using Vlindos.Logging.Configuration;
+using Vlindos.Logging.Tools;
 
 namespace Framework.Web.DemoApp
 {
-    public class Application : IApplication
+    public class Application : IApplication, IContainerAccessor
     {
-        private IContainer _container;
         private ILogger _logger;
-
+        private ISystem _loggingSystem;
+        public IContainer Container { get; private set; }
         public ApplicationConfiguration Configuration { get; set; }
 
         public bool Initialize()
         {
-            _container = new Container();
-            _logger = _container.Resolve<ILogger>();
+            Container = new Container();
 
+            // initialize container
+            AppllicationConfigurator.Configure(
+                AppDomain.CurrentDomain,
+                Container,
+                new IConventionConfigurator[] { 
+                    new FactoriesConventionConfigurator(), 
+                    new SingletonConventionConfigurator() });
+
+            // initialize logger
+            _loggingSystem = Container.Resolve<IFileConfigurationLoggingSystemInitializer>().GetLoggingSystem();
+            _logger = Container.Resolve<ILogger>();
             _logger.Info("Starting Web Service ...");
- 
-            Configuration = new ApplicationConfiguration
-            {
-                PerformerManger = new PerformerManager(_container),
-                PerformerException = null,
-                Endpoints = new List<object> {  }, // TODO: How to setup endpoints easily
-                GlobalFilters = null,
-            };
+
+            // initialize web application
+            Configuration = Container.Resolve<IDefaultApplicationConfigurationGetter>()
+                                     .GetApplicationConfiguration();
 
             return true;
         }
@@ -34,7 +47,8 @@ namespace Framework.Web.DemoApp
         public void Dispose()
         {
             _logger.Info("Stopping Web Service ...");
-            _container.Dispose();
+            _loggingSystem.Stop();
+            Container.Dispose();
         }
     }
 }

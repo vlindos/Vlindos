@@ -3,18 +3,13 @@ using Framework.Web.Models;
 
 namespace Framework.Web.Service
 {
-    public interface IJsonHttpStreamResponseWritterFactory
-    {
-        IJsonHttpStreamResponseWritter<T> GetJsonHttpStreamResponseWritter<T>();
-    }
-
-    public interface IJsonHttpStreamResponseWritter<in T> : IHttpStreamResponseWritter<T>
+    public interface IJsonHttpStreamResponseWritter<TRequest, TResponse> : IHttpStreamResponseWritter<TRequest, TResponse>
     {
     }
 
-    public class JsonHttpStreamResponseWritter<T> : IJsonHttpStreamResponseWritter<T>
+    public class JsonHttpStreamResponseWritter<TRequest, TResponse> : IJsonHttpStreamResponseWritter<TRequest, TResponse>
     {
-        public void WriteResponse(IHttpRequest httpRequest, HttpResponse httpResponse, T response)
+        public void WriteResponse(IHttpRequest<TRequest> httpRequest, HttpResponse<TResponse> httpResponse)
         {
             //httpResponse.ContentType = new ContentType("application/json");
             //var js = new Newtonsoft.Json.JsonSerializer();

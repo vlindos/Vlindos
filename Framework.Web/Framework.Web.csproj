@@ -39,12 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\DefaultPerfomerException.cs" />
+    <Compile Include="Application\DefaultPerformerManager.cs" />
     <Compile Include="Application\IApplication.cs" />
     <Compile Include="Application\IPerformerManager.cs" />
     <Compile Include="Models\ApplicationConfiguration.cs" />
     <Compile Include="Application\HttpEndpoint\Filters\IAfterPerformHttpEndpointsFilter.cs" />
     <Compile Include="Application\HttpEndpoint\IClientSideHttpEndpoint.cs" />
     <Compile Include="Application\HttpEndpoint\IServerSideHttpEndpoint.cs" />
+    <Compile Include="Models\FiltersObjects\RequestObjectsBag.cs" />
+    <Compile Include="Models\FiltersObjects\IFiltersObjectsBagGroup.cs" />
     <Compile Include="Models\HttpMethods\ConnectHttpMethod.cs" />
     <Compile Include="Models\HttpMethods\DeleteHttpMethod.cs" />
     <Compile Include="Models\HttpMethods\GetHttpMethod.cs" />
@@ -53,6 +57,7 @@
     <Compile Include="Models\HttpMethods\PostHttpMethod.cs" />
     <Compile Include="Models\HttpMethods\PutHttpMethod.cs" />
     <Compile Include="Models\HttpMethods\TraceHttpMethod.cs" />
+    <Compile Include="Tools\DefaultApplicationConfigurationGetter.cs" />
     <Compile Include="Tools\HttpUrlMaterializer.cs" />
     <Compile Include="Application\HttpEndpoint\Filters\IHttpEndpointFilter.cs" />
     <Compile Include="Application\Filters\IFilter.cs" />
@@ -86,6 +91,10 @@
     <Content Include="Readme.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Framework.InversionOfControl\Framework.InversionOfControl.csproj">
+      <Project>{92926fd0-433b-49d9-afa1-2d5db1a8f02b}</Project>
+      <Name>Framework.InversionOfControl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Framework\Framework.csproj">
       <Project>{FF60F6F2-57B9-49CF-9745-6EBA430C8604}</Project>
       <Name>Framework</Name>

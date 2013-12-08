@@ -11,8 +11,8 @@ namespace Framework.Web.Service.Client.Tools
 {
     public interface IHttpRequestTransmitter
     {
-        bool TransmitHttpRequest(
-            IHttpRequest httpRequest,
+        bool TransmitHttpRequest<TRequest>(
+            IHttpRequest<TRequest> httpRequest,
             IUsernamePassword usernamePassword,
             out StreamReader streamReader,
             List<string> messages);
@@ -29,8 +29,8 @@ namespace Framework.Web.Service.Client.Tools
             _httpUrlMaterializer = httpUrlMaterializer;
         }
 
-        public bool TransmitHttpRequest(
-            IHttpRequest httpRequest, 
+        public bool TransmitHttpRequest<TRequest>(
+            IHttpRequest<TRequest> httpRequest, 
             IUsernamePassword usernamePassword,
             out StreamReader streamReader, 
             List<string> messages)

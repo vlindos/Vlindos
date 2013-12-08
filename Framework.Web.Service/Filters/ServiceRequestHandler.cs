@@ -18,7 +18,9 @@ namespace Framework.Web.Service.Filters
         public int Priority { get { return 100; } }
 
         public bool BeforePerform(
-            IHttpRequest httpRequest, IHttpResponse httpResponse, IServerSideHttpEndpoint<TRequest, TResponse> httpEndpoint)
+            IHttpRequest<TRequest> httpRequest, 
+            IHttpResponse<TResponse> httpResponse, 
+            IServerSideHttpEndpoint<TRequest, TResponse> httpEndpoint)
         {
             var unbinder = httpEndpoint.HttpRequestUnbinder;
 
@@ -26,15 +28,14 @@ namespace Framework.Web.Service.Filters
             if (unbinder == null) return true;
 
             var messages = new List<string>();
-            TRequest request;
-            if (unbinder.TryToUnbind(httpRequest, out request, messages) == false)
+            if (unbinder.TryToUnbind(httpRequest, messages) == false)
             {
                 messages.Add("Bad request.");
                 var response = default(TResponse);
                 response.Messages = messages;
 
                 httpResponse.HttpStatusCode = HttpStatusCode.BadRequest;
-                httpResponse.FiltersObjects.Add(messages);
+                httpResponse.Response.Messages = messages;
 
                 return false;
             }
@@ -45,18 +46,16 @@ namespace Framework.Web.Service.Filters
                 return true;
             }
 
-            if (validator.Validate(request, messages) == false)
+            if (validator.Validate(httpRequest.Request, messages) == false)
             {
                 messages.Add("Invalid request.");
                 var response = default(TResponse);
                 response.Messages = messages;
 
                 httpResponse.HttpStatusCode = HttpStatusCode.BadRequest;
-                httpResponse.FiltersObjects.Add(messages);
+                httpResponse.Response.Messages = messages;
                 return false;
             }
-
-            httpRequest.FiltersObjects.Add(request);
 
             return true;
         }

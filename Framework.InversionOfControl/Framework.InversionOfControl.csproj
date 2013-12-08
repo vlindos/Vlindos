@@ -39,6 +39,7 @@
     <Compile Include="IAssemblyConfigurator.cs" />
     <Compile Include="IConfigurator.cs" />
     <Compile Include="Container.cs" />
+    <Compile Include="IContainerAccessor.cs" />
     <Compile Include="LifestyleManagers\ILifestyleManager.cs" />
     <Compile Include="LifestyleManagers\Lifestyle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

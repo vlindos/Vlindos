@@ -17,6 +17,7 @@ namespace Vlindos.InversionOfControl
         T Resolve<T>(List<object> arguments);
     }
 
+
     public class Container : IContainer
     {
         public void Register(Type serviceType, Type componentType, ILifestyleManager lifeStyleManager, string registrationId)

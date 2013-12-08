@@ -1,6 +1,6 @@
 ﻿using Database.Entity;
 
-namespace Framework.Web.DemoApp.Models
+namespace Framework.Web.DemoApp.Endpoints.ConfigAdder
 {
     public class Config : IEntity
     {

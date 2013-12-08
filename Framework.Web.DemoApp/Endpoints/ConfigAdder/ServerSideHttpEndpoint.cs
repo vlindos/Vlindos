@@ -15,7 +15,7 @@ namespace Framework.Web.DemoApp.Endpoints.ConfigAdder
             IServiceRequestHandler<int, ServiceResponse> serviceRequestHandler, 
             IRequestPerformer requestPerformer,
             IHttpRequestUnbinder httpRequestUnbinder,
-            IJsonHttpStreamResponseWritter<ServiceResponse> jsonHttpStreamResponseWritter)
+            IJsonHttpStreamResponseWritter<int, ServiceResponse> jsonHttpStreamResponseWritter)
         {
             Filters = new List<IHttpEndpointFilter<int, ServiceResponse>> { serviceRequestHandler };
             HttpEndpoint = httpEndpoint;
@@ -26,7 +26,7 @@ namespace Framework.Web.DemoApp.Endpoints.ConfigAdder
 
         public IHttpEndpoint<int> HttpEndpoint { get; private set; }
         public IHttpRequestUnbinder<int> HttpRequestUnbinder { get; private set; }
-        public IHttpStreamResponseWritter<ServiceResponse> HttpStreamResponseWritter { get; private set; }
+        public IHttpStreamResponseWritter<int, ServiceResponse> HttpStreamResponseWritter { get; private set; }
         public IRequestPerformer<ServiceResponse> RequestPerformer { get; private set; }
         public List<IHttpEndpointFilter<int, ServiceResponse>> Filters { get; private set; }
     }

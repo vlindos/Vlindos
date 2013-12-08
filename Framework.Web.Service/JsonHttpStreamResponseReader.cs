@@ -5,15 +5,15 @@ using Framework.Web.Models;
 
 namespace Framework.Web.Service
 {
-    public interface IJsonHttpStreamResponseReader<T> : IHttpStreamResponseReader<T>
+    public interface IJsonHttpStreamResponseReader<TResponse> : IHttpStreamResponseReader<TResponse>
     {
     }
 
-    public class JsonHttpStreamResponseReader<T> : IJsonHttpStreamResponseReader<T>
+    public class JsonHttpStreamResponseReader<TResponse> : IJsonHttpStreamResponseReader<TResponse>
     {
-        public bool Read(IHttpRequest httpRequest, out T response, List<string> messages)
+        public bool Read(IHttpResponse<TResponse> httpResponse, List<string> messages)
         {
-            response = default(T);
+            httpResponse.Response = default(TResponse);
             try
             {
                 //var serializer = new JsonSerializer();

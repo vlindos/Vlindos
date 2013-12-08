@@ -7,6 +7,8 @@ namespace Framework.Web.Application.HttpEndpoint.Filters
         : IAfterPerformFilter, IHttpEndpointFilter<TRequest, TResponse>
     {
         bool BeforePerform(
-            IHttpRequest request, IHttpResponse httpResponse, IServerSideHttpEndpoint<TRequest, TResponse> httpEndpoint);
+            IHttpRequest<TRequest> httpRequest,
+            IHttpResponse<TResponse> httpResponse,
+            IServerSideHttpEndpoint<TRequest, TResponse> httpEndpoint);
     }
 }
