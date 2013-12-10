@@ -13,7 +13,7 @@ namespace Framework.Web.Service.Rest.Models
         public IHttpMethod[] HttpMethods { get; set; }
         public IHttpEndpoint<TRequest> HttpEndpoint { get; set; }
         public IHttpRequestUnbinder<TRequest> HttpRequestUnbinder { get; set; }
-        public IHttpStreamResponseWritter<TRequest, TResponse> HttpStreamResponseWritter { get; set; }
+        public IResponseWritter<TRequest, TResponse> ResponseWritter { get; set; }
         public IRequestPerformer<TResponse> RequestPerformer { get; set; }
         public List<IHttpEndpointFilter> Filters { get; set; }
     }

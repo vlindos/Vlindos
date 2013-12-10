@@ -75,7 +75,7 @@
     <Compile Include="Application\Filters\IBeforePerformFilter.cs" />
     <Compile Include="Application\Filters\Global\IBeforePerformGlobalFilter.cs" />
     <Compile Include="Models\HttpRequest.cs" />
-    <Compile Include="Models\HttpResponse.cs" />
+    <Compile Include="Models\IHttpResponse.cs" />
     <Compile Include="Models\HttpMethods\IHttpMethod.cs" />
     <Compile Include="Models\StandardHeaders.cs" />
     <Compile Include="Tools\IFormDataReader.cs" />
@@ -89,7 +89,7 @@
     <Compile Include="Application\HttpEndpoint\IHttpRequestUnbinder.cs" />
     <Compile Include="Application\IRequestPerformer.cs" />
     <Compile Include="Application\IRequestValidator.cs" />
-    <Compile Include="Application\HttpEndpoint\IHttpStreamResponseWritter.cs" />
+    <Compile Include="Application\HttpEndpoint\IResponseWritter.cs" />
     <Compile Include="Tools\AcceptHeaderPrioritizer.cs" />
     <Compile Include="Tools\CachedXmlSerializers.cs" />
     <Compile Include="Application\HttpEndpoint\IHttpStreamResponseReader.cs" />

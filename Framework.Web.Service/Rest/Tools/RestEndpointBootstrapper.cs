@@ -72,8 +72,8 @@ namespace Framework.Web.Service.Rest.Tools
             Action<IHttpRequest<TRequest>, IHttpResponse<TResponse>> responseWritter = null) 
             where TResponse : IServiceResponse
         {
-            restEndpoint.HttpStreamResponseWritter =
-                _containerAccessor.Container.Resolve<IJsonHttpStreamResponseWritter<TRequest, TResponse>>();
+            restEndpoint.ResponseWritter =
+                _containerAccessor.Container.Resolve<IJsonResponseWritter<TRequest, TResponse>>();
             throw new NotImplementedException();
         }
     }

@@ -13,7 +13,7 @@ namespace Framework.Web.Application.HttpEndpoint
 
         IHttpRequestUnbinder<TRequest> HttpRequestUnbinder { get; }
 
-        IHttpStreamResponseWritter<TRequest, TResponse> HttpStreamResponseWritter { get; }
+        IResponseWritter<TRequest, TResponse> ResponseWritter { get; }
 
         IRequestPerformer<TResponse> RequestPerformer { get; }
 

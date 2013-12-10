@@ -22,7 +22,7 @@ namespace Framework.Web.DemoApp.Endpoints.Authenticate
             IRestEndpointBootstrapper bootstrapper, 
             IFormDataReader formDataReader, 
             IPostHttpMethod postHttpMethod, 
-            IJsonHttpStreamResponseWritter<UsernamePassword, AuthenticateResponse> jsonHttpStreamResponseWritter)
+            IJsonResponseWritter<UsernamePassword, AuthenticateResponse> jsonResponseWritter)
         {
         //    bootstrapper.Bootstrap<UsernamePassword, AuthenticateResponse>(this, postHttpMethod, "authenticate",
         //        unbind: (httpRequest, messages) =>

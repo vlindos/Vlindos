@@ -17,20 +17,20 @@ namespace Framework.Web.DemoApp.Endpoints.ConfigAdder
             IServiceRequestHandler serviceRequestHandler, 
             IRequestPerformer requestPerformer,
             IHttpRequestUnbinder httpRequestUnbinder,
-            IJsonHttpStreamResponseWritter<int, ServiceResponse> jsonHttpStreamResponseWritter)
+            IJsonResponseWritter<int, ServiceResponse> jsonResponseWritter)
         {
             Filters = new List<IHttpEndpointFilter> { serviceRequestHandler };
             HttpMethods = new IHttpMethod[] { postHttpMethod };
             HttpEndpoint = httpEndpoint;
             RequestPerformer = requestPerformer;
             HttpRequestUnbinder = httpRequestUnbinder;
-            HttpStreamResponseWritter = jsonHttpStreamResponseWritter;
+            ResponseWritter = jsonResponseWritter;
         }
 
         public IHttpMethod[] HttpMethods { get; set; }
         public IHttpEndpoint<int> HttpEndpoint { get; private set; }
         public IHttpRequestUnbinder<int> HttpRequestUnbinder { get; private set; }
-        public IHttpStreamResponseWritter<int, ServiceResponse> HttpStreamResponseWritter { get; private set; }
+        public IResponseWritter<int, ServiceResponse> ResponseWritter { get; private set; }
         public IRequestPerformer<ServiceResponse> RequestPerformer { get; private set; }
         public List<IHttpEndpointFilter> Filters { get; private set; }
     }
