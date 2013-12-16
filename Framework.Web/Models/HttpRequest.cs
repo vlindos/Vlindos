@@ -3,7 +3,6 @@ using System.Collections.Specialized;
 using Framework.Web.Application.HttpEndpoint;
 using Framework.Web.Models.FiltersObjects;
 using Framework.Web.Models.HttpMethods;
-using Vlindos.Common.Extensions.IEnumerable;
 using Vlindos.Common.Streams;
 
 namespace Framework.Web.Models
@@ -11,9 +10,10 @@ namespace Framework.Web.Models
     public interface IHttpRequestFactory
     {
         IHttpRequest<TRequest> GetHttpRequest<TRequest>();
+        IHttpRequest GetHttpRequest();
     }
 
-    public interface IHttpRequest<TRequest>
+    public interface IHttpRequest
     {
         IHttpMethod HttpMethod { get; set; }
 
@@ -31,8 +31,6 @@ namespace Framework.Web.Models
 
         IInputStream InputStream { get; set; }
 
-        TRequest Request { get; set; }
-        
         Dictionary<string, string> Session { get; set; }
 
         IServerSideHttpEndpoint Endpoint { get; set; }
@@ -40,14 +38,13 @@ namespace Framework.Web.Models
         Dictionary<IFiltersObjectsGroup, List<object>> FiltersObjects { get; }
     }
 
-    public class HttpRequest<TRequest> : IHttpRequest<TRequest>
+    public interface IHttpRequest<TRequest> : IHttpRequest
     {
-        public HttpRequest(IEnumerable<IFiltersObjectsGroup> filtersObjectsGroups)
-        {
-            FiltersObjects = new Dictionary<IFiltersObjectsGroup, List<object>>();
-            filtersObjectsGroups.ForEach(x => FiltersObjects.Add(x, new List<object>()));
-        }
+        TRequest Request { get; set; }
+    }
 
+    public class HttpRequest : IHttpRequest
+    {
         public IHttpMethod HttpMethod { get; set; }
 
         public IEnumerable<byte[]> PostData { get; set; }
@@ -64,12 +61,37 @@ namespace Framework.Web.Models
 
         public IInputStream InputStream { get; set; }
 
-        public TRequest Request { get; set; }
-
-        public Dictionary<string, string> Session { get; set; }
-
         public IServerSideHttpEndpoint Endpoint { get; set; }
 
-        public Dictionary<IFiltersObjectsGroup, List<object>> FiltersObjects { get; private set; }
+        private Dictionary<string, string> _session;
+        public Dictionary<string, string> Session
+        {
+            get
+            {
+                return _session ?? (_session = new Dictionary<string, string>());
+            }
+            set
+            {
+                _session = value;
+            }
+        }
+
+        private Dictionary<IFiltersObjectsGroup, List<object>> _filtersObjects;
+        public Dictionary<IFiltersObjectsGroup, List<object>> FiltersObjects
+        {
+            get
+            {
+                return _filtersObjects ?? (_filtersObjects = new Dictionary<IFiltersObjectsGroup, List<object>>());
+            }
+            set
+            {
+                _filtersObjects = value;
+            }
+        }
+    }
+
+    public class HttpRequest<TRequest> : HttpRequest, IHttpRequest<TRequest>
+    {
+        public TRequest Request { get; set; }
     }
 }

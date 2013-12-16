@@ -1,31 +1,9 @@
 ﻿using System;
 using System.IO;
-using System.Security.Cryptography.X509Certificates;
-using Framework.Web.Application.HttpEndpoint;
 using Framework.Web.Models;
 
 namespace Framework.Web.HtmlPages
 {
-    public interface IPagesRepositoryProvider
-    {
-        string Path { get; set; }
-    }
-
-    public interface IHtmlResponseWritter<TRequest, TResponse> : IResponseWritter<TRequest, TResponse>
-        where TResponse : IHtmlResponse
-    {
-    }
-
-    public interface IHtmlPage
-    {
-        byte[] Read();
-    }
-
-    public interface IHtmlPageManager
-    {
-        IHtmlPage GetHtmlPage(string path);
-    }
-
     public class HtmlResponseWritter<TRequest, TResponse> : IHtmlResponseWritter<TRequest, TResponse>
         where TResponse : IHtmlResponse
     {
@@ -58,10 +36,5 @@ namespace Framework.Web.HtmlPages
                 // httpResponse.OutputStream.Write(bytes, _htmlPageWriteTimeoutProvider.Timeout);
             }
         }
-    }
-
-    public interface IHtmlPageWriteTimeoutProvider
-    {
-        TimeSpan Timeout { get; set; }
     }
 }

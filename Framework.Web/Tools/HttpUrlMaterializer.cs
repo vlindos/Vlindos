@@ -8,34 +8,34 @@ namespace Framework.Web.Tools
 {
     public interface IHttpUrlMaterializer
     {
-        Uri MaterializeHttpUrl<TRequest>(IHttpRequest<TRequest> requestContext);
+        Uri MaterializeHttpUrl(IHttpRequest httpRequest);
     }
 
     public class HttpUrlMaterializer : IHttpUrlMaterializer
     {
-        public Uri MaterializeHttpUrl<TRequest>(IHttpRequest<TRequest> requestContext)
+        public Uri MaterializeHttpUrl(IHttpRequest httpRequest)
         {	
             var sb = new StringBuilder();
-            var rawUrl = requestContext.RawUrl;
-            if (requestContext.RoutesValues != null)
+            var rawUrl = httpRequest.RawUrl;
+            if (httpRequest.RoutesValues != null)
             {
-                rawUrl = requestContext.RoutesValues.AllKeys.Aggregate(
+                rawUrl = httpRequest.RoutesValues.AllKeys.Aggregate(
                     rawUrl, 
                     (current, routesValueKey) => current.Replace("{" + routesValueKey + "}", 
-                        requestContext.RoutesValues[routesValueKey]));
+                        httpRequest.RoutesValues[routesValueKey]));
             }
             sb.Append(rawUrl);
-            if (requestContext.QueryString != null)
+            
+            if (httpRequest.QueryString == null) return new Uri(sb.ToString());
+
+            for (var i = 0; i < httpRequest.QueryString.Count; i++)
             {
-                for (var i = 0; i < requestContext.QueryString.Count; i++)
-                {
-                    var key = requestContext.QueryString.AllKeys[i];
-                    // http://stackoverflow.com/questions/575440/url-encoding-using-c-sharp
-                    sb.AppendFormat("{0}{1}={2}", 
-                        (i == 0 ? "?" : "&"), key, WebUtility.UrlEncode(requestContext.QueryString[key]));
-                }
+                var key = httpRequest.QueryString.AllKeys[i];
+                // http://stackoverflow.com/questions/575440/url-encoding-using-c-sharp
+                sb.AppendFormat("{0}{1}={2}", 
+                    (i == 0 ? "?" : "&"), key, WebUtility.UrlEncode(httpRequest.QueryString[key]));
             }
-	            
+
             return new Uri(sb.ToString());
         }
     }

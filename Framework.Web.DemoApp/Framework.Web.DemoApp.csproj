@@ -47,6 +47,8 @@
     <Compile Include="Application.cs" />
     <Compile Include="Endpoints\Authenticate\AuthenticateResponse.cs" />
     <Compile Include="Endpoints\Authenticate\AuthenticateRestEndpoint.cs" />
+    <Content Include="Endpoints\HtmlPage\NotFoundPage.html" />
+    <Compile Include="Endpoints\HtmlPage\NotFoundPage.cs" />
     <Compile Include="Filters\AuthenticationFilter.cs" />
     <Compile Include="Endpoints\Sample\EchoResponse.cs" />
     <Compile Include="Endpoints\Sample\SampleRestEndpoint.cs" />
@@ -70,6 +72,10 @@
     <ProjectReference Include="..\Framework.Logging\Framework.Logging.csproj">
       <Project>{7909B1AB-545D-4938-B4D6-BA7E2AC13F96}</Project>
       <Name>Framework.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework.Web.HtmlPages\Framework.Web.HtmlPages.csproj">
+      <Project>{169E4C40-C2FF-44FB-98BE-A0AE7FF44FA8}</Project>
+      <Name>Framework.Web.HtmlPages</Name>
     </ProjectReference>
     <ProjectReference Include="..\Framework.Web.Service\Framework.Web.Service.csproj">
       <Project>{D32855AC-02DF-4D43-983E-9A3711C578A2}</Project>

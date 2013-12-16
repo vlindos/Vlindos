@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using System.Net;
 using Framework.Web.Application.HttpEndpoint;
-using Framework.Web.Models;
 using Framework.Web.Models.HttpMethods;
 using Framework.Web.Service;
 using Framework.Web.Service.Rest.Models;
@@ -13,7 +10,6 @@ namespace Framework.Web.DemoApp.Endpoints.Authenticate
 {
     public interface IAuthenticateRestEndpoint : IServerSideHttpEndpoint<UsernamePassword, AuthenticateResponse>
     {
-        
     }
 
     public class AuthenticateRestEndpoint : RestEndpointBase<UsernamePassword, AuthenticateResponse>, IAuthenticateRestEndpoint
