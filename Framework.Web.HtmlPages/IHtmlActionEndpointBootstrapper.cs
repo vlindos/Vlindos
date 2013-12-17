@@ -8,10 +8,11 @@ namespace Framework.Web.HtmlPages
     public interface IHtmlActionEndpointBootstrapper
     {
         void Bootstrap<TResponse>(
-            IServerSideHttpEndpoint notFoundEndpoint, 
-            IGetHttpMethod getHttpMethod, 
-            string url,
-            Action<IHttpRequest<object>, IHttpResponse<TResponse>> perform)
+            IServerSideHttpEndpoint serverSideHttpEndpoint, 
+            IHttpMethod httpMethod,
+            string routeUrl,
+            IHtmlPage<object, TResponse> page, 
+            Action<IHttpRequest<object>, IHttpResponse<TResponse>> controller = null)
             where TResponse : IHtmlPageViewData;
     }
 }

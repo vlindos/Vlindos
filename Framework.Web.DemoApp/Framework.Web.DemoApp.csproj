@@ -47,8 +47,10 @@
     <Compile Include="Application.cs" />
     <Compile Include="Endpoints\Authenticate\AuthenticateResponse.cs" />
     <Compile Include="Endpoints\Authenticate\AuthenticateRestEndpoint.cs" />
-    <Content Include="Endpoints\HtmlPage\NotFoundPage.html" />
-    <Compile Include="Endpoints\HtmlPage\NotFoundPage.cs" />
+    <Content Include="Endpoints\SimpleHtmlPage\SimpleHtmlPage.html" />
+    <Compile Include="Endpoints\SimpleHtmlPage\ISimpleHtmlPage.cs" />
+    <Compile Include="Endpoints\SimpleHtmlPage\SimpleHtmlPageEndpoint.cs" />
+    <Compile Include="Endpoints\SimpleHtmlPage\SimplePageViewData.cs" />
     <Compile Include="Filters\AuthenticationFilter.cs" />
     <Compile Include="Endpoints\Sample\EchoResponse.cs" />
     <Compile Include="Endpoints\Sample\SampleRestEndpoint.cs" />

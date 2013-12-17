@@ -1,7 +1,13 @@
-﻿namespace Framework.Web.HtmlPages
+﻿using Framework.Web.Models;
+
+namespace Framework.Web.HtmlPages
 {
-    public interface IHtmlPage
+    public interface IHtmlPage<TRequest, TResponse>
+        where TResponse : IHtmlPageViewData
     {
-        byte[] Read();
+        void RenderPage(
+            IRenderer renderer,
+            IHttpRequest<TRequest> httpRequest,
+            IHttpResponse<TResponse> httpResponse);
     }
 }
