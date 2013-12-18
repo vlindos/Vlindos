@@ -3,7 +3,7 @@ namespace Framework.Web.DemoApp.Endpoints.SimpleHtmlPageEndpoint
 {
     public class SimpleHtmlPage : ISimpleHtmlPage
     {
-        public void RenderPage(IRenderer pageRenderer, IHttpRequest httpRequest, IHttpResponse<SimpleData> httpResponse)
+        public void RenderPage(IRenderer<object, SimpleData> pageRenderer, IHttpRequest httpRequest, IHttpResponse<SimpleData> httpResponse)
         {
 -->
 <html>

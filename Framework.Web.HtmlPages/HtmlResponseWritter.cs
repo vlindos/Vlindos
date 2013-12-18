@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using Framework.Web.Models;
+﻿using Framework.Web.Models;
 
 namespace Framework.Web.HtmlPages
 {
