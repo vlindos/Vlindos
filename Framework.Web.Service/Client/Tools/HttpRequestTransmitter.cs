@@ -5,17 +5,13 @@ using System.Net;
 using Framework.Web.Models;
 using Framework.Web.Tools;
 using Vlindos.Common.Logging;
-using Vlindos.Common.Models;
 
 namespace Framework.Web.Service.Client.Tools
 {
     public interface IHttpRequestTransmitter
     {
-        bool TransmitHttpRequest<TRequest>(
-            IHttpRequest<TRequest> httpRequest,
-            IUsernamePassword usernamePassword,
-            out StreamReader streamReader,
-            List<string> messages);
+        bool TransmitHttpRequest(HttpRequest httpRequest, List<string> messages,
+            out StreamReader streamReader);
     }
 
     public class HttpRequestTransmitter : IHttpRequestTransmitter
@@ -28,12 +24,9 @@ namespace Framework.Web.Service.Client.Tools
             _logger = logger;
             _httpUrlMaterializer = httpUrlMaterializer;
         }
-
-        public bool TransmitHttpRequest<TRequest>(
-            IHttpRequest<TRequest> httpRequest, 
-            IUsernamePassword usernamePassword,
-            out StreamReader streamReader, 
-            List<string> messages)
+        
+        public bool TransmitHttpRequest(HttpRequest httpRequest, List<string> messages,
+            out StreamReader streamReader)
         {
             var url = _httpUrlMaterializer.MaterializeHttpUrl(httpRequest);
             _logger.Debug("Transporting request to '{0}'...", url);
@@ -42,11 +35,6 @@ namespace Framework.Web.Service.Client.Tools
             {
                 var webRequest = (HttpWebRequest)WebRequest.Create(url);
                 webRequest.Method = httpRequest.HttpMethod.ToString();
-                if (!string.IsNullOrWhiteSpace(usernamePassword.Username))
-                {
-                    webRequest.Credentials = new NetworkCredential(usernamePassword.Username,
-                                                                   usernamePassword.Password);
-                }
                 if (httpRequest.Headers != null && httpRequest.Headers.Count > 0)
                 {
                     foreach (var headerKey in httpRequest.Headers.AllKeys)
