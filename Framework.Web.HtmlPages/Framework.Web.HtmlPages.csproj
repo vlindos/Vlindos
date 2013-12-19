@@ -40,16 +40,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Readme.txt" />
-    <Compile Include="HtmlActionEndpointBase.cs" />
-    <Compile Include="HtmlResponseWritter.cs" />
+    <Compile Include="HtmlPageEndpointBase.cs" />
     <Compile Include="IHtmlActionEndpointBootstrapper.cs" />
     <Compile Include="IHtmlPage.cs" />
     <Compile Include="IHtmlPageViewData.cs" />
-    <Compile Include="IHtmlPageWriteTimeoutProvider.cs" />
+    <Compile Include="IHtmlResponseWritterTimeoutProvider.cs" />
     <Compile Include="IHtmlResponse.cs" />
     <Compile Include="IHtmlResponseWritter.cs" />
     <Compile Include="IRenderer.cs" />
-    <Compile Include="IPagesRepositoryProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

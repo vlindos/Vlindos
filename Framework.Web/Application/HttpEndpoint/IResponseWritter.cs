@@ -2,8 +2,8 @@
 
 namespace Framework.Web.Application.HttpEndpoint
 {
-    public interface IResponseWritter<TRequest, TResponse>
+    public interface IResponseWritter
     {
-        void WriteResponse(IHttpRequest<TRequest> httpRequest, IHttpResponse<TResponse> httpResponse);
+        void WriteResponse(HttpRequest httpRequest, HttpResponse httpResponse);
     }
 }

@@ -5,7 +5,7 @@ using Framework.Web.Models.HttpMethods;
 
 namespace Framework.Web.DemoApp.Endpoints.SimpleHtmlPage
 {
-    public class SimpleHtmlPageEndpoint : HtmlActionEndpointBase<object, IHtmlPageViewData>
+    public class SimpleHtmlPageEndpoint : HtmlPageEndpointBase<object, IHtmlPageViewData>
     {
         public SimpleHtmlPageEndpoint(
             IHtmlActionEndpointBootstrapper bootstrapper,

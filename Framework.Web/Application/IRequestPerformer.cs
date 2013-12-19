@@ -1,7 +1,7 @@
 namespace Framework.Web.Application
 {
-    public interface IRequestPerformer<out TResponse>
+    public interface IRequestPerformer
     {
-        TResponse Perform();
+        void Perform();
     }
 }

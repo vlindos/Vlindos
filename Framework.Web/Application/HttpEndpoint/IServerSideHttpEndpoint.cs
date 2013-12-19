@@ -5,17 +5,13 @@ namespace Framework.Web.Application.HttpEndpoint
 {
     public interface IServerSideHttpEndpoint
     {
-    }
+        IHttpEndpoint HttpEndpoint { get; }
 
-    public interface IServerSideHttpEndpoint<TRequest, TResponse> : IServerSideHttpEndpoint
-    {
-        IHttpEndpoint<TRequest> HttpEndpoint { get; }
+        IHttpRequestUnbinder HttpRequestUnbinder { get; }
 
-        IHttpRequestUnbinder<TRequest> HttpRequestUnbinder { get; }
+        IResponseWritter ResponseWritter { get; }
 
-        IResponseWritter<TRequest, TResponse> ResponseWritter { get; }
-
-        IRequestPerformer<TResponse> RequestPerformer { get; }
+        IRequestPerformer RequestPerformer { get; }
 
         List<IHttpEndpointFilter> Filters { get; } 
     }

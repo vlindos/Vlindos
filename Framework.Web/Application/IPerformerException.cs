@@ -6,10 +6,9 @@ namespace Framework.Web.Application
 {
     public interface IPerformerException
     {
-        void OnException<TRequest, TResponse>(
-                         IHttpRequest<TRequest> request, 
-                         IHttpResponse<TResponse> httpResponse,
-                         IServerSideHttpEndpoint<TRequest, TResponse> endpointDescriptor, 
+        void OnException(HttpRequest request, 
+                         HttpResponse httpResponse,
+                         IServerSideHttpEndpoint endpointDescriptor, 
                          Exception exception);
     }
 }

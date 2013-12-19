@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using System.Xml.Serialization;
 
-namespace Vlindos.Web.Tools
+namespace Framework.Web.Tools
 {
     public interface ICachedResponseXmlSerializers
     {

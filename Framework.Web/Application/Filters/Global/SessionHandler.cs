@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Framework.Web.Application.Session;
 using Framework.Web.Models;
 using Framework.Web.Models.FiltersObjects;
@@ -26,7 +25,7 @@ namespace Framework.Web.Application.Filters.Global
             _sessionValueReader = sessionValueReader;
         }
     
-        public bool AfterPerform<TRequest, TResponse>(IHttpRequest<TRequest> request, IHttpResponse<TResponse> httpResponse)
+        public bool AfterPerform(HttpRequest request, HttpResponse httpResponse)
         {
             for (var i = request.Headers.Count - 1; i >= 0; i--)
             {
@@ -47,7 +46,7 @@ namespace Framework.Web.Application.Filters.Global
             return true;
         }
 
-        public bool BeforePerform<TRequest, TResponse>(IHttpRequest<TRequest> request, IHttpResponse<TResponse> httpResponse)
+        public bool BeforePerform(HttpRequest request, HttpResponse httpResponse)
         {
             var sessionValue = request.FiltersObjects[_sessionObjectsGroup].OfType<SessionValue>().FirstOrDefault();
             if (sessionValue == null) return false;

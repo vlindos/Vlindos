@@ -6,7 +6,7 @@ namespace Framework.Web.HtmlPages
         where TResponse : IHtmlPageViewData
     {
         void RenderPage(
-            IRenderer<object, TResponse> renderer,
+            IRenderer<TRequest, TResponse> renderer,
             IHttpRequest<TRequest> httpRequest,
             IHttpResponse<TResponse> httpResponse);
     }

@@ -8,12 +8,12 @@ namespace Framework.Web.Tools
 {
     public interface IHttpUrlMaterializer
     {
-        Uri MaterializeHttpUrl(IHttpRequest httpRequest);
+        Uri MaterializeHttpUrl(HttpRequest httpRequest);
     }
 
     public class HttpUrlMaterializer : IHttpUrlMaterializer
     {
-        public Uri MaterializeHttpUrl(IHttpRequest httpRequest)
+        public Uri MaterializeHttpUrl(HttpRequest httpRequest)
         {	
             var sb = new StringBuilder();
             var rawUrl = httpRequest.RawUrl;

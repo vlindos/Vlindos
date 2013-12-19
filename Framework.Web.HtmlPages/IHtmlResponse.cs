@@ -1,7 +1,7 @@
 namespace Framework.Web.HtmlPages
 {
-    public interface IHtmlResponse
+    public interface IHtmlResponse<TRequest>
     {
-        string PageName { get; set; }
+        IHtmlPage<TRequest, IHtmlPageViewData> HtmlPage { get; set; }
     }
 }

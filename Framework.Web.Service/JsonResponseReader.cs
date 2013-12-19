@@ -5,13 +5,13 @@ using Framework.Web.Models;
 
 namespace Framework.Web.Service
 {
-    public interface IJsonHttpStreamResponseReader<TResponse> : IHttpStreamResponseReader<TResponse>
+    public interface IJsonHttpStreamResponseReader : IHttpStreamResponseReader
     {
     }
 
-    public class JsonHttpStreamResponseReader<TResponse> : IJsonHttpStreamResponseReader<TResponse>
+    public class JsonHttpStreamResponseReader : IJsonHttpStreamResponseReader
     {
-        public bool Read(IHttpResponse<TResponse> httpResponse, List<string> messages)
+        public bool Read(HttpResponse httpResponse, List<string> messages)
         {
             httpResponse.Response = default(TResponse);
             try

@@ -1,11 +1,11 @@
 ﻿namespace Framework.Web.Application.HttpEndpoint
 {
-    public interface IClientSideHttpEndpoint<TRequest, TResponse>
+    public interface IClientSideHttpEndpoint
     {
-        IHttpEndpoint<TRequest> HttpEndpoint { get; }
+        IHttpEndpoint HttpEndpoint { get; }
 
-        IHttpRequestBuilder<TRequest> HttpRequestBuilder { get; }
+        IHttpRequestBuilder HttpRequestBuilder { get; }
 
-        IHttpStreamResponseReader<TResponse> HttpStreamResponseReader { get; }
+        IHttpStreamResponseReader HttpStreamResponseReader { get; }
     }
 }

@@ -6,10 +6,10 @@ namespace Framework.Web.Application
 {
     public class DefaultPerfomerException : IPerformerException
     {
-        public void OnException<TRequest, TResponse>(
-            IHttpRequest<TRequest> request, 
-            IHttpResponse<TResponse> httpResponse,
-            IServerSideHttpEndpoint<TRequest, TResponse> endpointDescriptor, 
+        public void OnException(
+            HttpRequest request, 
+            HttpResponse httpResponse,
+            IServerSideHttpEndpoint endpointDescriptor, 
             Exception exception)
         {
             throw new NotImplementedException();

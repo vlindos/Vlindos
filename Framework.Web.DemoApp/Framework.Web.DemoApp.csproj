@@ -47,7 +47,7 @@
     <Compile Include="Application.cs" />
     <Compile Include="Endpoints\Authenticate\AuthenticateResponse.cs" />
     <Compile Include="Endpoints\Authenticate\AuthenticateRestEndpoint.cs" />
-    <Content Include="Endpoints\SimpleHtmlPage\SimpleHtmlPage.html" />
+    <Content Include="Endpoints\SimpleHtmlPage\SimpleHtmlPage.cs.html" />
     <Compile Include="Endpoints\SimpleHtmlPage\ISimpleHtmlPage.cs" />
     <Compile Include="Endpoints\SimpleHtmlPage\SimpleHtmlPageEndpoint.cs" />
     <Compile Include="Endpoints\SimpleHtmlPage\SimplePageViewData.cs" />

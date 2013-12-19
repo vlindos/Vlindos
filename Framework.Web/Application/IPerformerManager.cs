@@ -4,8 +4,7 @@ namespace Framework.Web.Application
 {
     public interface IPerformerManager
     {
-        TPerformer GetPerformer<TPerformer, TRequest, TResponse>(
-            IHttpRequest<TRequest> request, IHttpResponse<TResponse> httpResponse)
-            where TPerformer : IRequestPerformer<TResponse>;
+        T GetPerformer<T>(HttpRequest request, HttpResponse httpResponse)
+            where T : IRequestPerformer;
     }
 }

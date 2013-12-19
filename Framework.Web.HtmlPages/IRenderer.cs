@@ -1,5 +1,11 @@
 namespace Framework.Web.HtmlPages
 {
+    public interface IRendererFactory
+    {
+        IRenderer<TRequest, TResponse> GetRenderer<TRequest, TResponse>()
+            where TResponse : IHtmlPageViewData;
+    }
+
     public interface IRenderer<TRequest, TResponse>
         where TResponse : IHtmlPageViewData
     {

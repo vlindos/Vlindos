@@ -2,7 +2,7 @@
 
 namespace Framework.Web.HtmlPages
 {
-    public interface IHtmlPageWriteTimeoutProvider
+    public interface IHtmlResponseWritterTimeoutProvider
     {
         TimeSpan Timeout { get; set; }
     }

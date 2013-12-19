@@ -1,6 +1,10 @@
 namespace Framework.Web.Models.HttpMethods
 {
-    public class HeadHttpMethod : IHttpMethod
+    public interface IHeadHttpMethod : IHttpMethod
+    {
+    }
+
+    public class HeadHttpMethod : IHeadHttpMethod
     {
         public string MethodName { get { return "HEAD"; } }
     }

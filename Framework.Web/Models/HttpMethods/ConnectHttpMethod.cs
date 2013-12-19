@@ -1,6 +1,10 @@
 namespace Framework.Web.Models.HttpMethods
 {
-    public class ConnectHttpMethod : IHttpMethod
+    public interface IConnectHttpMethod : IHttpMethod
+    {
+    }
+
+    public class ConnectHttpMethod : IConnectHttpMethod
     {
         public string MethodName { get { return "CONNECT"; } }
     }

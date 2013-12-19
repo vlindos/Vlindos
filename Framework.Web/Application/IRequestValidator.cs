@@ -2,8 +2,8 @@
 
 namespace Framework.Web.Application
 {
-    public interface IRequestValidator<in T>
+    public interface IRequestValidator
     {
-        bool Validate(T request, List<string> messages);
+        bool Validate<T>(T request, List<string> messages);
     }
 }

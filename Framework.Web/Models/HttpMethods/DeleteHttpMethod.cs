@@ -1,6 +1,10 @@
 namespace Framework.Web.Models.HttpMethods
 {
-    public class DeleteHttpMethod : IHttpMethod
+    public interface IDeleteHttpMethod : IHttpMethod
+    {
+    }
+
+    public class DeleteHttpMethod : IDeleteHttpMethod
     {
         public string MethodName { get { return "DELETE"; } }
     }

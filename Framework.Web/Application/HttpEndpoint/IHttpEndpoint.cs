@@ -2,12 +2,12 @@
 
 namespace Framework.Web.Application.HttpEndpoint
 {
-    public interface IHttpEndpoint<in TRequest>
+    public interface IHttpEndpoint
     {
         IHttpMethod[] HttpMethods { get; set; }
 
         string HttpUrlDescription { get; }
 
-        IRequestValidator<TRequest> RequestValidator { get; }
+        IRequestValidator RequestValidator { get; }
     }
 }

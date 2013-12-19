@@ -16,11 +16,10 @@ namespace Framework.Web.Application
             _requestFiltersObjectsGroup = requestFiltersObjectsGroup;
         }
 
-        public TPerformer GetPerformer<TPerformer, TRequest, TResponse>(
-            IHttpRequest<TRequest> request, IHttpResponse<TResponse> httpResponse) 
-            where TPerformer : IRequestPerformer<TResponse>
+        public T GetPerformer<T>(HttpRequest request, HttpResponse httpResponse) 
+            where T : IRequestPerformer
         {
-            return _containerAccessor.Container.Resolve<TPerformer>(
+            return _containerAccessor.Container.Resolve<T>(
                 request.FiltersObjects[_requestFiltersObjectsGroup]);
         }
     }

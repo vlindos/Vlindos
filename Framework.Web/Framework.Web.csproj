@@ -75,7 +75,7 @@
     <Compile Include="Application\Filters\IBeforePerformFilter.cs" />
     <Compile Include="Application\Filters\Global\IBeforePerformGlobalFilter.cs" />
     <Compile Include="Models\HttpRequest.cs" />
-    <Compile Include="Models\IHttpResponse.cs" />
+    <Compile Include="Models\HttpResponse.cs" />
     <Compile Include="Models\HttpMethods\IHttpMethod.cs" />
     <Compile Include="Models\StandardHeaders.cs" />
     <Compile Include="Tools\IFormDataReader.cs" />
