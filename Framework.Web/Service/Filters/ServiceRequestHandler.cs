@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Net;
-using Framework.Web.Application.HttpEndpoint;
 using Framework.Web.Application.HttpEndpoint.Filters;
 using Framework.Web.Models;
 using Framework.Web.Service.Models;
@@ -15,12 +14,10 @@ namespace Framework.Web.Service.Filters
     {
         public int Priority { get { return 5000; } }
 
-        public bool BeforePerform<TRequest, TResponse>(
-            IHttpRequest<TRequest> httpRequest, 
-            IHttpResponse<TResponse> httpResponse)
+        public bool BeforePerform(HttpRequest httpRequest, HttpResponse httpResponse)
         {
             if (typeof(TResponse).IsAssignableFrom(typeof(IServiceResponse))) return true;
-            var httpEndpoint = httpRequest.Endpoint as IServerSideHttpEndpoint<TRequest, TResponse>;
+            var httpEndpoint = httpRequest.Endpoint;
             // is request having IServiceResponse?
             if (httpEndpoint == null) return true;
 

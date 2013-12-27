@@ -11,25 +11,25 @@ using Vlindos.InversionOfControl;
 
 namespace Framework.Web.Service.Rest.Tools
 {
-    public delegate bool UnbinderDelegate<TRequest>(IHttpRequest<TRequest> httpRequest, IList<string> messages);
+    public delegate bool UnbinderDelegate<in TRequest>(HttpRequest httpRequest, IList<string> messages, TRequest request);
     public interface IRestEndpointBootstrapper
     {
         void Bootstrap<TRequest, TResponse>(
-            RestEndpointBase<TRequest, TResponse> restEndpoint,
+            RestEndpointBase<TRequest> restEndpoint,
             IHttpMethod httpMethod, string route,
             List<IHttpEndpointFilter> filters = null,
             UnbinderDelegate<TRequest> unbind = null,
             Func<TRequest, List<string>, bool> validate = null,
-            Action<IHttpRequest<TRequest>, IHttpResponse<TResponse>> perform = null,
-            Action<IHttpRequest<TRequest>, IHttpResponse<TResponse>> responseWritter = null)
+            Action<HttpRequest, HttpResponse> perform = null,
+            Action<HttpRequest, HttpResponse> responseWritter = null)
             where TResponse : IServiceResponse;
         void Bootstrap<TRequest, TResponse>(
-            RestEndpointBase<TRequest, TResponse> restEndpoint, 
+            RestEndpointBase<TRequest> restEndpoint, 
             IHttpEndpoint<TRequest> httpEndpoint,
             List<IHttpEndpointFilter> filters = null,
             UnbinderDelegate<TRequest> unbind = null,
-            Action<IHttpRequest<TRequest>, IHttpResponse<TResponse>> perform = null,
-            Action<IHttpRequest<TRequest>, IHttpResponse<TResponse>> responseWritter = null)
+            Action<HttpRequest, HttpResponse> perform = null,
+            Action<HttpRequest, HttpResponse> responseWritter = null)
             where TResponse : IServiceResponse;
     }
 
@@ -43,7 +43,7 @@ namespace Framework.Web.Service.Rest.Tools
         }
 
         public void Bootstrap<TRequest, TResponse>(
-            RestEndpointBase<TRequest, TResponse> restEndpoint, 
+            RestEndpointBase<TRequest> restEndpoint, 
             IHttpMethod httpMethod, string route, 
             IRequestValidator<TRequest> validator = null) 
             where TResponse : IServiceResponse
@@ -51,29 +51,29 @@ namespace Framework.Web.Service.Rest.Tools
         }
 
         public void Bootstrap<TRequest, TResponse>(
-            RestEndpointBase<TRequest, TResponse> restEndpoint, 
+            RestEndpointBase<TRequest> restEndpoint, 
             IHttpMethod httpMethod, string route,
             List<IHttpEndpointFilter> filters = null, 
             UnbinderDelegate<TRequest> unbind = null, 
             Func<TRequest, List<string>, bool> validate = null,
-            Action<IHttpRequest<TRequest>, IHttpResponse<TResponse>> perform = null,
-            Action<IHttpRequest<TRequest>, IHttpResponse<TResponse>> responseWritter = null) 
+            Action<HttpRequest, HttpResponse> perform = null,
+            Action<HttpRequest, HttpResponse> responseWritter = null) 
             where TResponse : IServiceResponse
         {
             throw new NotImplementedException();
         }
 
         public void Bootstrap<TRequest, TResponse>(
-            RestEndpointBase<TRequest, TResponse> restEndpoint, 
+            RestEndpointBase<TRequest> restEndpoint, 
             IHttpEndpoint<TRequest> httpEndpoint, 
             List<IHttpEndpointFilter> filters = null, 
             UnbinderDelegate<TRequest> unbind = null,
-            Action<IHttpRequest<TRequest>, IHttpResponse<TResponse>> perform = null,
-            Action<IHttpRequest<TRequest>, IHttpResponse<TResponse>> responseWritter = null) 
+            Action<HttpRequest, HttpResponse> perform = null,
+            Action<HttpRequest, HttpResponse> responseWritter = null) 
             where TResponse : IServiceResponse
         {
             restEndpoint.ResponseWritter =
-                _containerAccessor.Container.Resolve<IJsonResponseWritter<TRequest, TResponse>>();
+                _containerAccessor.Container.Resolve<IJsonResponseWritter>();
             throw new NotImplementedException();
         }
     }

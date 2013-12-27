@@ -6,8 +6,6 @@ namespace Framework.Web.Application.HttpEndpoint
     {
         IHttpMethod[] HttpMethods { get; set; }
 
-        string HttpUrlDescription { get; }
-
-        IRequestValidator RequestValidator { get; }
+        string RouteDescription { get; }
     }
 }

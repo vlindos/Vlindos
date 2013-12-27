@@ -4,6 +4,6 @@ namespace Framework.Web.Application.Filters
 {
     public interface IBeforePerformFilter : IFilter
     {
-        bool BeforePerform(HttpRequest request, HttpResponse httpResponse);
+        bool BeforePerform(HttpContext httpContext);
     }
 }

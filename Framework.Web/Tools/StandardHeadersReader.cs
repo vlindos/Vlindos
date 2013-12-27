@@ -14,7 +14,6 @@ namespace Framework.Web.Tools
         {
             return new StandardHeaders
             {
-
             };
         }
     }

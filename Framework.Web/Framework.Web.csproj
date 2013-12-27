@@ -40,22 +40,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application\DefaultPerfomerException.cs" />
-    <Compile Include="Application\DefaultPerformerManager.cs" />
     <Compile Include="Application\Session\ISessionValueReader.cs" />
     <Compile Include="Application\Session\ISessionRepositoryManager.cs" />
     <Compile Include="Application\Filters\Global\SessionHandler.cs" />
     <Compile Include="Application\Session\MemorySessionRepository.cs" />
     <Compile Include="Application\Session\SessionIdSpecifier.cs" />
     <Compile Include="Application\IApplication.cs" />
-    <Compile Include="Application\IPerformerManager.cs" />
     <Compile Include="Application\Session\SessionValue.cs" />
+    <Compile Include="HtmlPages\HtmlPageEndpointBase.cs" />
+    <Compile Include="HtmlPages\IHtmlActionEndpointBootstrapper.cs" />
+    <Compile Include="HtmlPages\IHtmlPage.cs" />
+    <Compile Include="HtmlPages\IHtmlPageViewData.cs" />
+    <Compile Include="HtmlPages\IHtmlResponse.cs" />
+    <Compile Include="HtmlPages\IHtmlResponseWritter.cs" />
+    <Compile Include="HtmlPages\IHtmlResponseWritterTimeoutProvider.cs" />
+    <Compile Include="HtmlPages\IRenderer.cs" />
     <Compile Include="Models\ApplicationConfiguration.cs" />
     <Compile Include="Application\HttpEndpoint\Filters\IBeforePerformHttpEndpointFilter.cs" />
-    <Compile Include="Application\HttpEndpoint\IClientSideHttpEndpoint.cs" />
-    <Compile Include="Application\HttpEndpoint\IServerSideHttpEndpoint.cs" />
     <Compile Include="Models\FiltersObjects\RequestObjectsBag.cs" />
     <Compile Include="Models\FiltersObjects\IFiltersObjectsGroup.cs" />
     <Compile Include="Models\FiltersObjects\SessionObjectsGroup.cs" />
+    <Compile Include="Models\HttpContext.cs" />
     <Compile Include="Models\HttpMethods\ConnectHttpMethod.cs" />
     <Compile Include="Models\HttpMethods\DeleteHttpMethod.cs" />
     <Compile Include="Models\HttpMethods\GetHttpMethod.cs" />
@@ -64,6 +69,20 @@
     <Compile Include="Models\HttpMethods\PostHttpMethod.cs" />
     <Compile Include="Models\HttpMethods\PutHttpMethod.cs" />
     <Compile Include="Models\HttpMethods\TraceHttpMethod.cs" />
+    <Compile Include="Service\Client\Tools\HttpRequestTransmitter.cs" />
+    <Compile Include="Service\Client\Tools\Models\HttpSettings.cs" />
+    <Compile Include="Service\Filters\ServiceRequestHandler.cs" />
+    <Compile Include="Service\JsonResponseReader.cs" />
+    <Compile Include="Service\JsonResponseWritter.cs" />
+    <Compile Include="Service\Models\SerializationType.cs" />
+    <Compile Include="Service\Models\ServiceResponse.cs" />
+    <Compile Include="Service\Rest\DefaultPerformerManager.cs" />
+    <Compile Include="Service\Rest\IHttpStreamResponseReader.cs" />
+    <Compile Include="Service\Rest\IPerformerManager.cs" />
+    <Compile Include="Service\Rest\IRequestPerformer.cs" />
+    <Compile Include="Service\Rest\IRequestValidator.cs" />
+    <Compile Include="Service\Rest\Models\RestEndpointBase.cs" />
+    <Compile Include="Service\Rest\Tools\RestEndpointBootstrapper.cs" />
     <Compile Include="Tools\DefaultApplicationConfigurationGetter.cs" />
     <Compile Include="Tools\HttpUrlMaterializer.cs" />
     <Compile Include="Application\HttpEndpoint\Filters\IHttpEndpointFilter.cs" />
@@ -83,18 +102,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\IPerformerException.cs" />
+    <Compile Include="Application\IHttpException.cs" />
     <Compile Include="Application\HttpEndpoint\IHttpEndpoint.cs" />
     <Compile Include="Application\HttpEndpoint\IHttpRequestBuilder.cs" />
     <Compile Include="Application\HttpEndpoint\IHttpRequestUnbinder.cs" />
-    <Compile Include="Application\IRequestPerformer.cs" />
-    <Compile Include="Application\IRequestValidator.cs" />
     <Compile Include="Application\HttpEndpoint\IResponseWritter.cs" />
     <Compile Include="Tools\AcceptHeaderPrioritizer.cs" />
     <Compile Include="Tools\CachedXmlSerializers.cs" />
-    <Compile Include="Application\HttpEndpoint\IHttpStreamResponseReader.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="HtmlPages\Readme.txt" />
     <Content Include="Readme.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -107,7 +124,9 @@
       <Name>Framework</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="JavaScript\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -3,9 +3,8 @@ using Framework.Web.Models;
 
 namespace Framework.Web.Application.HttpEndpoint
 {
-    public interface IHttpRequestUnbinder 
+    public interface IHttpRequestUnbinder<TRequest>
     {
-        bool TryToUnbind<TRequest>(
-            HttpRequest httpRequest, IList<string> messages, out TRequest request);
+        bool TryToUnbind(HttpRequest httpRequest, IList<string> messages, out TRequest request);
     }
 }

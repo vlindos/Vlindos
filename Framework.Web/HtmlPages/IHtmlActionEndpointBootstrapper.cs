@@ -7,12 +7,12 @@ namespace Framework.Web.HtmlPages
 {
     public interface IHtmlActionEndpointBootstrapper
     {
-        void Bootstrap<TResponse>(
-            IServerSideHttpEndpoint serverSideHttpEndpoint, 
+        void Bootstrap<TRequest, TResponse>(
+            IServerSideHttpEndpoint<TRequest> serverSideHttpEndpoint, 
             IHttpMethod httpMethod,
             string routeUrl,
-            IHtmlPage<object, TResponse> page, 
-            Action<IHttpRequest<object>, IHttpResponse<TResponse>> controller = null)
+            IHtmlPage page, 
+            Action<HttpRequest, HttpResponse> controller = null)
             where TResponse : IHtmlPageViewData;
     }
 }

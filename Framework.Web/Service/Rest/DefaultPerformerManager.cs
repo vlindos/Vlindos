@@ -2,7 +2,7 @@
 using Framework.Web.Models.FiltersObjects;
 using Vlindos.InversionOfControl;
 
-namespace Framework.Web.Application
+namespace Framework.Web.Service.Rest
 {
     public class DefaultPerformerManager : IPerformerManager
     {
@@ -16,8 +16,8 @@ namespace Framework.Web.Application
             _requestFiltersObjectsGroup = requestFiltersObjectsGroup;
         }
 
-        public T GetPerformer<T>(HttpRequest request, HttpResponse httpResponse) 
-            where T : IRequestPerformer
+        public T GetPerformer<T, TResponse>(HttpContext httpContext) 
+            where T : IRequestPerformer<TResponse>
         {
             return _containerAccessor.Container.Resolve<T>(
                 request.FiltersObjects[_requestFiltersObjectsGroup]);

@@ -1,16 +1,11 @@
 ﻿using System;
-using Framework.Web.Application.HttpEndpoint;
 using Framework.Web.Models;
 
 namespace Framework.Web.Application
 {
-    public class DefaultPerfomerException : IPerformerException
+    public class DefaultPerfomerException : IHttpException
     {
-        public void OnException(
-            HttpRequest request, 
-            HttpResponse httpResponse,
-            IServerSideHttpEndpoint endpointDescriptor, 
-            Exception exception)
+        public void OnException(Exception exception, HttpContext httpContext)
         {
             throw new NotImplementedException();
         }

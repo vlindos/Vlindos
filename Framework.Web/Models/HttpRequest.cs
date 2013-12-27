@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
-using Framework.Web.Application.HttpEndpoint;
-using Framework.Web.Models.FiltersObjects;
 using Framework.Web.Models.HttpMethods;
 using Vlindos.Common.Streams;
 
@@ -25,31 +23,16 @@ namespace Framework.Web.Models
 
         public IInputStream InputStream { get; set; }
 
-        public IServerSideHttpEndpoint Endpoint { get; set; }
-
-        private Dictionary<string, string> _session;
-        public Dictionary<string, string> Session
+        private Dictionary<string, object> _session;
+        public Dictionary<string, object> Session
         {
             get
             {
-                return _session ?? (_session = new Dictionary<string, string>());
+                return _session ?? (_session = new Dictionary<string, object>());
             }
             set
             {
                 _session = value;
-            }
-        }
-
-        private Dictionary<IFiltersObjectsGroup, List<object>> _filtersObjects;
-        public Dictionary<IFiltersObjectsGroup, List<object>> FiltersObjects
-        {
-            get
-            {
-                return _filtersObjects ?? (_filtersObjects = new Dictionary<IFiltersObjectsGroup, List<object>>());
-            }
-            set
-            {
-                _filtersObjects = value;
             }
         }
     }

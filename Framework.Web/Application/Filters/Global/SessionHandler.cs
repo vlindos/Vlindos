@@ -25,11 +25,11 @@ namespace Framework.Web.Application.Filters.Global
             _sessionValueReader = sessionValueReader;
         }
     
-        public bool AfterPerform(HttpRequest request, HttpResponse httpResponse)
+        public bool AfterPerform(HttpContext httpContext)
         {
-            for (var i = request.Headers.Count - 1; i >= 0; i--)
+            for (var i = httpContext.HttpRequest.Headers.Count - 1; i >= 0; i--)
             {
-                var header = request.Headers[i];
+                var header = httpContext.HttpRequest.Headers[i];
                 var delimPosition = header.IndexOf(':');
                 if (delimPosition < 0) continue;
                 var key = header.Substring(0, delimPosition);
@@ -38,20 +38,24 @@ namespace Framework.Web.Application.Filters.Global
                 if (string.IsNullOrWhiteSpace(sessionValueString)) continue;
                 var sessionValue = _sessionValueReader.ReadSessionValue(sessionValueString);
                 if (sessionValue == null) continue;
-                request.FiltersObjects[_sessionObjectsGroup].Add(sessionValue);
-                request.Session = _sessionRepositoryManager.GetRepository(sessionValue);
+                httpContext.HttpRequest.FiltersObjects[_sessionObjectsGroup].Add(sessionValue);
+                httpContext.HttpRequest.Session = _sessionRepositoryManager.GetRepository(sessionValue);
                 break;
             }
 
             return true;
         }
 
-        public bool BeforePerform(HttpRequest request, HttpResponse httpResponse)
+        public bool BeforePerform(HttpContext httpContext)
         {
-            var sessionValue = request.FiltersObjects[_sessionObjectsGroup].OfType<SessionValue>().FirstOrDefault();
+            var sessionValue = httpContext
+                .HttpRequest
+                .FiltersObjects[_sessionObjectsGroup]
+                .OfType<SessionValue>()
+                .FirstOrDefault();
             if (sessionValue == null) return false;
-            httpResponse.Headers.Add(_sessionIdSpecifier.SessionId, sessionValue.ToString());
-            _sessionRepositoryManager.PersistSession(sessionValue, request.Session);
+            httpContext.HttpResponse.Headers.Add(_sessionIdSpecifier.SessionId, sessionValue.ToString());
+            _sessionRepositoryManager.PersistSession(sessionValue, httpContext.HttpRequest.Session);
 
             return true;
         }

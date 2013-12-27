@@ -60,6 +60,7 @@
     <Compile Include="Endpoints\ConfigAdder\ServerSideHttpEndpoint.cs" />
     <Compile Include="Endpoints\ConfigAdder\Config.cs" />
     <Compile Include="Endpoints\ConfigAdder\RequestPerformer.cs" />
+    <Compile Include="OptionsHttpMethod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -74,14 +75,6 @@
     <ProjectReference Include="..\Framework.Logging\Framework.Logging.csproj">
       <Project>{7909B1AB-545D-4938-B4D6-BA7E2AC13F96}</Project>
       <Name>Framework.Logging</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Framework.Web.HtmlPages\Framework.Web.HtmlPages.csproj">
-      <Project>{169E4C40-C2FF-44FB-98BE-A0AE7FF44FA8}</Project>
-      <Name>Framework.Web.HtmlPages</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Framework.Web.Service\Framework.Web.Service.csproj">
-      <Project>{D32855AC-02DF-4D43-983E-9A3711C578A2}</Project>
-      <Name>Framework.Web.Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\Framework.Web\Framework.Web.csproj">
       <Project>{6BC58CD0-6CB2-477F-8618-760989416E38}</Project>

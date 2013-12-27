@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Framework.Web.Application.HttpEndpoint;
 using Framework.Web.Models;
+using Framework.Web.Service.Rest;
 
 namespace Framework.Web.Service
 {
