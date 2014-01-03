@@ -13,10 +13,10 @@ namespace Framework.Web.HtmlPages
             string routeDescription,
             IHtmlPage<THtmlPageViewData> htmlPage,
             Func<HttpContext, THtmlPageViewData> perform = null,
-            IList<IBeforePerformAction> beforePerformActions = null,
-            IList<IAfterPerformAction> afterPerformActions = null);
+            List<IBeforePerformAction> beforePerformActions = null,
+            List<IAfterPerformAction> afterPerformActions = null);
     }
-    public delegate bool UnbinderDelegate<in TRequest>(HttpRequest httpRequest, IList<string> messages, TRequest request);
+    public delegate bool UnbinderDelegate<in TRequest>(HttpRequest httpRequest, List<string> messages, TRequest request);
     public interface IIHtmlPageEndpointBootstrapper<TRequest, THtmlPageViewData> 
     {
         void Bootstrap(
@@ -25,9 +25,9 @@ namespace Framework.Web.HtmlPages
             string routeDescription,
             IHtmlPage<THtmlPageViewData> htmlPage,
             UnbinderDelegate<TRequest> unbind,
-            Func<TRequest, IList<string>, bool> validate = null,
+            Func<TRequest, List<string>, bool> validate = null,
             Func<HttpContext, TRequest, THtmlPageViewData> perform = null,
-            IList<IBeforePerformAction> beforePerformActions = null,
-            IList<IAfterPerformAction> afterPerformActions = null);
+            List<IBeforePerformAction> beforePerformActions = null,
+            List<IAfterPerformAction> afterPerformActions = null);
     }
 }

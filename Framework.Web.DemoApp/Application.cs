@@ -1,7 +1,6 @@
 ﻿using System;
 using Framework.Web.Application;
 using Framework.Web.Tools;
-using Vlindos.Common.Logging;
 using Vlindos.InversionOfControl;
 using Vlindos.InversionOfControl.ConventionConfigurators;
 using Vlindos.Logging;
@@ -9,44 +8,43 @@ using Vlindos.Logging.Tools;
 
 namespace Framework.Web.DemoApp
 {
-    public class Application : IApplication, IContainerAccessor
+    public class Application : IApplication
     {
-        private ILogger _logger;
         private ISystem _loggingSystem;
-        public IContainer Container { get; private set; }
-        public ApplicationConfiguration Configuration { get; set; }
+        private Container _container;
 
         public bool Initialize(out ApplicationConfiguration applicationConfiguration)
         {
-            Container = new Container();
+            _container = new Container();
 
             // initialize container
             AppllicationConfigurator.Configure(
                 AppDomain.CurrentDomain,
-                Container,
+                _container,
                 new IConventionConfigurator[] { 
                     new FactoriesConventionConfigurator(), 
                     new SingletonConventionConfigurator() });
 
             // initialize logger
-            _loggingSystem = Container.Resolve<IFileConfigurationLoggingSystemInitializer>()
-                                      .GetLoggingSystem();
+            _loggingSystem = _container.Resolve<IFileConfigurationLoggingSystemInitializer>()
+                                       .GetLoggingSystem();
             _loggingSystem.Start();
-            _logger = Container.Resolve<ILogger>();
-            _logger.Info("Starting Web Service ...");
+            _loggingSystem.Logger
+                          .Info("Starting Web Service ...");
 
             // initialize web application
-            applicationConfiguration = Container.Resolve<IDefaultApplicationConfigurationGetter>()
-                                                .GetApplicationConfiguration();
+            applicationConfiguration = _container.Resolve<IDefaultApplicationConfigurationGetter>()
+                                                 .GetApplicationConfiguration();
 
             return true;
         }
 
         public void Shutdown()
         {
-            _logger.Info("Stopping Web Service ...");
+            _loggingSystem.Logger
+                          .Info("Stopping Web Service ...");
             _loggingSystem.Stop();
-            Container.Dispose();
+            _container.Dispose();
         }
     }
 }

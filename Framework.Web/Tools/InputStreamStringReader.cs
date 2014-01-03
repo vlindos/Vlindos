@@ -45,7 +45,7 @@ namespace Framework.Web.Tools
 
     public interface IInputStreamStringReader
     {
-        bool ReadStringFromInputStream(IInputStream inputStream, IList<string> messages, out string s);
+        bool ReadStringFromInputStream(IInputStream inputStream, List<string> messages, out string s);
     }
 
     public class InputStreamStringReader : IInputStreamStringReader
@@ -60,7 +60,7 @@ namespace Framework.Web.Tools
             _encoding = encodingProvider.Endcoding;
         }
      
-        public bool ReadStringFromInputStream(IInputStream inputStream, IList<string> messages, out string s)
+        public bool ReadStringFromInputStream(IInputStream inputStream, List<string> messages, out string s)
         {
             var bytesCollection = new List<byte[]>();
             var bytes = new byte[Environment.SystemPageSize];

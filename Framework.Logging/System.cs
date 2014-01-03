@@ -13,6 +13,7 @@ namespace Vlindos.Logging
 
     public interface ISystem
     {
+        ILogger Logger { get; set; }
         bool Start();
         void Stop();
     }
@@ -20,15 +21,15 @@ namespace Vlindos.Logging
     public class System : ISystem, INotifiable
     {
         private readonly IContainer<Configuration.Configuration> _configurationContainer;
-        private readonly ILogger _logger;
         private readonly IMessagesDequeuer _messagesDequeuer;
 
+        public ILogger Logger { get; set; }
         public System(ILogger logger,
                       IMessagesDequeuer messagesDequeuer,
                       IContainer<Configuration.Configuration> configurationContainer)
         {
             _configurationContainer = configurationContainer;
-            _logger = logger;
+            Logger = logger;
             _messagesDequeuer = messagesDequeuer;
         }
 
@@ -41,7 +42,7 @@ namespace Vlindos.Logging
 
             _messagesDequeuer.Start();
 
-            _logger.Debug("Logging was initialized.");
+            Logger.Debug("Logging was initialized.");
                                     
             _configurationContainer.ChangeNotifier.Attach(this);
 
@@ -65,8 +66,8 @@ namespace Vlindos.Logging
             Configuration.Configuration configuration;
             if (_configurationContainer.Reader.Read(out configuration) == false)
             {
-                _logger.Error("Logging re-initizalization failed because failure(s) " +
-                              "while re-reading configuration file.");
+                Logger.Error("Logging re-initizalization failed because failure(s) " +
+                             "while re-reading configuration file.");
                 return;
             }
 
@@ -84,13 +85,13 @@ namespace Vlindos.Logging
             }
             _messagesDequeuer.Start();
 
-            _logger.Info("Logging was re-initizalized.");             
+            Logger.Info("Logging was re-initizalized.");             
 
             if (messages.Count <= 0) return;
 
-            _logger.Debug("The following unexpected messages occured " +
-                          "while trying to re-initialize logging:{0}{1}",
-                          Environment.NewLine, string.Join(Environment.NewLine, messages));
+            Logger.Debug("The following unexpected messages occured " +
+                         "while trying to re-initialize logging:{0}{1}",
+                         Environment.NewLine, string.Join(Environment.NewLine, messages));
         }
     }
 }

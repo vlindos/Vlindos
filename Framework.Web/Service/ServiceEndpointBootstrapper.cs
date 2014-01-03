@@ -13,8 +13,8 @@ namespace Framework.Web.Service
             IHttpEndpoint<TResponse> endpoint,
             string routeDescription,
             Func<HttpContext, TResponse> perform = null,
-            IList<IBeforePerformAction> beforePerformActions = null,
-            IList<IAfterPerformAction> afterPerformActions = null,
+            List<IBeforePerformAction> beforePerformActions = null,
+            List<IAfterPerformAction> afterPerformActions = null,
             IResponseWritter<TResponse> responseWritter = null);
     }
 
@@ -36,8 +36,8 @@ namespace Framework.Web.Service
             IHttpEndpoint<TResponse> endpoint, 
             string routeDescription, 
             Func<HttpContext, TResponse> perform = null, 
-            IList<IBeforePerformAction> beforePerformActions = null,
-            IList<IAfterPerformAction> afterPerformActions = null, 
+            List<IBeforePerformAction> beforePerformActions = null,
+            List<IAfterPerformAction> afterPerformActions = null, 
             IResponseWritter<TResponse> responseWritter = null)
         {
             endpoint.HttpRequestDescriptor = new GenericRequestDescriptor
@@ -49,18 +49,18 @@ namespace Framework.Web.Service
             endpoint.BeforePerformActions = new List<IBeforePerformAction> { _sessionHandler };
             if (beforePerformActions != null)
             {
-                ((List<IBeforePerformAction>)endpoint.BeforePerformActions).AddRange(beforePerformActions);
+                (endpoint.BeforePerformActions).AddRange(beforePerformActions);
             }
             endpoint.AfterPerformActions = new List<IAfterPerformAction> { _sessionHandler };
             if (afterPerformActions != null)
             {
-                ((List<IAfterPerformAction>)endpoint.AfterPerformActions).AddRange(afterPerformActions);
+                (endpoint.AfterPerformActions).AddRange(afterPerformActions);
             }
             endpoint.ResponseWritter = responseWritter ?? _jsonResponseWritter;
         }
     }
 
-    public delegate bool UnbinderDelegate<TRequest>(HttpContext httpContext, IList<string> messages, out TRequest request);
+    public delegate bool UnbinderDelegate<TRequest>(HttpContext httpContext, List<string> messages, out TRequest request);
     public interface IServiceEndpointBootstrapper<TRequest, TResponse>
     {
         void Bootstrap(
@@ -68,10 +68,11 @@ namespace Framework.Web.Service
             IHttpMethod httpMethod, 
             string routeDescription,
             UnbinderDelegate<TRequest> unbind,
-            Func<TRequest, IList<string>, bool> validate = null,
+            Func<TRequest, List<string>, bool> validate = null,
             Func<HttpContext, TRequest, TResponse> perform = null,
-            IList<IBeforePerformAction> beforePerformActions = null,
-            IList<IAfterPerformAction> afterPerformActions = null,
+            Func<HttpContext, List<string>, TRequest, TResponse> requestFailureHandler = null,
+            List<IBeforePerformAction> beforePerformActions = null,
+            List<IAfterPerformAction> afterPerformActions = null,
             IResponseWritter<TResponse> responseWritter = null);
     }
 
@@ -92,10 +93,11 @@ namespace Framework.Web.Service
             IHttpMethod httpMethod, 
             string routeDescription,
             UnbinderDelegate<TRequest> unbind,
-            Func<TRequest, IList<string>, bool> validate = null,
+            Func<TRequest, List<string>, bool> validate = null,
             Func<HttpContext, TRequest, TResponse> perform = null,
-            IList<IBeforePerformAction> beforePerformActions = null,
-            IList<IAfterPerformAction> afterPerformActions = null,
+            Func<HttpContext, List<string>, TRequest, TResponse> requestFailureHandler = null,
+            List<IBeforePerformAction> beforePerformActions = null,
+            List<IAfterPerformAction> afterPerformActions = null,
             IResponseWritter<TResponse> responseWritter = null)
         {
             endpoint.HttpRequestDescriptor = new GenericRequestDescriptor
@@ -106,12 +108,12 @@ namespace Framework.Web.Service
             endpoint.BeforePerformActions = new List<IBeforePerformAction> { _sessionHandler };
             if (beforePerformActions != null)
             {
-                ((List<IBeforePerformAction>)endpoint.BeforePerformActions).AddRange(beforePerformActions);
+                (endpoint.BeforePerformActions).AddRange(beforePerformActions);
             }
             endpoint.AfterPerformActions = new List<IAfterPerformAction> { _sessionHandler };
             if (afterPerformActions != null)
             {
-                ((List<IAfterPerformAction>)endpoint.AfterPerformActions).AddRange(afterPerformActions);
+                (endpoint.AfterPerformActions).AddRange(afterPerformActions);
             }
             endpoint.ResponseWritter = responseWritter ?? _jsonResponseWritter;
         }

@@ -10,9 +10,9 @@ namespace Framework.Web.Application.HttpEndpoint
 
         IHttpRequestProcessor HttpRequestProcessor { get; set; }
 
-        IList<IBeforePerformAction> BeforePerformActions { get; set; }
+        List<IBeforePerformAction> BeforePerformActions { get; set; }
 
-        IList<IAfterPerformAction> AfterPerformActions { get; set; } 
+        List<IAfterPerformAction> AfterPerformActions { get; set; } 
     }
 
     public interface IHttpEndpoint<TResponse> : IHttpEndpoint

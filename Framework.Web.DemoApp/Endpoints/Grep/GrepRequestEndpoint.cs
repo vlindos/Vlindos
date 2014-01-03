@@ -24,7 +24,7 @@ namespace Framework.Web.DemoApp.Endpoints.Grep
                 RouteDescription = "grep/{for}"
             };
             HttpRequestProcessor = httpRequestProcessor;
-            BeforePerformActions = new IBeforePerformAction[] { requireAuthenticationFilter };
+            BeforePerformActions = new List<IBeforePerformAction> { requireAuthenticationFilter };
             ResponseWritter = stringResponseWritter;
             HttpRequestUnbinder = unbinder;
             Performer = performer;
@@ -34,8 +34,8 @@ namespace Framework.Web.DemoApp.Endpoints.Grep
 
         public IHttpRequestDescriptor HttpRequestDescriptor { get; set; }
         public IHttpRequestProcessor HttpRequestProcessor { get; set; }
-        public IList<IBeforePerformAction> BeforePerformActions { get; set; }
-        public IList<IAfterPerformAction> AfterPerformActions { get; set; }
+        public List<IBeforePerformAction> BeforePerformActions { get; set; }
+        public List<IAfterPerformAction> AfterPerformActions { get; set; }
         public IPerformer<GrepRequest, string> Performer { get; set; }
         public IResponseWritter<string> ResponseWritter { get; set; }
         public IHttpRequestUnbinder<GrepRequest> HttpRequestUnbinder { get; set; }

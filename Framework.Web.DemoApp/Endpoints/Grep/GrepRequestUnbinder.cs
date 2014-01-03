@@ -18,7 +18,7 @@ namespace Framework.Web.DemoApp.Endpoints.Grep
             _inputStreamStringReader = inputStreamStringReader;
         }
 
-        public bool TryToUnbind(HttpRequest httpRequest, IList<string> messages, out GrepRequest request)
+        public bool TryToUnbind(HttpRequest httpRequest, List<string> messages, out GrepRequest request)
         {
             string s;
             if (_inputStreamStringReader.ReadStringFromInputStream(httpRequest.InputStream, messages, out s) == false)

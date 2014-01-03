@@ -10,7 +10,7 @@ namespace Framework.Web.Tools
 
     public interface IFormDataReader
     {
-        bool ReadFormData(IInputStream inputStream, IList<string> messages, out Dictionary<string, string> formData);
+        bool ReadFormData(IInputStream inputStream, List<string> messages, out Dictionary<string, string> formData);
     }
 
     public class FormDataReader : IFormDataReader
@@ -22,7 +22,7 @@ namespace Framework.Web.Tools
             _formDataMaximumLength = provider.FormDataMaximumLength;
         }
 
-        public bool ReadFormData(IInputStream inputStream, IList<string> messages, out Dictionary<string, string> formData)
+        public bool ReadFormData(IInputStream inputStream, List<string> messages, out Dictionary<string, string> formData)
         {
             throw new System.NotImplementedException();
         }

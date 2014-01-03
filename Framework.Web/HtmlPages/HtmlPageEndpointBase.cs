@@ -8,8 +8,8 @@ namespace Framework.Web.HtmlPages
     {
         public IHttpRequestDescriptor HttpRequestDescriptor { get; set; }
         public IHttpRequestProcessor HttpRequestProcessor { get; set; }
-        public IList<IBeforePerformAction> BeforePerformActions { get; set; }
-        public IList<IAfterPerformAction> AfterPerformActions { get; set; }
+        public List<IBeforePerformAction> BeforePerformActions { get; set; }
+        public List<IAfterPerformAction> AfterPerformActions { get; set; }
         public IPerformer<IHtmlPageResponse<THtmlPageViewData>> Performer { get; set; }
         public IResponseWritter<IHtmlPageResponse<THtmlPageViewData>> ResponseWritter { get; set; }
         public IHtmlPage<THtmlPageViewData> HtmlPage { get; set; }
@@ -19,8 +19,8 @@ namespace Framework.Web.HtmlPages
     {
         public IHttpRequestDescriptor HttpRequestDescriptor { get; set; }
         public IHttpRequestProcessor HttpRequestProcessor { get; set; }
-        public IList<IBeforePerformAction> BeforePerformActions { get; set; }
-        public IList<IAfterPerformAction> AfterPerformActions { get; set; }
+        public List<IBeforePerformAction> BeforePerformActions { get; set; }
+        public List<IAfterPerformAction> AfterPerformActions { get; set; }
         public IPerformer<TRequest, IHtmlPageResponse<THtmlPageViewData>> Performer { get; set; }
         public IResponseWritter<IHtmlPageResponse<THtmlPageViewData>> ResponseWritter { get; set; }
         public IHttpRequestUnbinder<TRequest> HttpRequestUnbinder { get; set; }

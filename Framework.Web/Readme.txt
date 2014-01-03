@@ -7,7 +7,7 @@
     - has the endpoint performer (see below)
     - Allowed method openers
     - Model reader / writters
-    - model validators z
+    - model validators
 - Endpoint must sophisticated base that could be easily used:
     - Passing to the performer (if implementing):
         - Request object that has:
@@ -31,4 +31,4 @@
 	- common way to handle authentication
 	- common way to handle measuring
 	- support for strongly typed (view data) html view engine
-	- 
+	- javascript bindings and client validation

@@ -8,14 +8,9 @@ namespace Framework.Web.DemoApp.Endpoints.SimpleHtmlPage
 
     public class SimpleHtmlPageEndpoint : HtmlPageEndpointBase<string[]>
     {
-        public SimpleHtmlPageEndpoint(
-            IIHtmlPageEndpointBootstrapper<string[]> bootstrapper,
-            ISimpleHtmlPage simpleHtmlPage)
+        public SimpleHtmlPageEndpoint(IIHtmlPageEndpointBootstrapper<string[]> bootstrapper, ISimpleHtmlPage simpleHtmlPage)
         {
-            bootstrapper.Bootstrap(
-                this,
-                "ShowList",
-                simpleHtmlPage,
+            bootstrapper.Bootstrap(this, "ShowList", simpleHtmlPage,
                 httpContext => httpContext.HttpRequest.QueryString.GetValues("s"));
         }
     }
