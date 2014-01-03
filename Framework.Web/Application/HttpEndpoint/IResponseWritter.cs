@@ -1,9 +1,7 @@
-﻿using Framework.Web.Models;
-
-namespace Framework.Web.Application.HttpEndpoint
+﻿namespace Framework.Web.Application.HttpEndpoint
 {
-    public interface IResponseWritter
+    public interface IResponseWritter<in TResponse>
     {
-        void WriteResponse(HttpContext httpContext);
+        void WriteResponse(HttpContext httpContext, TResponse response);
     }
 }

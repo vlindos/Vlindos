@@ -1,16 +1,32 @@
 using System.Collections.Generic;
-using Framework.Web.Application;
 using Framework.Web.Application.HttpEndpoint;
-using Framework.Web.Application.HttpEndpoint.Filters;
 
 namespace Framework.Web.HtmlPages
 {
-    public abstract class HtmlPageEndpointBase<TRequest> : IServerSideHttpEndpoint<TRequest>
+    public abstract class HtmlPageEndpointBase<THtmlPageViewData>
+        : IHtmlPageEndpoint<THtmlPageViewData>
     {
-        public IHttpEndpoint<TRequest> HttpEndpoint { get; set; }
-        public IHttpRequestUnbinder<TRequest> HttpRequestUnbinder { get; set; }
-        public IResponseWritter ResponseWritter { get; set; }
-        public IRequestPerformer RequestPerformer { get; set; }
-        public List<IHttpEndpointFilter> Filters { get; set; }
+        public IHttpRequestDescriptor HttpRequestDescriptor { get; set; }
+        public IHttpRequestProcessor HttpRequestProcessor { get; set; }
+        public IList<IBeforePerformAction> BeforePerformActions { get; set; }
+        public IList<IAfterPerformAction> AfterPerformActions { get; set; }
+        public IPerformer<IHtmlPageResponse<THtmlPageViewData>> Performer { get; set; }
+        public IResponseWritter<IHtmlPageResponse<THtmlPageViewData>> ResponseWritter { get; set; }
+        public IHtmlPage<THtmlPageViewData> HtmlPage { get; set; }
     }
+    public abstract class HtmlPageEndpointBase<TRequest, THtmlPageViewData> 
+        : IHtmlPageEndpoint<TRequest, THtmlPageViewData>
+    {
+        public IHttpRequestDescriptor HttpRequestDescriptor { get; set; }
+        public IHttpRequestProcessor HttpRequestProcessor { get; set; }
+        public IList<IBeforePerformAction> BeforePerformActions { get; set; }
+        public IList<IAfterPerformAction> AfterPerformActions { get; set; }
+        public IPerformer<TRequest, IHtmlPageResponse<THtmlPageViewData>> Performer { get; set; }
+        public IResponseWritter<IHtmlPageResponse<THtmlPageViewData>> ResponseWritter { get; set; }
+        public IHttpRequestUnbinder<TRequest> HttpRequestUnbinder { get; set; }
+        public IRequestValidator<TRequest> RequestValidator { get; set; }
+        public IRequestFailureHandler<TRequest> RequestFailureHandler { get; set; }
+        public IHtmlPage<THtmlPageViewData> HtmlPage { get; set; }
+    }
+
 }

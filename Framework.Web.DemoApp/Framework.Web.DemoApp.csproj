@@ -45,22 +45,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application.cs" />
-    <Compile Include="Endpoints\Authenticate\AuthenticateResponse.cs" />
-    <Compile Include="Endpoints\Authenticate\AuthenticateRestEndpoint.cs" />
     <Content Include="Endpoints\SimpleHtmlPage\SimpleHtmlPage.cs.html" />
-    <Compile Include="Endpoints\SimpleHtmlPage\ISimpleHtmlPage.cs" />
+    <Compile Include="Endpoints\Grep\GrepRequest.cs" />
+    <Compile Include="Endpoints\Grep\GrepRequestFailureHandler.cs" />
+    <Compile Include="Endpoints\Grep\GrepRequestPerformer.cs" />
+    <Compile Include="Endpoints\Grep\GrepRequestUnbinder.cs" />
+    <Compile Include="Endpoints\Grep\GrepRequestValidator.cs" />
     <Compile Include="Endpoints\SimpleHtmlPage\SimpleHtmlPageEndpoint.cs" />
-    <Compile Include="Endpoints\SimpleHtmlPage\SimplePageViewData.cs" />
-    <Compile Include="Filters\AuthenticationFilter.cs" />
-    <Compile Include="Endpoints\Sample\EchoResponse.cs" />
-    <Compile Include="Endpoints\Sample\SampleRestEndpoint.cs" />
-    <Compile Include="Endpoints\ConfigAdder\HttpEndpoint.cs" />
-    <Compile Include="Endpoints\ConfigAdder\HttpRequestUnbinder.cs" />
-    <Compile Include="Endpoints\ConfigAdder\RequestValidator.cs" />
-    <Compile Include="Endpoints\ConfigAdder\ServerSideHttpEndpoint.cs" />
-    <Compile Include="Endpoints\ConfigAdder\Config.cs" />
-    <Compile Include="Endpoints\ConfigAdder\RequestPerformer.cs" />
-    <Compile Include="OptionsHttpMethod.cs" />
+    <Compile Include="Endpoints\Grep\GrepRequestEndpoint.cs" />
+    <Compile Include="Endpoints\Status\StatusEndpoint.cs" />
+    <Compile Include="Endpoints\Status\StatusResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -84,6 +78,9 @@
       <Project>{FF60F6F2-57B9-49CF-9745-6EBA430C8604}</Project>
       <Name>Framework</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Endpoints\Authenticate\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

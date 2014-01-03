@@ -1,9 +1,9 @@
 <!--C# 
 namespace Framework.Web.DemoApp.Endpoints.SimpleHtmlPageEndpoint
 {
-    public class SimpleHtmlPage : ISimpleHtmlPage
+    public class SimpleHtmlPage : ISimpleHtmlPage<SimplePageViewData>
     {
-        public void RenderPage(IRenderer<object, SimpleData> pageRenderer, IHttpRequest httpRequest, IHttpResponse<SimpleData> httpResponse)
+        public void RenderPage(HttpContext httpContext, IHtmlPageRenderer pageRenderer, stringp[] viewData)
         {
 -->
 <html>
@@ -11,10 +11,10 @@ namespace Framework.Web.DemoApp.Endpoints.SimpleHtmlPageEndpoint
         <title>Simple page</title>
     </head>
     <body>
-        Urls:
+        Values for 's' query argument:
         <ul>
 <!--C# 
-                foreach(var url in httpResponse.Response.Urls) 
+                foreach(var url in viewData) 
                 {                
 -->
             <li><a href="$url">$url</a></li>

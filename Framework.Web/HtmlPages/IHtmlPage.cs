@@ -1,9 +1,9 @@
-﻿using Framework.Web.Models;
+﻿using Framework.Web.Application;
 
 namespace Framework.Web.HtmlPages
 {
-    public interface IHtmlPage
+    public interface IHtmlPage<in THtmlPageViewData> 
     {
-        void RenderPage(IRenderer renderer, HttpRequest httpRequest, HttpResponse httpResponse);
+        void RenderPage(HttpContext httpContext, IHtmlPageRenderer htmlPageRenderer, THtmlPageViewData viewData);
     }
 }

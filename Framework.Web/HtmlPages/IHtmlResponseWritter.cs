@@ -1,25 +1,28 @@
-﻿using Framework.Web.Application.HttpEndpoint;
-using Framework.Web.Models;
+﻿using Framework.Web.Application;
+using Framework.Web.Application.HttpEndpoint;
 
 namespace Framework.Web.HtmlPages
 {
-    public interface IHtmlResponseWritter : IResponseWritter
+    public interface IHtmlResponseWritter<in THtmlPageResponse, THtmlPageViewData> 
+        : IResponseWritter<THtmlPageResponse>
+        where THtmlPageResponse : IHtmlPageResponse<THtmlPageViewData>
     {
     }
 
-    public class HtmlResponseWritter : IHtmlResponseWritter
+    public class HtmlResponseWritter<THtmlPageResponse, THtmlPageViewData>  
+        : IHtmlResponseWritter<THtmlPageResponse, THtmlPageViewData>
+        where THtmlPageResponse : IHtmlPageResponse<THtmlPageViewData>
     {
-        private readonly IRendererFactory _rendererFactory;
+        private readonly IHtmlPageRenderer _htmlPageRenderer;
 
-        public HtmlResponseWritter(IRendererFactory rendererFactory)
+        public HtmlResponseWritter(IHtmlPageRenderer htmlPageRenderer)
         {
-            _rendererFactory = rendererFactory;
+            _htmlPageRenderer = htmlPageRenderer;
         }
 
-        public void WriteResponse(HttpRequest httpRequest, HttpResponse httpResponse)
+        public void WriteResponse(HttpContext httpContext, THtmlPageResponse response)
         {
-            var renderer = _rendererFactory.GetRenderer();
-            httpResponse.Response.HtmlPage.RenderPage(renderer, httpRequest, httpResponse);
+            response.HtmlPage.RenderPage(httpContext, _htmlPageRenderer, response.HtmlPageViewData);
         }
     }
 }

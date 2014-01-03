@@ -1,6 +1,5 @@
 ﻿using System;
 using Framework.Web.Application;
-using Framework.Web.Models;
 using Framework.Web.Tools;
 using Vlindos.Common.Logging;
 using Vlindos.InversionOfControl;
@@ -17,7 +16,7 @@ namespace Framework.Web.DemoApp
         public IContainer Container { get; private set; }
         public ApplicationConfiguration Configuration { get; set; }
 
-        public bool Initialize()
+        public bool Initialize(out ApplicationConfiguration applicationConfiguration)
         {
             Container = new Container();
 
@@ -30,18 +29,20 @@ namespace Framework.Web.DemoApp
                     new SingletonConventionConfigurator() });
 
             // initialize logger
-            _loggingSystem = Container.Resolve<IFileConfigurationLoggingSystemInitializer>().GetLoggingSystem();
+            _loggingSystem = Container.Resolve<IFileConfigurationLoggingSystemInitializer>()
+                                      .GetLoggingSystem();
+            _loggingSystem.Start();
             _logger = Container.Resolve<ILogger>();
             _logger.Info("Starting Web Service ...");
 
             // initialize web application
-            Configuration = Container.Resolve<IDefaultApplicationConfigurationGetter>()
-                                     .GetApplicationConfiguration();
+            applicationConfiguration = Container.Resolve<IDefaultApplicationConfigurationGetter>()
+                                                .GetApplicationConfiguration();
 
             return true;
         }
 
-        public void Dispose()
+        public void Shutdown()
         {
             _logger.Info("Stopping Web Service ...");
             _loggingSystem.Stop();

@@ -2,21 +2,26 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Text;
-using Framework.Web.Models;
+using Framework.Web.Application;
 
 namespace Framework.Web.Tools
 {
     public interface IHttpUrlMaterializer
     {
-        Uri MaterializeHttpUrl(HttpRequest httpRequest);
+        Uri MaterializeHttpUrl(WebServiceSettings webServiceSettings, HttpRequest httpRequest);
     }
 
     public class HttpUrlMaterializer : IHttpUrlMaterializer
     {
-        public Uri MaterializeHttpUrl(HttpRequest httpRequest)
+        public Uri MaterializeHttpUrl(WebServiceSettings webServiceSettings, HttpRequest httpRequest)
         {	
             var sb = new StringBuilder();
-            var rawUrl = httpRequest.RawUrl;
+            var rawUrl = webServiceSettings.BaseUrl.AbsoluteUri;
+            if (string.IsNullOrWhiteSpace(httpRequest.Path) == false)
+            {
+                rawUrl += "/";
+                rawUrl += httpRequest.Path;
+            }
             if (httpRequest.RoutesValues != null)
             {
                 rawUrl = httpRequest.RoutesValues.AllKeys.Aggregate(

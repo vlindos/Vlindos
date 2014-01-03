@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using Framework.Web.Application.HttpEndpoint;
-using Framework.Web.Models;
-using Framework.Web.Service.Rest;
+using Framework.Web.Application;
 
 namespace Framework.Web.Service
 {
-    public interface IJsonHttpStreamResponseReader : IHttpStreamResponseReader
+    public interface IJsonHttpStreamResponseReader<TResponse> : IHttpStreamResponseReader<TResponse>
     {
     }
 
-    public class JsonHttpStreamResponseReader : IJsonHttpStreamResponseReader
+    public class JsonHttpStreamResponseReader<TResponse> : IJsonHttpStreamResponseReader<TResponse>
     {
-        public bool Read(HttpResponse httpResponse, List<string> messages)
+        public bool Read(HttpContext httpContext, List<string> messages, out TResponse response)
         {
-            httpResponse.Response = default(TResponse);
+            response = default(TResponse);
             try
             {
                 //var serializer = new JsonSerializer();

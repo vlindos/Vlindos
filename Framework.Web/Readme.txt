@@ -21,3 +21,14 @@
     - object xml, json writter
 - There must be special type of exception attribute and be set in app
 - There must be controller for 404
+
+- Cases to support:
+	- fast performer, ie no 'new' or factory.GetSomething cases
+	- support for value types without boxing/unboxing, ie requests of type int
+	- support for requestless http endpoints
+	- support for database session getting
+	- support of http sesssion
+	- common way to handle authentication
+	- common way to handle measuring
+	- support for strongly typed (view data) html view engine
+	- 

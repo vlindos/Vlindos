@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Framework.Web.Application;
-using Framework.Web.Application.Filters.Global;
-using Framework.Web.Models;
+using Framework.Web.Application.HttpEndpoint;
 
 namespace Framework.Web.Tools
 {
@@ -13,14 +12,14 @@ namespace Framework.Web.Tools
     public class DefaultApplicationConfigurationGetter : IDefaultApplicationConfigurationGetter
     {
         private readonly IHttpException _httpException;
-        private readonly List<IGlobalFilter> _globalFilters;
+        private readonly List<IHttpEndpoint> _httpEndpoints;
 
         public DefaultApplicationConfigurationGetter(
             IHttpException httpException, 
-            List<IGlobalFilter> globalFilters)
+            List<IHttpEndpoint> httpEndpoints)
         {
             _httpException = httpException;
-            _globalFilters = globalFilters;
+            _httpEndpoints = httpEndpoints;
         }
 
         public ApplicationConfiguration GetApplicationConfiguration()
@@ -28,7 +27,7 @@ namespace Framework.Web.Tools
             return new ApplicationConfiguration
             {
                 HttpException = _httpException,
-                GlobalFilters = _globalFilters,
+                HttpEndpoints = _httpEndpoints
             };
         }
     }

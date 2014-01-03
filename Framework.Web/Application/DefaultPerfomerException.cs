@@ -1,5 +1,4 @@
 ﻿using System;
-using Framework.Web.Models;
 
 namespace Framework.Web.Application
 {

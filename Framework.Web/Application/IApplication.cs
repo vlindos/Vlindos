@@ -1,11 +1,8 @@
-﻿using System;
-using Framework.Web.Models;
-
-namespace Framework.Web.Application
+﻿namespace Framework.Web.Application
 {
-    public interface IApplication : IDisposable
+    public interface IApplication
     {
-        bool Initialize();
-        ApplicationConfiguration Configuration { get; }
+        bool Initialize(out ApplicationConfiguration applicationConfiguration);
+        void Shutdown();
     }
 }
