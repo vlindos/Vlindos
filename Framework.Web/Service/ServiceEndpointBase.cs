@@ -9,8 +9,8 @@ namespace Framework.Web.Service
         public IHttpRequestDescriptor HttpRequestDescriptor { get; set; }
         public IHttpRequestProcessor HttpRequestProcessor { get; set; }
         public IResponseWritter<TResponse> ResponseWritter { get; set; }
-        public List<IBeforePerformAction> BeforePerformActions { get; set; }
-        public List<IAfterPerformAction> AfterPerformActions { get; set; }
+        public List<IPrePerformAction> BeforePerformActions { get; set; }
+        public List<IPostPerformAction> AfterPerformActions { get; set; }
         public IPerformer<TResponse> Performer { get; set; }
     }
 
@@ -20,11 +20,11 @@ namespace Framework.Web.Service
         public IHttpRequestDescriptor HttpRequestDescriptor { get; set; }
         public IHttpRequestProcessor HttpRequestProcessor { get; set; }
         public IResponseWritter<TResponse> ResponseWritter { get; set; }
-        public List<IBeforePerformAction> BeforePerformActions { get; set; }
-        public List<IAfterPerformAction> AfterPerformActions { get; set; }
+        public List<IPrePerformAction> BeforePerformActions { get; set; }
+        public List<IPostPerformAction> AfterPerformActions { get; set; }
         public IPerformer<TRequest, TResponse> Performer { get; set; }
         public IHttpRequestUnbinder<TRequest> HttpRequestUnbinder { get; set; }
         public IRequestValidator<TRequest> RequestValidator { get; set; }
-        public IRequestFailureHandler<TRequest> RequestFailureHandler { get; set; }
+        public IRequestFailureHandler<TRequest, TResponse> RequestFailureHandler { get; set; }
     }
 }

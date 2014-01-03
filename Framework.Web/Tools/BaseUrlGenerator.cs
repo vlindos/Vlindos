@@ -15,7 +15,7 @@ namespace Framework.Web.Tools
             var sb = new StringBuilder();
             sb.Append(!httpRequest.UsesSsl ? "http" : "https");
             sb.Append("://");
-            sb.Append(httpRequest.ServerHostName);
+            sb.Append(httpRequest.ServerDomain);
 
             if ((!httpRequest.UsesSsl && httpRequest.Port == 80) ||
                 (httpRequest.UsesSsl && httpRequest.Port == 443))

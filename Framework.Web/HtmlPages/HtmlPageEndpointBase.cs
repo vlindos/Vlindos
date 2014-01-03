@@ -8,8 +8,8 @@ namespace Framework.Web.HtmlPages
     {
         public IHttpRequestDescriptor HttpRequestDescriptor { get; set; }
         public IHttpRequestProcessor HttpRequestProcessor { get; set; }
-        public List<IBeforePerformAction> BeforePerformActions { get; set; }
-        public List<IAfterPerformAction> AfterPerformActions { get; set; }
+        public List<IPrePerformAction> BeforePerformActions { get; set; }
+        public List<IPostPerformAction> AfterPerformActions { get; set; }
         public IPerformer<IHtmlPageResponse<THtmlPageViewData>> Performer { get; set; }
         public IResponseWritter<IHtmlPageResponse<THtmlPageViewData>> ResponseWritter { get; set; }
         public IHtmlPage<THtmlPageViewData> HtmlPage { get; set; }
@@ -19,13 +19,13 @@ namespace Framework.Web.HtmlPages
     {
         public IHttpRequestDescriptor HttpRequestDescriptor { get; set; }
         public IHttpRequestProcessor HttpRequestProcessor { get; set; }
-        public List<IBeforePerformAction> BeforePerformActions { get; set; }
-        public List<IAfterPerformAction> AfterPerformActions { get; set; }
+        public List<IPrePerformAction> BeforePerformActions { get; set; }
+        public List<IPostPerformAction> AfterPerformActions { get; set; }
         public IPerformer<TRequest, IHtmlPageResponse<THtmlPageViewData>> Performer { get; set; }
         public IResponseWritter<IHtmlPageResponse<THtmlPageViewData>> ResponseWritter { get; set; }
         public IHttpRequestUnbinder<TRequest> HttpRequestUnbinder { get; set; }
         public IRequestValidator<TRequest> RequestValidator { get; set; }
-        public IRequestFailureHandler<TRequest> RequestFailureHandler { get; set; }
+        public IRequestFailureHandler<TRequest, IHtmlPageResponse<THtmlPageViewData>> RequestFailureHandler { get; set; }
         public IHtmlPage<THtmlPageViewData> HtmlPage { get; set; }
     }
 

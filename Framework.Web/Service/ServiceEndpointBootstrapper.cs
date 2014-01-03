@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Framework.Web.Application;
 using Framework.Web.Application.HttpEndpoint;
 using Framework.Web.HttpMethods;
-using Framework.Web.Session;
 
 namespace Framework.Web.Service
 {
@@ -13,22 +12,19 @@ namespace Framework.Web.Service
             IHttpEndpoint<TResponse> endpoint,
             string routeDescription,
             Func<HttpContext, TResponse> perform = null,
-            List<IBeforePerformAction> beforePerformActions = null,
-            List<IAfterPerformAction> afterPerformActions = null,
+            List<IPrePerformAction> prePerformActions = null,
+            List<IPostPerformAction> postPerformActions = null,
             IResponseWritter<TResponse> responseWritter = null);
     }
 
     public class ServiceEndpointBootstrapper<TResponse> : IServiceEndpointBootstrapper<TResponse>
     {
         private readonly IJsonResponseWritter<TResponse> _jsonResponseWritter;
-        private readonly ISessionHandler _sessionHandler;
         private readonly IGetHttpMethod _getHttpMethod;
 
-        public ServiceEndpointBootstrapper(
-            IJsonResponseWritter<TResponse> jsonResponseWritter, ISessionHandler sessionHandler, IGetHttpMethod getHttpMethod)
+        public ServiceEndpointBootstrapper(IJsonResponseWritter<TResponse> jsonResponseWritter, IGetHttpMethod getHttpMethod)
         {
             _jsonResponseWritter = jsonResponseWritter;
-            _sessionHandler = sessionHandler;
             _getHttpMethod = getHttpMethod;
         }
 
@@ -36,8 +32,8 @@ namespace Framework.Web.Service
             IHttpEndpoint<TResponse> endpoint, 
             string routeDescription, 
             Func<HttpContext, TResponse> perform = null, 
-            List<IBeforePerformAction> beforePerformActions = null,
-            List<IAfterPerformAction> afterPerformActions = null, 
+            List<IPrePerformAction> prePerformActions = null,
+            List<IPostPerformAction> postPerformActions = null, 
             IResponseWritter<TResponse> responseWritter = null)
         {
             endpoint.HttpRequestDescriptor = new GenericRequestDescriptor
@@ -46,16 +42,6 @@ namespace Framework.Web.Service
                 RouteDescription = routeDescription
             };
 
-            endpoint.BeforePerformActions = new List<IBeforePerformAction> { _sessionHandler };
-            if (beforePerformActions != null)
-            {
-                (endpoint.BeforePerformActions).AddRange(beforePerformActions);
-            }
-            endpoint.AfterPerformActions = new List<IAfterPerformAction> { _sessionHandler };
-            if (afterPerformActions != null)
-            {
-                (endpoint.AfterPerformActions).AddRange(afterPerformActions);
-            }
             endpoint.ResponseWritter = responseWritter ?? _jsonResponseWritter;
         }
     }
@@ -71,21 +57,19 @@ namespace Framework.Web.Service
             Func<TRequest, List<string>, bool> validate = null,
             Func<HttpContext, TRequest, TResponse> perform = null,
             Func<HttpContext, List<string>, TRequest, TResponse> requestFailureHandler = null,
-            List<IBeforePerformAction> beforePerformActions = null,
-            List<IAfterPerformAction> afterPerformActions = null,
+            List<IPrePerformAction> prePerformActions = null,
+            List<IPostPerformAction> postPerformActions = null,
             IResponseWritter<TResponse> responseWritter = null);
     }
 
     public class ServiceEndpointBootstrapper<TRequest, TResponse> : IServiceEndpointBootstrapper<TRequest, TResponse>
     {
         private readonly IJsonResponseWritter<TResponse> _jsonResponseWritter;
-        private readonly ISessionHandler _sessionHandler;
 
         public ServiceEndpointBootstrapper(
-            IJsonResponseWritter<TResponse> jsonResponseWritter, ISessionHandler sessionHandler)
+            IJsonResponseWritter<TResponse> jsonResponseWritter)
         {
             _jsonResponseWritter = jsonResponseWritter;
-            _sessionHandler = sessionHandler;
         }
 
         public void Bootstrap(
@@ -96,8 +80,8 @@ namespace Framework.Web.Service
             Func<TRequest, List<string>, bool> validate = null,
             Func<HttpContext, TRequest, TResponse> perform = null,
             Func<HttpContext, List<string>, TRequest, TResponse> requestFailureHandler = null,
-            List<IBeforePerformAction> beforePerformActions = null,
-            List<IAfterPerformAction> afterPerformActions = null,
+            List<IPrePerformAction> prePerformActions = null,
+            List<IPostPerformAction> postPerformActions = null,
             IResponseWritter<TResponse> responseWritter = null)
         {
             endpoint.HttpRequestDescriptor = new GenericRequestDescriptor
@@ -105,16 +89,6 @@ namespace Framework.Web.Service
                 HttpMethod = httpMethod,
                 RouteDescription = routeDescription
             };
-            endpoint.BeforePerformActions = new List<IBeforePerformAction> { _sessionHandler };
-            if (beforePerformActions != null)
-            {
-                (endpoint.BeforePerformActions).AddRange(beforePerformActions);
-            }
-            endpoint.AfterPerformActions = new List<IAfterPerformAction> { _sessionHandler };
-            if (afterPerformActions != null)
-            {
-                (endpoint.AfterPerformActions).AddRange(afterPerformActions);
-            }
             endpoint.ResponseWritter = responseWritter ?? _jsonResponseWritter;
         }
     }

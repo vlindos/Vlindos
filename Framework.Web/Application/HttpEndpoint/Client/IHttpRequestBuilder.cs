@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Framework.Web.Application.HttpEndpoint
+namespace Framework.Web.Application.HttpEndpoint.Client
 {
     public interface IHttpRequestBuilder<in TRequest>
     {

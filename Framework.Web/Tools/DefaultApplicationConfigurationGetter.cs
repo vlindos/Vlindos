@@ -11,14 +11,14 @@ namespace Framework.Web.Tools
 
     public class DefaultApplicationConfigurationGetter : IDefaultApplicationConfigurationGetter
     {
-        private readonly IHttpException _httpException;
+        private readonly IExceptionHandler _exceptionHandler;
         private readonly List<IHttpEndpoint> _httpEndpoints;
 
         public DefaultApplicationConfigurationGetter(
-            IHttpException httpException, 
+            IExceptionHandler exceptionHandler, 
             List<IHttpEndpoint> httpEndpoints)
         {
-            _httpException = httpException;
+            _exceptionHandler = exceptionHandler;
             _httpEndpoints = httpEndpoints;
         }
 
@@ -26,7 +26,7 @@ namespace Framework.Web.Tools
         {
             return new ApplicationConfiguration
             {
-                HttpException = _httpException,
+                ExceptionHandler = _exceptionHandler,
                 HttpEndpoints = _httpEndpoints
             };
         }

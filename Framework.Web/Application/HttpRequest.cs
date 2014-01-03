@@ -1,5 +1,6 @@
 ﻿using System.Collections.Specialized;
 using System.Net;
+using System.Net.Mime;
 using Framework.Web.HttpMethods;
 using Vlindos.Common.Streams;
 
@@ -15,10 +16,10 @@ namespace Framework.Web.Application
         
         public IPAddress ServerHostAddress { get; set; }
         
-        public IPAddress ServerHostName { get; set; }
+        public string ServerDomain { get; set; }
         
         public ushort Port { get; set; }
-        
+
         public string Path { get; set; }
 
         public NameValueCollection Headers { get; set; }

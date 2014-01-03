@@ -16,8 +16,6 @@ namespace Framework.Web.Application
 
         public NameValueCollection Headers { get; set; }
 
-        public ContentType ContentType { get; set; }
-
         public IOutputStream OutputStream { get; set; }
     }
 }

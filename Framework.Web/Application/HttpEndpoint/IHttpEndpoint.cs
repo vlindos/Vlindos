@@ -10,9 +10,9 @@ namespace Framework.Web.Application.HttpEndpoint
 
         IHttpRequestProcessor HttpRequestProcessor { get; set; }
 
-        List<IBeforePerformAction> BeforePerformActions { get; set; }
+        List<IPrePerformAction> BeforePerformActions { get; set; }
 
-        List<IAfterPerformAction> AfterPerformActions { get; set; } 
+        List<IPostPerformAction> AfterPerformActions { get; set; } 
     }
 
     public interface IHttpEndpoint<TResponse> : IHttpEndpoint
@@ -32,6 +32,6 @@ namespace Framework.Web.Application.HttpEndpoint
 
         IRequestValidator<TRequest> RequestValidator { get; set; }
 
-        IRequestFailureHandler<TRequest> RequestFailureHandler { get; set; }
+        IRequestFailureHandler<TRequest, TResponse> RequestFailureHandler { get; set; }
     }
 }

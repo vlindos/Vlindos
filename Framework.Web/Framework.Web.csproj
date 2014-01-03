@@ -39,9 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\DefaultPerfomerException.cs" />
+    <Compile Include="Application\DefaultExceptionHandler.cs" />
     <Compile Include="Application\HttpEndpoint\GenericRequestDescriptor.cs" />
-    <Compile Include="Application\HttpEndpoint\IBeforePerformAction.cs" />
+    <Compile Include="Application\HttpEndpoint\IPrePerformAction.cs" />
     <Compile Include="Application\HttpEndpoint\IHttpRequestDescriptor.cs" />
     <Compile Include="Application\HttpEndpoint\IHttpRequestProcessor.cs" />
     <Compile Include="Application\HttpEndpoint\IPerformer.cs" />
@@ -51,13 +51,14 @@
     <Compile Include="Authentication\RequireAuthenticationFilter.cs" />
     <Compile Include="HtmlPages\IHtmlPageEndpoint.cs" />
     <Compile Include="HtmlPages\IHtmlPageResponse.cs" />
+    <Compile Include="Session\CookieValidator.cs" />
     <Compile Include="Session\ISessionValueReader.cs" />
     <Compile Include="Session\ISessionRepositoryManager.cs" />
     <Compile Include="Session\SessionGetter.cs" />
-    <Compile Include="Session\SessionHandler.cs" />
     <Compile Include="Session\MemorySessionRepository.cs" />
     <Compile Include="Session\SessionIdSpecifier.cs" />
     <Compile Include="Application\IApplication.cs" />
+    <Compile Include="Session\SessionReader.cs" />
     <Compile Include="Session\SessionValue.cs" />
     <Compile Include="HtmlPages\HtmlPageEndpointBase.cs" />
     <Compile Include="HtmlPages\HtmlPageEndpointBootstrapper.cs" />
@@ -79,12 +80,15 @@
     <Compile Include="HttpMethods\TraceHttpMethod.cs" />
     <Compile Include="Tools\ApplicationRuntimeSettings.cs" />
     <Compile Include="Tools\BaseUrlGenerator.cs" />
+    <Compile Include="Tools\CookieHeadersGetter.cs" />
+    <Compile Include="Tools\CookieHeadersObject.cs" />
     <Compile Include="Tools\FormDataReader.cs" />
+    <Compile Include="Tools\HeaderCookie.cs" />
     <Compile Include="Tools\HttpRequestTransmitter.cs" />
     <Compile Include="Tools\InputStreamStringReader.cs" />
     <Compile Include="Tools\StringResponseWritter.cs" />
     <Compile Include="Tools\WebServiceSettings.cs" />
-    <Compile Include="Service\IServiceRequestHandler.cs" />
+    <Compile Include="Service\IServiceRequestFailureHandler.cs" />
     <Compile Include="Service\JsonResponseReader.cs" />
     <Compile Include="Service\JsonResponseWritter.cs" />
     <Compile Include="Service\SerializationType.cs" />
@@ -95,18 +99,17 @@
     <Compile Include="Service\ServiceEndpointBootstrapper.cs" />
     <Compile Include="Tools\DefaultApplicationConfigurationGetter.cs" />
     <Compile Include="Tools\HttpUrlMaterializer.cs" />
-    <Compile Include="Application\HttpEndpoint\IAfterPerformAction.cs" />
+    <Compile Include="Application\HttpEndpoint\IPostPerformAction.cs" />
     <Compile Include="Application\HttpRequest.cs" />
     <Compile Include="Application\HttpResponse.cs" />
     <Compile Include="HttpMethods\IHttpMethod.cs" />
-    <Compile Include="Tools\StandardHeaders.cs" />
-    <Compile Include="Tools\StandardHeadersReader.cs" />
+    <Compile Include="Tools\CookieHeadersReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\IHttpException.cs" />
+    <Compile Include="Application\IExceptionHandler.cs" />
     <Compile Include="Application\HttpEndpoint\IHttpEndpoint.cs" />
-    <Compile Include="Application\HttpEndpoint\IHttpRequestBuilder.cs" />
+    <Compile Include="Application\HttpEndpoint\Client\IHttpRequestBuilder.cs" />
     <Compile Include="Application\HttpEndpoint\IHttpRequestUnbinder.cs" />
     <Compile Include="Application\HttpEndpoint\IResponseWritter.cs" />
     <Compile Include="Tools\AcceptHeaderPrioritizer.cs" />

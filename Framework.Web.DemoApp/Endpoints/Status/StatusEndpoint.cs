@@ -7,7 +7,8 @@ namespace Framework.Web.DemoApp.Endpoints.Status
 {
     public class StatusEndpoint : ServiceEndpointBase<StatusResponse>
     {
-        public StatusEndpoint(IServiceEndpointBootstrapper<StatusResponse> bootstrapper, IEnumerable<IHttpEndpoint> httpEndpoints)
+        public StatusEndpoint(
+            IServiceEndpointBootstrapper<StatusResponse> bootstrapper, IEnumerable<IHttpEndpoint> httpEndpoints)
         {
             bootstrapper.Bootstrap(this, "status", httpRequest => new StatusResponse
                 {

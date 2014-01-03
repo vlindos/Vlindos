@@ -7,7 +7,7 @@ using Framework.Web.Tools;
 
 namespace Framework.Web.Authentication
 {
-    public interface IRequireAuthenticationFilter : IBeforePerformAction
+    public interface IRequireAuthenticationFilter : IPrePerformAction
     {
     }
 
@@ -30,7 +30,7 @@ namespace Framework.Web.Authentication
             _sessionGetter = sessionGetter;
         }
 
-        public bool BeforePerformAction(HttpContext httpContext)
+        public bool PrePerform(HttpContext httpContext)
         {
             var session = _sessionGetter.GetSession(httpContext);
             if (session["Authenticated"] == true.ToString()) // allow to continue

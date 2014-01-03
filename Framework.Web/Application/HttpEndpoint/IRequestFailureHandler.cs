@@ -2,9 +2,16 @@
 
 namespace Framework.Web.Application.HttpEndpoint
 {
-    public interface IRequestFailureHandler<in TRequest>
+    public enum RequestFailedAt
     {
-        void UnbindFailure(HttpContext httpContext, List<string> messages, TRequest request);
-        void ValidateFailure(HttpContext httpContext, List<string> messages, TRequest request);
+        PreAction,
+        Unbinding,
+        Validation
+    }
+
+    public interface IRequestFailureHandler<in TRequest, out TResponse>
+    {
+        TResponse HandleRequestFailure(
+            HttpContext httpContext, RequestFailedAt requestFailedAt, List<string> messages, TRequest request);
     }
 }

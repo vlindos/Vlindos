@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Vlindos.Common.Extensions.IEnumerable;
 
 namespace Framework.Web.Application.HttpEndpoint
 {
@@ -19,79 +20,76 @@ namespace Framework.Web.Application.HttpEndpoint
 
         public void ProcessHttpRequest(HttpContext httpContext, IHttpEndpoint httpEndpoint)
         {
-            if (httpEndpoint.BeforePerformActions != null && 
-                httpEndpoint.BeforePerformActions
-                            .Any(beforePerformAction => beforePerformAction.BeforePerformAction(httpContext) == false))
-            {
-                _responseHeadersWritter.WriteResponseHeaders(httpContext);
-            
-                return;
-            }
 
             var htmlEndpointType = httpEndpoint.GetType();
-            var performerProperty = htmlEndpointType.GetProperty("Performer");
-            var performerGetter = performerProperty.GetGetMethod();
-            var performer = performerGetter.Invoke(htmlEndpointType, new object[] { });
-            var performMethod = performer.GetType().GetMethod("Perform");
-            var methodArgs = new List<object>();
-            if (htmlEndpointType.IsGenericType)
+
+            var requestFailureHandlerProperty = htmlEndpointType.GetProperty("RequestFailureHandler");
+            var requestFailureHandlerGetter = requestFailureHandlerProperty.GetGetMethod();
+            var requestFailureHandler = requestFailureHandlerGetter.Invoke(
+                htmlEndpointType, new object[] { });
+            var requestFailureMethod = requestFailureHandler.GetType().GetMethod("HandleRequestFailure");
+
+            object response;
+
+            if (httpEndpoint.BeforePerformActions != null &&
+                httpEndpoint.BeforePerformActions
+                    .Any(beforePerformAction => beforePerformAction.PrePerform(httpContext) == false))
             {
-                var httpRequestUnbinderProperty = htmlEndpointType.GetProperty("HttpRequestUnbinder");
-                if (httpRequestUnbinderProperty != null)
+                response = requestFailureMethod.Invoke(
+                    requestFailureHandler, new object[] { httpContext, RequestFailedAt.PreAction, new List<string>(), null });
+            }
+            else
+            {
+                var performerProperty = htmlEndpointType.GetProperty("Performer");
+                var performerGetter = performerProperty.GetGetMethod();
+                var performer = performerGetter.Invoke(htmlEndpointType, new object[] { });
+                var performMethod = performer.GetType().GetMethod("Perform");
+                var methodArgs = new List<object>();
+                if (htmlEndpointType.IsGenericType)
                 {
-                    var httpRequestUnbinderGetter = httpRequestUnbinderProperty.GetGetMethod();
-                    var httpRequestUnbinder = httpRequestUnbinderGetter.Invoke(htmlEndpointType, new object[] { });
-                    var httpRequestUnbinderArgs = new object[] { httpContext.HttpRequest, new List<string>(), null };
-
-                    var tryToUnbindMethod = httpRequestUnbinder.GetType().GetMethod("TryToUnbind");
-                    var unbindResult = (bool)tryToUnbindMethod.Invoke(httpRequestUnbinder, httpRequestUnbinderArgs);
-                    if (!unbindResult)
+                    var httpRequestUnbinderProperty = htmlEndpointType.GetProperty("HttpRequestUnbinder");
+                    if (httpRequestUnbinderProperty != null)
                     {
-                        var requestFailureHandlerProperty = htmlEndpointType.GetProperty("RequestFailureHandler");
-                        var requestFailureHandlerGetter = requestFailureHandlerProperty.GetGetMethod();
-                        var requestFailureHandler = requestFailureHandlerGetter.Invoke(
-                            htmlEndpointType, new object[] { });
-                        var unbindFailureMethod = requestFailureHandler.GetType().GetMethod("UnbindFailure");
-                        unbindFailureMethod.Invoke(requestFailureHandler,
-                            new[] { httpContext, httpEndpoint, httpRequestUnbinderArgs[1] });
-                        return;
-                    }
+                        var httpRequestUnbinderGetter = httpRequestUnbinderProperty.GetGetMethod();
+                        var httpRequestUnbinder = httpRequestUnbinderGetter.Invoke(htmlEndpointType, new object[] { });
+                        var httpRequestUnbinderArgs = new object[] { httpContext.HttpRequest, new List<string>(), null };
 
-                    var request = httpRequestUnbinderArgs[2];
-                    var requestValidatorProperty = htmlEndpointType.GetProperty("RequestValidator");
-                    if (requestValidatorProperty != null)
-                    {
-                        var requestValidatorGetter = requestValidatorProperty.GetGetMethod();
-                        var requestValidator = requestValidatorGetter.Invoke(htmlEndpointType, new object[] { });
-                        var requestValidatorArgs = new[] { request, new List<string>() };
-
-                        var validateMethod = requestValidator.GetType().GetMethod("TryToUnbind");
-                        var validateResult = (bool)validateMethod.Invoke(requestValidator, requestValidatorArgs);
-                        if (validateResult == false)
+                        var tryToUnbindMethod = httpRequestUnbinder.GetType().GetMethod("TryToUnbind");
+                        var unbindResult = (bool)tryToUnbindMethod.Invoke(httpRequestUnbinder, httpRequestUnbinderArgs);
+                        if (!unbindResult)
                         {
-                            var requestFailureHandlerProperty = htmlEndpointType.GetProperty("RequestFailureHandler");
-                            var requestFailureHandlerGetter = requestFailureHandlerProperty.GetGetMethod();
-                            var requestFailureHandler = requestFailureHandlerGetter.Invoke(
-                                htmlEndpointType, new object[] { });
-
-                            var unbindFailureMethod = requestFailureHandler.GetType().GetMethod("ValidateFailure");
-                            unbindFailureMethod.Invoke(requestFailureHandler,
-                                new[] { httpContext, httpEndpoint, httpRequestUnbinderArgs[1] });
+                            requestFailureMethod.Invoke(requestFailureHandler,
+                                new[] { httpContext, RequestFailedAt.Unbinding, new List<string>(), httpRequestUnbinderArgs[1] });
                             return;
+                        }
+
+                        var request = httpRequestUnbinderArgs[2];
+                        var requestValidatorProperty = htmlEndpointType.GetProperty("RequestValidator");
+                        if (requestValidatorProperty != null)
+                        {
+                            var requestValidatorGetter = requestValidatorProperty.GetGetMethod();
+                            var requestValidator = requestValidatorGetter.Invoke(htmlEndpointType, new object[] { });
+                            var requestValidatorArgs = new[] { request, new List<string>() };
+
+                            var validateMethod = requestValidator.GetType().GetMethod("TryToUnbind");
+                            var validateResult = (bool)validateMethod.Invoke(requestValidator, requestValidatorArgs);
+                            if (validateResult == false)
+                            {
+                                requestFailureMethod.Invoke(requestFailureHandler,
+                                    new[] { httpContext, RequestFailedAt.Validation, new List<string>(), httpRequestUnbinderArgs[1] });
+                                return;
+                            }
                         }
                     }
                 }
+
+                response = performMethod.Invoke(performer, methodArgs.ToArray());
             }
 
-            var response = performMethod.Invoke(performer, methodArgs.ToArray());
-
-            if (httpEndpoint.AfterPerformActions != null &&
-                httpEndpoint.AfterPerformActions
-                            .Any(afterPerformAction => afterPerformAction.AfterPerformAction(httpContext) == false))
+            if (httpEndpoint.AfterPerformActions != null)
             {
-                _responseHeadersWritter.WriteResponseHeaders(httpContext);
-            
-                return;
+                httpEndpoint.AfterPerformActions
+                            .DoUntil(afterPerformAction => afterPerformAction.PostPerform(httpContext) == false);
             }
 
             _responseHeadersWritter.WriteResponseHeaders(httpContext);

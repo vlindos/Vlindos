@@ -5,7 +5,7 @@ namespace Framework.Web.Application
 {
     public class ApplicationConfiguration
     {
-        public IHttpException HttpException { get; set; }
+        public IExceptionHandler ExceptionHandler { get; set; }
         public List<IHttpEndpoint> HttpEndpoints { get; set; }
     }
 }

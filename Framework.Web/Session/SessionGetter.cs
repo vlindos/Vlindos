@@ -10,23 +10,24 @@ namespace Framework.Web.Session
     
     public class SessionGetter : ISessionGetter
     {
-        private readonly ISessionRepositoryManager _sessionRepositoryManager;
+        private readonly ISessionReader _sessionReader;
         private readonly ISessionObject _sessionObject;
 
-        public SessionGetter(ISessionRepositoryManager sessionRepositoryManager, ISessionObject sessionObject)
+        public SessionGetter(ISessionReader sessionReader,ISessionObject sessionObject)
         {
-            _sessionRepositoryManager = sessionRepositoryManager;
+            _sessionReader = sessionReader;
             _sessionObject = sessionObject;
         }
 
         public Dictionary<string, string> GetSession(HttpContext httpContext)
         {
-            var sessionValue = (SessionValue)httpContext.ActionObjects[_sessionObject];
-            if (sessionValue == null)
+            if (httpContext.ActionObjects.ContainsKey(_sessionObject))
             {
-                return null;
+                return (Dictionary<string, string>)httpContext.ActionObjects[_sessionObject];
             }
-            return _sessionRepositoryManager.GetRepository(sessionValue);
+            var sessionObject = _sessionReader.ReadSession(httpContext);
+            httpContext.ActionObjects[_sessionObject] = sessionObject;
+            return sessionObject;
         }
     }
 }

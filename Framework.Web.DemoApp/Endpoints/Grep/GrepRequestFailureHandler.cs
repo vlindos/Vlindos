@@ -1,39 +1,34 @@
 using System.Collections.Generic;
+using System.Text;
 using Framework.Web.Application;
 using Framework.Web.Application.HttpEndpoint;
-using Framework.Web.Tools;
 
 namespace Framework.Web.DemoApp.Endpoints.Grep
 {
-    public interface IGrepRequestFailureHandler : IRequestFailureHandler<GrepRequest>
+    public interface IGrepRequestFailureHandler : IRequestFailureHandler<GrepRequest, string>
     {
     }
 
     public class GrepRequestFailureHandler : IGrepRequestFailureHandler
     {
-        private readonly IStringResponseWritter _stringResponseWritter;
-
-        public GrepRequestFailureHandler(IStringResponseWritter stringResponseWritter)
+        public string HandleRequestFailure(
+            HttpContext httpContext, RequestFailedAt requestFailedAt, List<string> messages, GrepRequest request)
         {
-            _stringResponseWritter = stringResponseWritter;
-        }
-
-        public void UnbindFailure(HttpContext httpContext, List<string> messages, GrepRequest request)
-        {
-            _stringResponseWritter.WriteResponse(httpContext, "Unable to read request.");  
-            foreach (var message in messages)
+            var sb = new StringBuilder();
+            switch (requestFailedAt)
             {
-                _stringResponseWritter.WriteResponse(httpContext, message);   
+                case RequestFailedAt.PreAction:
+                    sb.AppendLine("Preparing for request handling.");  
+                    break;
+                case RequestFailedAt.Unbinding:
+                    sb.AppendLine("Unable to read request.");  
+                    break;
+                case RequestFailedAt.Validation:
+                    sb.AppendLine("Unable to validate request.");
+                    break;
             }
-        }
-
-        public void ValidateFailure(HttpContext httpContext, List<string> messages, GrepRequest request)
-        {
-            _stringResponseWritter.WriteResponse(httpContext, "Unable to validate request.");  
-            foreach (var message in messages)
-            {
-                _stringResponseWritter.WriteResponse(httpContext, message);
-            }
+            messages.ForEach(x => sb.AppendLine(x));
+            return sb.ToString();
         }
     }
 }
