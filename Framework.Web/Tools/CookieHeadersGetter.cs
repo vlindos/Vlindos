@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Framework.Web.Application;
-using Framework.Web.Session;
 
 namespace Framework.Web.Tools
 {

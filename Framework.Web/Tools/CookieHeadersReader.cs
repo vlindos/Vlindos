@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
+using Framework.Web.Session;
 
 namespace Framework.Web.Tools
 {
@@ -13,6 +14,13 @@ namespace Framework.Web.Tools
 
     public class CookieHeadersReader : ICookieHeadersReader
     {
+        private readonly IStandardHeadersConstants _contants;
+
+        public CookieHeadersReader(IStandardHeadersConstants contants)
+        {
+            _contants = contants;
+        }
+
         public IEnumerable<HeaderCookie> ReadCookieHeaders(NameValueCollection headers)
         {
             for (var i = headers.Count - 1; i >= 0; i--)
@@ -22,7 +30,7 @@ namespace Framework.Web.Tools
                 if (delimPosition < 0) continue; // no ':' - invalid header - skip
                 if (delimPosition == header.Length) continue; // no any value - invalid header - skip
                 var key = header.Substring(0, delimPosition);
-                if (key != "Set-Cookie") continue;
+                if (key != _contants.SetCookie) continue;
                 var value = header.Substring(delimPosition + 1, header.Length - delimPosition - 1);
                 if (string.IsNullOrWhiteSpace(value)) continue; // empty value - invalid header - skip
 
@@ -31,15 +39,16 @@ namespace Framework.Web.Tools
                 {
                     var tokenKeyValue = token.Split('=').Select(x => x.Trim()).ToArray();
                     var tokenKey = tokenKeyValue.FirstOrDefault();
-                    switch (tokenKey)
+                    if (string.IsNullOrWhiteSpace(tokenKey)) continue;
+                    switch (tokenKey.ToLowerInvariant())
                     {
-                        case "HttpOnly":
+                        case "httponly":
                             headerCookie.HttpOnly = true;
                             break;
-                        case "Secure":
+                        case "secure":
                             headerCookie.Secure = true;
                             break;
-                        case "Expires":
+                        case "expires":
                         {
                             if (tokenKeyValue.Length != 2)
                             {
@@ -55,14 +64,14 @@ namespace Framework.Web.Tools
                             headerCookie.Expires = expires;
                         }
                             break;
-                        case "Domain":
+                        case "domain":
                         {
                             if (tokenKeyValue.Length != 2) continue;
                             var tokenValue = tokenKeyValue[1];
                             headerCookie.Domain = tokenValue;
                         }
                             break;
-                        case "Path":
+                        case "path":
                         {
                             if (tokenKeyValue.Length != 2) continue;
                             var tokenValue = tokenKeyValue[1];

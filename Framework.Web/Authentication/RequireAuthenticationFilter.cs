@@ -17,23 +17,26 @@ namespace Framework.Web.Authentication
         private readonly IBaseUrlGenerator _baseUrlGenerator;
         private readonly IAuthenticateServiceEndpoint _authenticateServiceEndpoint;
         private readonly ISessionGetter _sessionGetter;
+        private readonly IAuthenticationSessionContants _contants;
 
         public RequireAuthenticationFilter(
             IApplicationRuntimeSettings applicationRuntimeSettings,
             IBaseUrlGenerator baseUrlGenerator,
             IAuthenticateServiceEndpoint authenticateServiceEndpoint, 
-            ISessionGetter sessionGetter)
+            ISessionGetter sessionGetter,
+            IAuthenticationSessionContants contants)
         {
             _applicationRuntimeSettings = applicationRuntimeSettings;
             _baseUrlGenerator = baseUrlGenerator;
             _authenticateServiceEndpoint = authenticateServiceEndpoint;
             _sessionGetter = sessionGetter;
+            _contants = contants;
         }
 
         public bool PrePerform(HttpContext httpContext)
         {
             var session = _sessionGetter.GetSession(httpContext);
-            if (session["Authenticated"] == true.ToString()) // allow to continue
+            if (session[_contants.Authenticated] == true.ToString()) // allow to continue
             {
                 return true;
             }
@@ -58,7 +61,7 @@ namespace Framework.Web.Authentication
             {
                 authenticationUrl.AppendFormat("/{0}", httpContext.HttpRequest.Path);
             }
-            session["ReturnUrl"] = returnUrl.ToString();
+            session[_contants.ReturnUrl] = returnUrl.ToString();
 
             return false;
         }

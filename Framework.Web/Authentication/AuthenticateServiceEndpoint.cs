@@ -23,7 +23,8 @@ namespace Framework.Web.Authentication
             IUserRepository userRepository,
             IFormDataReader formDataReader, 
             IPostHttpMethod postHttpMethod, 
-            ISessionGetter sessionGetter)
+            ISessionGetter sessionGetter,
+            IAuthenticationSessionContants contants)
         {
             bootstrapper.Bootstrap(this, postHttpMethod, "authenticate",
                 (HttpContext httpContext, List<string> messages, out UsernamePassword request) =>
@@ -49,7 +50,7 @@ namespace Framework.Web.Authentication
                 {
                     ServiceResponse serviceResponse;
                     var session = sessionGetter.GetSession(httpContext);
-                    if (session["Authenticated"] == true.ToString())
+                    if (session[contants.Authenticated] == true.ToString())
                     {
                         serviceResponse = new ServiceResponse
                         {
@@ -59,8 +60,8 @@ namespace Framework.Web.Authentication
                     } 
                     else if (userRepository.Authenticate(request.Username, request.Password))
                     {
-                        session["Username"] = request.Username;
-                        session["Authenticated"] = true.ToString();
+                        session[contants.Username] = request.Username;
+                        session[contants.Authenticated] = true.ToString();
                         serviceResponse = new ServiceResponse
                         {
                             Success = true,
@@ -77,10 +78,10 @@ namespace Framework.Web.Authentication
                         };   
                     }
 
-                    var returnUrl = session["ReturnUrl"];
+                    var returnUrl = session[contants.ReturnUrl];
                     if (serviceResponse.Success && returnUrl != null)
                     {
-                        session.Remove("ReturnUrl");
+                        session.Remove(contants.ReturnUrl);
                         httpContext.HttpResponse.HttpStatusCode = HttpStatusCode.Redirect;
                         httpContext.HttpResponse.Headers.Add("Location:", returnUrl);
                     }
@@ -98,7 +99,7 @@ namespace Framework.Web.Authentication
 
                     return true;
                 },
-                requestFailureHandler: (httpContext, messages, request) =>
+                requestFailureHandler: (httpContext, requestFailedAt, messages, request) =>
                 {
                     httpContext.HttpResponse.HttpStatusCode = HttpStatusCode.Forbidden;
                     var serviceResponse = new ServiceResponse

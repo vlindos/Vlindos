@@ -56,7 +56,7 @@ namespace Framework.Web.Service
             UnbinderDelegate<TRequest> unbind,
             Func<TRequest, List<string>, bool> validate = null,
             Func<HttpContext, TRequest, TResponse> perform = null,
-            Func<HttpContext, List<string>, TRequest, TResponse> requestFailureHandler = null,
+            Func<HttpContext, RequestFailedAt, List<string>, TRequest, TResponse> requestFailureHandler = null,
             List<IPrePerformAction> prePerformActions = null,
             List<IPostPerformAction> postPerformActions = null,
             IResponseWritter<TResponse> responseWritter = null);
@@ -79,7 +79,7 @@ namespace Framework.Web.Service
             UnbinderDelegate<TRequest> unbind,
             Func<TRequest, List<string>, bool> validate = null,
             Func<HttpContext, TRequest, TResponse> perform = null,
-            Func<HttpContext, List<string>, TRequest, TResponse> requestFailureHandler = null,
+            Func<HttpContext, RequestFailedAt, List<string>, TRequest, TResponse> requestFailureHandler = null,
             List<IPrePerformAction> prePerformActions = null,
             List<IPostPerformAction> postPerformActions = null,
             IResponseWritter<TResponse> responseWritter = null)
