@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application\DefaultExceptionHandler.cs" />
+    <Compile Include="Application\HttpEndpoint\Client\IHttpEndpoint.cs" />
     <Compile Include="Application\HttpEndpoint\GenericRequestDescriptor.cs" />
     <Compile Include="Application\HttpEndpoint\IPrePerformAction.cs" />
     <Compile Include="Application\HttpEndpoint\IHttpRequestDescriptor.cs" />
@@ -79,7 +80,7 @@
     <Compile Include="HttpMethods\PostHttpMethod.cs" />
     <Compile Include="HttpMethods\PutHttpMethod.cs" />
     <Compile Include="HttpMethods\TraceHttpMethod.cs" />
-    <Compile Include="Session\StandardHeadersContants.cs" />
+    <Compile Include="Tools\StandardHeadersContants.cs" />
     <Compile Include="Tools\ApplicationRuntimeSettings.cs" />
     <Compile Include="Tools\BaseUrlGenerator.cs" />
     <Compile Include="Tools\CookieHeadersGetter.cs" />

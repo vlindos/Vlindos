@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
-using Framework.Web.Session;
+
+// TODO: Finish as exampled here
+// http://curl.haxx.se/rfc/cookie_spec.html
 
 namespace Framework.Web.Tools
 {

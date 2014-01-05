@@ -1,4 +1,4 @@
-namespace Framework.Web.Session
+namespace Framework.Web.Tools
 {
     public interface IStandardHeadersConstants
     {
