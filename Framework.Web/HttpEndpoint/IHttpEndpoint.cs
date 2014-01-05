@@ -1,6 +1,7 @@
-﻿using Framework.Web.Service;
+﻿using Framework.Web.Application.HttpEndpoint;
+using Framework.Web.Service;
 
-namespace Framework.Web.Application.HttpEndpoint.Client
+namespace Framework.Web.HttpEndpoint
 {
     public interface IHttpEndpoint
     {
