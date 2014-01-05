@@ -40,7 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application\DefaultExceptionHandler.cs" />
-    <Compile Include="Application\HttpEndpoint\Client\IHttpEndpoint.cs" />
+    <Compile Include="Application\HttpEndpoint\StandardHttpRequestProcessor.cs" />
+    <Compile Include="HttpEndpoint\IHttpEndpoint.cs" />
     <Compile Include="Application\HttpEndpoint\GenericRequestDescriptor.cs" />
     <Compile Include="Application\HttpEndpoint\IPrePerformAction.cs" />
     <Compile Include="Application\HttpEndpoint\IHttpRequestDescriptor.cs" />
@@ -53,6 +54,15 @@
     <Compile Include="Authentication\RequireAuthenticationFilter.cs" />
     <Compile Include="HtmlPages\IHtmlPageEndpoint.cs" />
     <Compile Include="HtmlPages\IHtmlPageResponse.cs" />
+    <Compile Include="JavaScript\IAssetsCompressSettingProvider.cs" />
+    <Compile Include="JavaScript\ICssCompressor.cs" />
+    <Compile Include="JavaScript\IDynamicDataEndpointsManager.cs" />
+    <Compile Include="Tools\IDocumentRootProvider.cs" />
+    <Compile Include="JavaScript\AssetsRenderer.cs" />
+    <Compile Include="JavaScript\IJavascriptCompressor.cs" />
+    <Compile Include="JavaScript\JavascriptSourceEndpoint.cs" />
+    <Compile Include="JavaScript\IJavascriptValidatorProvider.cs" />
+    <Compile Include="JavaScript\JavascriptSourcePerformer.cs" />
     <Compile Include="Tools\CookieValidator.cs" />
     <Compile Include="Session\DefaultSessionCookieFactory.cs" />
     <Compile Include="Session\DefaultSessionCookieLifespanProvider.cs" />
@@ -80,6 +90,7 @@
     <Compile Include="HttpMethods\PostHttpMethod.cs" />
     <Compile Include="HttpMethods\PutHttpMethod.cs" />
     <Compile Include="HttpMethods\TraceHttpMethod.cs" />
+    <Compile Include="Tools\DefaultBufferWriteTimeoutProvider.cs" />
     <Compile Include="Tools\StandardHeadersContants.cs" />
     <Compile Include="Tools\ApplicationRuntimeSettings.cs" />
     <Compile Include="Tools\BaseUrlGenerator.cs" />
@@ -90,6 +101,7 @@
     <Compile Include="Tools\HttpRequestTransmitter.cs" />
     <Compile Include="Tools\InputStreamStringReader.cs" />
     <Compile Include="Tools\StringResponseWritter.cs" />
+    <Compile Include="Tools\Utf8TextEncodingProvider.cs" />
     <Compile Include="Tools\WebServiceSettings.cs" />
     <Compile Include="Service\IServiceRequestFailureHandler.cs" />
     <Compile Include="Service\JsonResponseReader.cs" />
@@ -112,7 +124,7 @@
   <ItemGroup>
     <Compile Include="Application\IExceptionHandler.cs" />
     <Compile Include="Application\HttpEndpoint\IHttpEndpoint.cs" />
-    <Compile Include="Application\HttpEndpoint\Client\IHttpRequestBuilder.cs" />
+    <Compile Include="HttpEndpoint\IHttpRequestBuilder.cs" />
     <Compile Include="Application\HttpEndpoint\IHttpRequestUnbinder.cs" />
     <Compile Include="Application\HttpEndpoint\IResponseWritter.cs" />
     <Compile Include="Tools\AcceptHeaderPrioritizer.cs" />
@@ -131,9 +143,7 @@
       <Name>Framework</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="JavaScript\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

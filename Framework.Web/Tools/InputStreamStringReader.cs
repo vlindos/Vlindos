@@ -6,43 +6,6 @@ using Vlindos.Common.Streams;
 
 namespace Framework.Web.Tools
 {
-    public interface IStreamStringReaderEncodingProvider
-    {
-        Encoding Endcoding { get; }
-    }
-
-    public class Utf8StreamStringReaderUnicodingProvider : IStreamStringReaderEncodingProvider
-    {
-        public Encoding Endcoding
-        {
-            get
-            {
-                return Encoding.UTF8;
-            }
-        }
-    }
-    public interface IStreamStringReaderTimeoutProvider
-    {
-        TimeSpan Timeout { get; }
-    }
-
-    public class StreamStringReaderTimeoutProvider : IStreamStringReaderTimeoutProvider
-    {
-        private readonly TimeSpan _timeout;
-
-        public StreamStringReaderTimeoutProvider()
-        {
-            _timeout = new TimeSpan(0, 0, 0, 5);
-        }
-        public TimeSpan Timeout
-        {
-            get
-            {
-                return _timeout;
-            }
-        }
-    }
-
     public interface IInputStreamStringReader
     {
         bool ReadStringFromInputStream(IInputStream inputStream, List<string> messages, out string s);
@@ -54,7 +17,7 @@ namespace Framework.Web.Tools
         private readonly Encoding _encoding;
 
         public InputStreamStringReader(
-            IStreamStringReaderTimeoutProvider timeoutProvider, IStreamStringReaderEncodingProvider encodingProvider)
+            IBufferWriteTimeoutProvider timeoutProvider, ITextEncodingProvider encodingProvider)
         {
             _timeout = timeoutProvider.Timeout;
             _encoding = encodingProvider.Endcoding;

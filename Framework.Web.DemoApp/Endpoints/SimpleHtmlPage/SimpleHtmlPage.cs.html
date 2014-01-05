@@ -3,12 +3,24 @@ namespace Framework.Web.DemoApp.Endpoints.SimpleHtmlPageEndpoint
 {
     public class SimpleHtmlPage : ISimpleHtmlPage<string[]>
     {
+        IAssetsRendererFactory _assetsRendererFactory;
+        public SimpleHtmlPage(IAssetsRendererFactory assetsRendererFactory)
+        {
+            _assetsRendererFactory = assetsRendererFactory;
+        }
+
         public void RenderPage(HttpContext httpContext, IHtmlPageRenderer pageRenderer, string[] viewData)
         {
 -->
 <html>
     <head>
         <title>Simple page</title>
+<!--C# 
+            using(var assetsRenderer = _assetsRendererFactory.GetAssetsRenderer(httpContext, "assets/simplehtmlpage")) {
+                assetsRenderer.RenderJavascript("javascript/jQuery-1.6.js");
+                assetsRenderer.RenderJavascript("javascript/jQuery.Mobile-2.0.js");
+            }
+-->
     </head>
     <body>
         Values for 's' query argument:
