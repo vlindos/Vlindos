@@ -11,20 +11,19 @@ namespace Framework.Web.JavaScript
 
     public class JavascriptSourcePerformer : IJavascriptSourcePerformer
     {
-        private readonly IJavascriptCompressor _javascriptCompressor;
+        private readonly IJsTransformer _jsTransformer;
         private readonly IEnumerable<IJavascriptProvider> _javascriptProviders;
         private string _cache;
         private readonly object _lockObject;
-        private readonly bool _compressAssets;
 
         public JavascriptSourcePerformer(
-            IJavascriptCompressor javascriptCompressor, 
-            IEnumerable<IJavascriptProvider> javascriptProviders, 
-            IAssetsCompressSettingProvider assetsCompressSettingProvider)
+            IJsTransformer jsTransformer, 
+            IEnumerable<IJavascriptProvider> javascriptProviders,
+            IAssetsTransformersManager assetsTransformersManager)
         {
-            _javascriptCompressor = javascriptCompressor;
+            _jsTransformer = jsTransformer;
             _javascriptProviders = javascriptProviders;
-            _compressAssets = assetsCompressSettingProvider.CompressAssets;
+            _jsTransformer = assetsTransformersManager.GetJsTransformer();
             _lockObject = new object();
         }
 
@@ -37,17 +36,8 @@ namespace Framework.Web.JavaScript
             lock (_lockObject)
             {
                 var sb = new StringBuilder();
-
-                if (_compressAssets)
-                {
-                    _javascriptProviders.ForEach(x => sb.Append(_javascriptCompressor.CompressJavascript(x.GetJavascript())));
-                }
-                else
-                {
-                    _javascriptProviders.ForEach(x => sb.Append(x.GetJavascript()));
-                }
-                _cache = sb.ToString();
-
+                _javascriptProviders.ForEach(x => sb.Append(x.GetJavascript()));
+                _cache = _jsTransformer.TransformJsContent(sb.ToString());
                 return _cache;
             }
         }

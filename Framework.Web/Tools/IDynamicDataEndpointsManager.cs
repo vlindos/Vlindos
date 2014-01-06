@@ -1,4 +1,4 @@
-﻿namespace Framework.Web.JavaScript
+﻿namespace Framework.Web.Tools
 {
     public class DataEndpoint
     {
