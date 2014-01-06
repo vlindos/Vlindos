@@ -3,7 +3,7 @@ using Framework.Web.Application.HttpEndpoint;
 using Framework.Web.HttpMethods;
 using Framework.Web.Tools;
 
-namespace Framework.Web.JavaScript
+namespace Framework.Web.Assets
 {
     public interface IClientValidationsEndpoint : IHttpEndpoint<string>
     {

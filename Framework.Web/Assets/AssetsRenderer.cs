@@ -4,7 +4,7 @@ using System.Linq;
 using Framework.Web.HtmlPages;
 using Framework.Web.Tools;
 
-namespace Framework.Web.JavaScript
+namespace Framework.Web.Assets
 {
     public interface IAssetsRendererFactory
     {

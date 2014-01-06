@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Framework.Web.JavaScript
+namespace Framework.Web.Assets
 {
     public class AssetBundle
     {

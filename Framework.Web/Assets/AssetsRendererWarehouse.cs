@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Vlindos.Common.Extensions.IEnumerable;
 
-namespace Framework.Web.JavaScript
+namespace Framework.Web.Assets
 {
     public interface IAssetsRenderWarehouse
     {

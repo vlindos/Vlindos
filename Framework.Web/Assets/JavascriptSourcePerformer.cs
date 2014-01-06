@@ -3,7 +3,7 @@ using System.Text;
 using Framework.Web.Application.HttpEndpoint;
 using Vlindos.Common.Extensions.IEnumerable;
 
-namespace Framework.Web.JavaScript
+namespace Framework.Web.Assets
 {
     public interface IJavascriptSourcePerformer : IPerformer<string>
     {

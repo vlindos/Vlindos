@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Framework.Web.Application.HttpEndpoint;
-using Framework.Web.JavaScript;
+using Framework.Web.Assets;
 
 namespace Framework.Web.Service
 {
