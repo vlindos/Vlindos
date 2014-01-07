@@ -29,7 +29,10 @@
 	- [x] support for database session getting
 	- [x] common way to handle authentication
 	- [x] support for strongly typed (view data) html view engine
+	- [x] javascript bindings and client validation
 	- [ ] support of http sesssion
+	- [ ] support for content neogotiation (json, xml)
 	- common way to handle measuring
-	- javascript bindings and client validation
 	- support for i18n
+	- support for devices views
+	- support for async and canceable(?) performers as part of the descriptors
