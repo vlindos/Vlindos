@@ -7,3 +7,4 @@
 	- compression requests must be supported
 	- cache requests must 
 	- must support application run in non same user (user delevation)
+	- might help http://blog.stephencleary.com/2009/04/tcpip-net-sockets-faq.html

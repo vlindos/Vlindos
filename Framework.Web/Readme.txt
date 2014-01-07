@@ -36,3 +36,4 @@
 	- support for i18n
 	- support for devices views
 	- support for async and canceable(?) performers as part of the descriptors
+	- long polling and web sockets investigation/consideration 
