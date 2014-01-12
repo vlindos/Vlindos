@@ -14,7 +14,7 @@ namespace Framework.Web.Assets
         public ClientValidationsEndpoint(
             IStringResponseWritter stringResponseWritter, 
             IJavascriptSourcePerformer javascriptSourcePerformer,
-            IStandardHttpRequestProcessor httpRequestProcessor, 
+            IHttpRequestProcessor<IHttpEndpoint<string>> httpRequestProcessor, 
             IGetHttpMethod getHttpMethod)
         {
             HttpRequestDescriptor = new GenericRequestDescriptor
@@ -28,7 +28,7 @@ namespace Framework.Web.Assets
         }
 
         public IHttpRequestDescriptor HttpRequestDescriptor { get; set; }
-        public IHttpRequestProcessor HttpRequestProcessor { get; set; }
+        public IHttpRequestProcessor<IHttpEndpoint<string>> HttpRequestProcessor { get; set; }
         public List<IPrePerformAction> BeforePerformActions { get; set; }
         public List<IPostPerformAction> AfterPerformActions { get; set; }
         public IPerformer<string> Performer { get; set; }

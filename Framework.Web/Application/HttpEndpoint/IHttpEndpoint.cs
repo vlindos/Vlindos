@@ -8,8 +8,6 @@ namespace Framework.Web.Application.HttpEndpoint
         // E.g. GET <WebAppPath>Help/{ApplicationName}
         IHttpRequestDescriptor HttpRequestDescriptor { get; set; }
 
-        IHttpRequestProcessor HttpRequestProcessor { get; set; }
-
         List<IPrePerformAction> BeforePerformActions { get; set; }
 
         List<IPostPerformAction> AfterPerformActions { get; set; } 
@@ -17,6 +15,8 @@ namespace Framework.Web.Application.HttpEndpoint
 
     public interface IHttpEndpoint<TResponse> : IHttpEndpoint
     {
+        IHttpRequestProcessor<IHttpEndpoint<TResponse>> HttpRequestProcessor { get; set; }
+
         IPerformer<TResponse> Performer { get; set; }
 
         IResponseWritter<TResponse> ResponseWritter { get; set; }
@@ -24,6 +24,8 @@ namespace Framework.Web.Application.HttpEndpoint
 
     public interface IHttpEndpoint<TRequest, TResponse> : IHttpEndpoint
     {
+        IHttpRequestProcessor<IHttpEndpoint<TRequest, TResponse>> HttpRequestProcessor { get; set; }
+
         IPerformer<TRequest, TResponse> Performer { get; set; }
 
         IResponseWritter<TResponse> ResponseWritter { get; set; }

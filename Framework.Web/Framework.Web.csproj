@@ -40,7 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application\DefaultExceptionHandler.cs" />
-    <Compile Include="Application\HttpEndpoint\StandardHttpRequestProcessor.cs" />
+    <Compile Include="Application\HttpEndpoint\HttpRequestProcessor.cs" />
     <Compile Include="HttpEndpoint\IHttpEndpoint.cs" />
     <Compile Include="Application\HttpEndpoint\GenericRequestDescriptor.cs" />
     <Compile Include="Application\HttpEndpoint\IPrePerformAction.cs" />

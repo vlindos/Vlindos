@@ -9,7 +9,7 @@ namespace Framework.Web.Service
             where TResponse : IServiceResponse
     {
         public IHttpRequestDescriptor HttpRequestDescriptor { get; set; }
-        public IHttpRequestProcessor HttpRequestProcessor { get; set; }
+        public IHttpRequestProcessor<IHttpEndpoint<TResponse>> HttpRequestProcessor { get; set; }
         public IResponseWritter<TResponse> ResponseWritter { get; set; }
         public List<IPrePerformAction> BeforePerformActions { get; set; }
         public List<IPostPerformAction> AfterPerformActions { get; set; }
@@ -27,7 +27,7 @@ namespace Framework.Web.Service
             where TResponse : IServiceResponse
     {
         public IHttpRequestDescriptor HttpRequestDescriptor { get; set; }
-        public IHttpRequestProcessor HttpRequestProcessor { get; set; }
+        public IHttpRequestProcessor<IHttpEndpoint<TRequest, TResponse>> HttpRequestProcessor { get; set; }
         public IResponseWritter<TResponse> ResponseWritter { get; set; }
         public List<IPrePerformAction> BeforePerformActions { get; set; }
         public List<IPostPerformAction> AfterPerformActions { get; set; }

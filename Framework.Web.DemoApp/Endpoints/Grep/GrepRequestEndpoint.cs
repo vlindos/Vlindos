@@ -10,7 +10,7 @@ namespace Framework.Web.DemoApp.Endpoints.Grep
     {
         public GrepRequestEndpoint(
             IPostHttpMethod postHttpMethod, 
-            IHttpRequestProcessor httpRequestProcessor,
+            IHttpRequestProcessor<IHttpEndpoint<GrepRequest, string>> httpRequestProcessor,
             IRequireAuthenticationFilter requireAuthenticationFilter,
             IGrepRequestUnbinder unbinder,
             IGrepRequestValidator validator,
@@ -33,7 +33,7 @@ namespace Framework.Web.DemoApp.Endpoints.Grep
         }
 
         public IHttpRequestDescriptor HttpRequestDescriptor { get; set; }
-        public IHttpRequestProcessor HttpRequestProcessor { get; set; }
+        public IHttpRequestProcessor<IHttpEndpoint<GrepRequest, string>> HttpRequestProcessor { get; set; }
         public List<IPrePerformAction> BeforePerformActions { get; set; }
         public List<IPostPerformAction> AfterPerformActions { get; set; }
         public IPerformer<GrepRequest, string> Performer { get; set; }

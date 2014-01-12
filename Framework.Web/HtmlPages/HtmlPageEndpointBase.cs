@@ -7,7 +7,8 @@ namespace Framework.Web.HtmlPages
         : IHtmlPageEndpoint<THtmlPageViewData>
     {
         public IHttpRequestDescriptor HttpRequestDescriptor { get; set; }
-        public IHttpRequestProcessor HttpRequestProcessor { get; set; }
+        public IHttpRequestProcessor<IHttpEndpoint<IHtmlPageResponse<THtmlPageViewData>>> 
+            HttpRequestProcessor { get; set; }
         public List<IPrePerformAction> BeforePerformActions { get; set; }
         public List<IPostPerformAction> AfterPerformActions { get; set; }
         public IPerformer<IHtmlPageResponse<THtmlPageViewData>> Performer { get; set; }
@@ -18,7 +19,8 @@ namespace Framework.Web.HtmlPages
         : IHtmlPageEndpoint<TRequest, THtmlPageViewData>
     {
         public IHttpRequestDescriptor HttpRequestDescriptor { get; set; }
-        public IHttpRequestProcessor HttpRequestProcessor { get; set; }
+        public IHttpRequestProcessor<IHttpEndpoint<TRequest, IHtmlPageResponse<THtmlPageViewData>>>
+            HttpRequestProcessor { get; set; }
         public List<IPrePerformAction> BeforePerformActions { get; set; }
         public List<IPostPerformAction> AfterPerformActions { get; set; }
         public IPerformer<TRequest, IHtmlPageResponse<THtmlPageViewData>> Performer { get; set; }
