@@ -1,0 +1,1 @@
+﻿- add this http://blogs.microsoft.co.il/yuvmaz/2013/05/10/longest-common-prefix-with-c-and-linq/

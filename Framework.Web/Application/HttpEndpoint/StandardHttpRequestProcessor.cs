@@ -4,6 +4,7 @@ using Vlindos.Common.Extensions.IEnumerable;
 
 namespace Framework.Web.Application.HttpEndpoint
 {
+    // http://dotnet-snippets.com/snippet/runtime-compilation/638 ??
     public interface IStandardHttpRequestProcessor : IHttpRequestProcessor
     {
     }
