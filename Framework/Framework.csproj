@@ -44,6 +44,7 @@
     <Compile Include="Configuration\IContainerGetter.cs" />
     <Compile Include="Configuration\IReader.cs" />
     <Compile Include="Extensions\IEnumerable\EnumerableForEach.cs" />
+    <Compile Include="Extensions\String\StringFormat.cs" />
     <Compile Include="Formatters\String\DateTimeOffsetStringFormatProvider.cs" />
     <Compile Include="Formatters\String\IStringFormatProvider.cs" />
     <Compile Include="Hashing\HashAlgorithm.cs" />

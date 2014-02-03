@@ -1,5 +1,5 @@
 ﻿using System;
-using Vlindos.Logging;
+using Vlindos.Common.Extensions.String;
 using Vlindos.Logging.Tools;
 
 namespace Vlindos.DemoApp
@@ -22,7 +22,7 @@ namespace Vlindos.DemoApp
         {
             var loggingSystem = _loggingSystemInitializer.GetLoggingSystem();
 
-            Console.WriteLine("Press any key to stop the application.");
+            Console.WriteLine("Press {0} to stop the application.".Args("any key"));
             Console.ReadKey();
 
             loggingSystem.Stop();
