@@ -2,7 +2,7 @@
 {
     public interface IApplication
     {
-        bool Initialize(out ApplicationConfiguration applicationConfiguration);
+        ApplicationConfiguration Initialize();
         void Shutdown();
     }
 }

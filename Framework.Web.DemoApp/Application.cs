@@ -13,7 +13,7 @@ namespace Framework.Web.DemoApp
         private ISystem _loggingSystem;
         private Container _container;
 
-        public bool Initialize(out ApplicationConfiguration applicationConfiguration)
+        public ApplicationConfiguration  Initialize()
         {
             _container = new Container();
 
@@ -33,10 +33,8 @@ namespace Framework.Web.DemoApp
                           .Info("Starting Web Service ...");
 
             // initialize web application
-            applicationConfiguration = _container.Resolve<IDefaultApplicationConfigurationGetter>()
-                                                 .GetApplicationConfiguration();
-
-            return true;
+            return _container.Resolve<IDefaultApplicationConfigurationGetter>()
+                             .GetApplicationConfiguration();
         }
 
         public void Shutdown()
